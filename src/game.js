@@ -3,14 +3,15 @@ const Player = require('./player/Player');
 const config = require('./config');
 
 class Game {
-  constructor(storage) {
+  constructor(storage, physics) {
     this._storage = storage;
+    this._physics = physics;
   }
 
   addPlayer() {
     // TODO: demo data, update with something like rand place generating
     const playerData = new PlayerData(1500, 400, 50);
-    const player = new Player(playerData);
+    const player = new Player(playerData, this._physics);
 
     this._storage.addPlayer(playerData.id, player);
 

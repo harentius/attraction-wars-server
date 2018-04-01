@@ -21,6 +21,14 @@ class PlayerData {
     this.rotationData = null;
     this.color = color;
   }
+
+  setRotationData(rotationData) {
+    this.rotationData = rotationData;
+  }
+
+  cleanRotationData() {
+    this.rotationData = null;
+  }
 }
 
 module.exports = { RotationData, PlayerData };
