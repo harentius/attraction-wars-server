@@ -2,8 +2,9 @@ const config = require('../config');
 const { getValueNotViolatingBounds } = require('../utils');
 
 class Player {
-  constructor(playerData) {
+  constructor(playerData, physics) {
     this.playerData = playerData;
+    this._physics = physics;
     this._isAttenuation = false;
   }
 
@@ -11,14 +12,6 @@ class Player {
     this.playerData.aX = aX;
     this.playerData.aY = aY;
     this._isAttenuation = isAttenuation;
-  }
-
-  setRotationData(rotationData) {
-    this.playerData.rotationData = rotationData;
-  }
-
-  cleanRotationData() {
-    this.playerData.rotationData = null;
   }
 
   isStoppedX() {
@@ -31,9 +24,15 @@ class Player {
 
   updateData() {
     this._updateVelocity();
+
+    if (this.playerData.rotationData !== null) {
+      this._rotateAroundDistance();
+    }
+
     this.playerData.x += this.playerData.vX * config.dt;
     this.playerData.y += this.playerData.vY * config.dt;
     this._checkBoundCollisions();
+    this._physics.checkZoneSwitch(this.playerData);
   }
 
   _updateVelocity() {
@@ -98,6 +97,15 @@ class Player {
         ||
       (this.playerData.y > (config.worldBounds[3] - this.playerData.r))
     ;
+  }
+
+  _rotateAroundDistance() {
+    const t = config.rotationSpeed + Math.atan2(
+      this.playerData.y - this.playerData.rotationData.y,
+      this.playerData.x - this.playerData.rotationData.x,
+    );
+    this.playerData.x = this.playerData.rotationData.x + (this.playerData.rotationData.r * Math.cos(t));
+    this.playerData.y = this.playerData.rotationData.y + (this.playerData.rotationData.r * Math.sin(t));
   }
 }
 

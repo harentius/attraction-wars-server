@@ -14,7 +14,6 @@ class Physics {
       }
 
       const interactionZone = this._getInteractionZone(playerData, otherPlayerData);
-      console.log(interactionZone);
       getInteractionZoneHandler(interactionZone)(playerData, otherPlayerData);
     }
   }

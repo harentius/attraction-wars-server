@@ -5,6 +5,7 @@ module.exports = {
   worldBounds: [0, 0, 20000, 20000],
   keyPressDv: 0.00025,
   releaseDv: 0.0005,
+  rotationSpeed: 0.0025,
   minSpeed: 0,
   maxSpeed: 0.2,
 };

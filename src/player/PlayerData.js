@@ -1,10 +1,10 @@
 const genId = () => Math.random().toString(36).substr(2, 16);
 
 class RotationData {
-  constructor(x, y, R) {
+  constructor(x, y, r) {
     this.x = x;
     this.y = y;
-    this.R = R;
+    this.r = r;
   }
 }
 
