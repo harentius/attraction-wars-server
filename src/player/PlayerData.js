@@ -1,4 +1,5 @@
 const genId = () => Math.random().toString(36).substr(2, 16);
+const { generateRandomColor } = require('../utils');
 
 class RotationData {
   constructor(x, y, r) {
@@ -9,7 +10,7 @@ class RotationData {
 }
 
 class PlayerData {
-  constructor(x, y, r, id = genId(), color = 0x303331) {
+  constructor(x, y, r, id = genId(), color = generateRandomColor()) {
     this.id = id;
     this.x = x;
     this.y = y;

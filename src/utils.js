@@ -1,3 +1,5 @@
 const getValueNotViolatingBounds = (v, min, max) => Math.max(Math.min(v, max), min);
 
-module.exports = { getValueNotViolatingBounds };
+const generateRandomColor = () => +(Math.random() * 16777215);
+
+module.exports = { getValueNotViolatingBounds, generateRandomColor };
