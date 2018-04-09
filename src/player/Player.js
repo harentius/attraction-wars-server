@@ -104,8 +104,12 @@ class Player {
       this.playerData.y - this.playerData.rotationData.y,
       this.playerData.x - this.playerData.rotationData.x,
     );
-    this.playerData.x = this.playerData.rotationData.x + (this.playerData.rotationData.r * Math.cos(t));
-    this.playerData.y = this.playerData.rotationData.y + (this.playerData.rotationData.r * Math.sin(t));
+    this.playerData.x = this.playerData.rotationData.x
+      + (this.playerData.rotationData.r * Math.cos(t))
+    ;
+    this.playerData.y = this.playerData.rotationData.y
+      + (this.playerData.rotationData.r * Math.sin(t))
+    ;
   }
 }
 

@@ -7,7 +7,7 @@
   "scripts": {
     "server": "node src/server/server.js",
     "server-watch": "./node_modules/.bin/nodemon src/server/server.js",
-    "lint": "eslint ./src/**.js"
+    "lint": "eslint ./src/**/**.js"
   },
   "dependencies": {
     "express": "^4.16.2",
