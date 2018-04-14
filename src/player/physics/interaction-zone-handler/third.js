@@ -6,7 +6,7 @@ const thirdZoneHandler = (playerData, otherPlayerData) => {
     + (otherPlayerData.y - playerData.y) ** 2,
   );
 
-  playerData.setRotationData(new RotationData(
+  playerData.setRotationData(otherPlayerData.id, new RotationData(
     otherPlayerData.x,
     otherPlayerData.y,
     r,

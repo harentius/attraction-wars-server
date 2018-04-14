@@ -19,16 +19,16 @@ class PlayerData {
     this.vY = 0;
     this.aX = 0;
     this.aY = 0;
-    this.rotationData = null;
+    this.rotationData = new Map();
     this.color = color;
   }
 
-  setRotationData(rotationData) {
-    this.rotationData = rotationData;
+  setRotationData(id, rotationData) {
+    this.rotationData.set(id, rotationData);
   }
 
-  cleanRotationData() {
-    this.rotationData = null;
+  removeRotationData(id) {
+    this.rotationData.delete(id);
   }
 }
 

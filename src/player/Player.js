@@ -25,7 +25,7 @@ class Player {
   updateData() {
     this._updateVelocity();
 
-    if (this.playerData.rotationData !== null) {
+    if (this.playerData.rotationData.size > 0) {
       this._rotateAroundDistance();
     }
 
@@ -100,16 +100,18 @@ class Player {
   }
 
   _rotateAroundDistance() {
-    const t = config.rotationSpeed + Math.atan2(
-      this.playerData.y - this.playerData.rotationData.y,
-      this.playerData.x - this.playerData.rotationData.x,
-    );
-    this.playerData.x = this.playerData.rotationData.x
-      + (this.playerData.rotationData.r * Math.cos(t))
-    ;
-    this.playerData.y = this.playerData.rotationData.y
-      + (this.playerData.rotationData.r * Math.sin(t))
-    ;
+    for (const rotationData of this.playerData.rotationData.values()) {
+      const t = config.rotationSpeed + Math.atan2(
+        this.playerData.y - rotationData.y,
+        this.playerData.x - rotationData.x,
+      );
+      this.playerData.x = rotationData.x
+        + (rotationData.r * Math.cos(t))
+      ;
+      this.playerData.y = rotationData.y
+        + (rotationData.r * Math.sin(t))
+      ;
+    }
   }
 }
 

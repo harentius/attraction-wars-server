@@ -13,9 +13,22 @@ class Physics {
         continue;
       }
 
-      const interactionZone = this._getInteractionZone(playerData, otherPlayerData);
-      const interactionZoneHandler = getInteractionZoneHandler(interactionZone);
-      interactionZoneHandler(playerData, otherPlayerData);
+      const interactionZonePlayerIntoOtherPlayer = this._getInteractionZone(
+        playerData,
+        otherPlayerData,
+      );
+
+      const interactionZoneOtherPlayerIntoPlayer = this._getInteractionZone(
+        otherPlayerData,
+        playerData,
+      );
+
+      if (interactionZonePlayerIntoOtherPlayer <= interactionZoneOtherPlayerIntoPlayer) {
+        const interactionZoneHandler = getInteractionZoneHandler(
+          interactionZonePlayerIntoOtherPlayer,
+        );
+        interactionZoneHandler(playerData, otherPlayerData);
+      }
     }
   }
 
@@ -34,7 +47,7 @@ class Physics {
       }
     }
 
-    return null;
+    return 4;
   }
 
   _circleContain(circle, x, y) {
