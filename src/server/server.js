@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
 });
 
 setInterval(() => {
-  io.emit('worldData', storage.worldData);
+  io.emit('worldData', storage.getWorldDataForClient());
 }, config.broadCastPeriod);
 
 server.listen(config.port, () => console.log('Attraction Wars server started'));

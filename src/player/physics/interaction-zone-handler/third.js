@@ -6,11 +6,12 @@ const thirdZoneHandler = (playerData, otherPlayerData) => {
     + (otherPlayerData.y - playerData.y) ** 2,
   );
 
-  playerData.setRotationData(otherPlayerData.id, new RotationData(
+  playerData.rotationData.set(otherPlayerData.id, new RotationData(
     otherPlayerData.x,
     otherPlayerData.y,
     r,
   ));
+  playerData.boundedToPlayersData.set(otherPlayerData.id, otherPlayerData);
 };
 
 module.exports = thirdZoneHandler;

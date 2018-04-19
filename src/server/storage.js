@@ -30,6 +30,11 @@ class Storage {
     return this.players.get(id);
   }
 
+  getWorldDataForClient() {
+    // TODO: filter data which users receives
+    return this.worldData;
+  }
+
   updateKeyPressState(id, keyPressState) {
     this.trigger(
       Storage.UPDATE_KEY_PRESS_STATE,

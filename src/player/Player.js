@@ -27,6 +27,7 @@ class Player {
 
     if (this.playerData.rotationData.size > 0) {
       this._rotateAroundDistance();
+      this._moveInfluencedByPlayers();
     }
 
     this.playerData.x += this.playerData.vX * config.dt;
@@ -111,6 +112,13 @@ class Player {
       this.playerData.y = rotationData.y
         + (rotationData.r * Math.sin(t))
       ;
+    }
+  }
+
+  _moveInfluencedByPlayers() {
+    for (const playerData of this.playerData.boundedToPlayersData.values()) {
+      this.playerData.x += playerData.vX * config.dt;
+      this.playerData.y += playerData.vY * config.dt;
     }
   }
 }
