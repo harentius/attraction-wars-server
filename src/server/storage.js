@@ -16,6 +16,11 @@ class Storage {
     return this._clients.get(id);
   }
 
+  getPlayerDataForClient(id) {
+    // TODO: filter data which users receives
+    return this.worldData.playersData[id];
+  }
+
   addPlayer(id, player) {
     this.players.set(id, player);
     this.worldData.addPlayerData(player.playerData);
