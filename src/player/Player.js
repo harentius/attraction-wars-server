@@ -102,7 +102,7 @@ class Player {
 
   _rotateAroundDistance() {
     for (const rotationData of this.playerData.rotationData.values()) {
-      const t = config.rotationSpeed + Math.atan2(
+      const t = config.rotationSpeed * rotationData.direction + Math.atan2(
         this.playerData.y - rotationData.y,
         this.playerData.x - rotationData.x,
       );
