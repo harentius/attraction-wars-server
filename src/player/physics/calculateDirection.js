@@ -15,7 +15,7 @@ const calculateDirection = (playerData, otherPlayerData) => {
     return playerData.x > otherPlayerData.x ? -1 : 1;
   }
 
-  throw new Error('This code should be unreachable');
+  return 1;
 };
 
 module.exports = calculateDirection;
