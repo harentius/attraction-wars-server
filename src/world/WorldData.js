@@ -9,6 +9,12 @@ class WorldData {
   }
 
   removePlayerData(id) {
+    for (const playerData of Object.values(this.playersData)) {
+      playerData.rotationData.delete(id);
+      playerData.attractionData.delete(id);
+      playerData.boundedToPlayersData.delete(id);
+    }
+
     delete this.playersData[id];
   }
 }
