@@ -6,6 +6,7 @@ module.exports = {
   keyPressDv: 0.00025,
   releaseDv: 0.0005,
   rotationSpeed: 0.0025,
+  attractionSpeed: 20,
   minSpeed: 0,
   maxSpeed: 0.2,
 };

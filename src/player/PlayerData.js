@@ -1,6 +1,13 @@
 const genId = () => Math.random().toString(36).substr(2, 16);
 const { generateRandomColor } = require('../utils');
 
+class AttractionData {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
 class RotationData {
   constructor(x, y, r, direction = 1) {
     this.x = x;
@@ -21,9 +28,10 @@ class PlayerData {
     this.aX = 0;
     this.aY = 0;
     this.rotationData = new Map();
+    this.attractionData = new Map();
     this.boundedToPlayersData = new Map();
     this.color = color;
   }
 }
 
-module.exports = { RotationData, PlayerData };
+module.exports = { RotationData, PlayerData, AttractionData };

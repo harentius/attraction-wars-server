@@ -23,17 +23,15 @@ class Player {
   }
 
   updateData() {
+    this._physics.checkZoneSwitch(this.playerData);
+    this._moveAttractedByPlayers();
+    this._rotateAroundPlayers();
+    this._moveInfluencedByPlayers();
     this._updateVelocity();
-
-    if (this.playerData.rotationData.size > 0) {
-      this._rotateAroundDistance();
-      this._moveInfluencedByPlayers();
-    }
 
     this.playerData.x += this.playerData.vX * config.dt;
     this.playerData.y += this.playerData.vY * config.dt;
     this._checkBoundCollisions();
-    this._physics.checkZoneSwitch(this.playerData);
   }
 
   _updateVelocity() {
@@ -100,7 +98,7 @@ class Player {
     ;
   }
 
-  _rotateAroundDistance() {
+  _rotateAroundPlayers() {
     for (const rotationData of this.playerData.rotationData.values()) {
       const t = config.rotationSpeed * rotationData.direction + Math.atan2(
         this.playerData.y - rotationData.y,
@@ -119,6 +117,27 @@ class Player {
     for (const playerData of this.playerData.boundedToPlayersData.values()) {
       this.playerData.x += playerData.vX * config.dt;
       this.playerData.y += playerData.vY * config.dt;
+    }
+  }
+
+  _moveAttractedByPlayers() {
+    for (const attractionData of this.playerData.attractionData.values()) {
+      const dx = attractionData.x - this.playerData.x;
+      const dy = attractionData.y - this.playerData.y;
+      /** This is not real world distance
+       * But this is value which pretend to work in similar way as real world distance
+       * This is "pseudo interaction potential"
+       */
+      const r = dx ** 2 + dy ** 2 + 1;
+      const vX = config.attractionSpeed * dx / r;
+      const vY = config.attractionSpeed * dy / r;
+
+      if (Math.abs(dx) < this.playerData.r / 4 && Math.abs(dy) < this.playerData.r / 4) {
+        return;
+      }
+
+      this.playerData.x += vX * config.dt;
+      this.playerData.y += vY * config.dt;
     }
   }
 }

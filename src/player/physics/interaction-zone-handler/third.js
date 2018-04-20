@@ -20,6 +20,7 @@ const thirdZoneHandler = (playerData, otherPlayerData) => {
     oldDirection || calculateDirection(playerData, otherPlayerData),
   ));
   playerData.boundedToPlayersData.set(otherPlayerData.id, otherPlayerData);
+  playerData.attractionData.delete(otherPlayerData.id);
 };
 
 module.exports = thirdZoneHandler;
