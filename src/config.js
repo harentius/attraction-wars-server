@@ -9,4 +9,5 @@ module.exports = {
   attractionSpeed: 20,
   minSpeed: 0,
   maxSpeed: 0.2,
+  relativeZonesSizes: [1.5, 2.5, 3.5],
 };

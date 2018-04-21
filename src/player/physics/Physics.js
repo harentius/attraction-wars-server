@@ -1,4 +1,5 @@
 const getInteractionZoneHandler = require('./interaction-zone-handler/registry');
+const config = require('../../config');
 
 class Physics {
   constructor(storage) {
@@ -37,7 +38,7 @@ class Physics {
     // Check is first zone.
     let i = 0;
 
-    for (const RofZone of [1.5, 2.5, 3.5]) {
+    for (const RofZone of config.relativeZonesSizes) {
       i++;
       const { x, y, r } = otherPlayerData;
       const circle = { x, y, r: RofZone * r };
