@@ -13,12 +13,10 @@ const secondZoneHandler = (playerData, otherPlayerData) => {
     oldDirection = playerData.rotationData.get(otherPlayerData.id).direction;
   }
 
-  playerData.rotationData.set(otherPlayerData.id, new RotationData(
-    otherPlayerData.x,
-    otherPlayerData.y,
-    r,
-    oldDirection || calculateDirection(playerData, otherPlayerData),
-  ));
+  const direction = oldDirection || calculateDirection(playerData, otherPlayerData);
+  const rotationData = new RotationData(otherPlayerData.x, otherPlayerData.y, r, direction);
+
+  playerData.rotationData.set(otherPlayerData.id, rotationData);
   playerData.boundedToPlayersData.set(otherPlayerData.id, otherPlayerData);
   playerData.attractionData.delete(otherPlayerData.id);
 };
