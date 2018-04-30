@@ -10,7 +10,7 @@ class Game {
 
   addPlayer() {
     // TODO: demo data, update with something like rand place generating
-    const playerData = new PlayerData(1500, 400, Math.random() * 100 + 50);
+    const playerData = new PlayerData(2600, 1500, Math.random() * 100 + 50);
     const player = new Player(playerData, this._physics);
 
     this._storage.addPlayer(playerData.id, player);

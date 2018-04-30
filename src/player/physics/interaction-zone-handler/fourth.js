@@ -1,7 +1,8 @@
 const fourthZoneHandler = (playerData, otherPlayerData) => {
-  playerData.rotationData.delete(otherPlayerData.id);
-  playerData.boundedToPlayersData.delete(otherPlayerData.id);
   playerData.attractionData.delete(otherPlayerData.id);
+  playerData.rotationData.delete(otherPlayerData.id);
+  playerData.gravityAssistData.delete(otherPlayerData.id);
+  playerData.boundedToPlayersData.delete(otherPlayerData.id);
 };
 
 module.exports = fourthZoneHandler;

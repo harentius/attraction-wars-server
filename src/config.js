@@ -5,9 +5,11 @@ module.exports = {
   worldBounds: [0, 0, 20000, 20000],
   keyPressDv: 0.00025,
   releaseDv: 0.0005,
-  rotationSpeed: 0.0025,
+  gravityAssistReleaseDv: 0.0001,
+  rotationSpeed: 0.00025,
+  gravityAssistRotationSpeed: 0.003,
   attractionSpeed: 20,
   minSpeed: 0,
-  maxSpeed: 0.2,
+  maxMovementSpeed: 0.2,
   relativeZonesSizes: [1.5, 2.5, 3.5],
 };

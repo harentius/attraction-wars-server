@@ -26,11 +26,12 @@ class Player {
     this._physics.checkZoneSwitch(this.playerData);
     this._moveAttractedByPlayers();
     this._rotateAroundPlayers();
+    this._moveByGravityAssist();
     this._moveInfluencedByPlayers();
     this._updateVelocity();
 
-    this.playerData.x += this.playerData.vX * config.dt;
-    this.playerData.y += this.playerData.vY * config.dt;
+    this.playerData.x += (this.playerData.vX + this.playerData.bonusVx) * config.dt;
+    this.playerData.y += (this.playerData.vY + this.playerData.bonusVy) * config.dt;
     this._checkBoundCollisions();
   }
 
@@ -58,8 +59,16 @@ class Player {
       newVy = this.playerData.vY + this.playerData.aY * config.dt;
     }
 
-    this.playerData.vX = getValueNotViolatingBounds(newVx, -config.maxSpeed, config.maxSpeed);
-    this.playerData.vY = getValueNotViolatingBounds(newVy, -config.maxSpeed, config.maxSpeed);
+    this.playerData.vX = getValueNotViolatingBounds(
+      newVx,
+      -config.maxMovementSpeed,
+      config.maxMovementSpeed,
+    );
+    this.playerData.vY = getValueNotViolatingBounds(
+      newVy,
+      -config.maxMovementSpeed,
+      config.maxMovementSpeed,
+    );
 
     if (this._isAttenuation) {
       if (Math.abs(this.playerData.vX) < considerStoppedWhen) {
@@ -71,6 +80,22 @@ class Player {
         this.playerData.vY = config.minSpeed;
         this.playerData.aY = 0;
       }
+    }
+
+    if (this.playerData.gravityAssistData.size === 0 && (Math.abs(this.playerData.bonusVx) > considerStoppedWhen || Math.abs(this.playerData.bonusVy) > considerStoppedWhen)) {
+      const newBonusVx = (this.playerData.bonusVx > 0)
+        ? Math.max(0, this.playerData.bonusVx - config.gravityAssistReleaseDv * config.dt)
+        : Math.min(0, this.playerData.bonusVx + config.gravityAssistReleaseDv * config.dt)
+      ;
+
+      const k = Math.abs(this.playerData.bonusVy / this.playerData.bonusVx);
+      const newBonusVy = (this.playerData.bonusVy > 0)
+        ? Math.max(0, this.playerData.bonusVy - config.gravityAssistReleaseDv * k * config.dt)
+        : Math.min(0, this.playerData.bonusVy + config.gravityAssistReleaseDv * k * config.dt)
+      ;
+      // const newBonusVy = this.playerData.bonusVy * newBonusVx / this.playerData.bonusVx;
+      this.playerData.bonusVx = newBonusVx;
+      this.playerData.bonusVy = newBonusVy;
     }
   }
 
@@ -100,7 +125,7 @@ class Player {
 
   _rotateAroundPlayers() {
     for (const rotationData of this.playerData.rotationData.values()) {
-      const t = config.rotationSpeed * rotationData.direction + Math.atan2(
+      const t = config.rotationSpeed * config.dt * rotationData.direction + Math.atan2(
         this.playerData.y - rotationData.y,
         this.playerData.x - rotationData.x,
       );
@@ -138,6 +163,34 @@ class Player {
 
       this.playerData.x += vX * config.dt;
       this.playerData.y += vY * config.dt;
+    }
+  }
+
+  _moveByGravityAssist() {
+    for (const rotationData of this.playerData.gravityAssistData.values()) {
+      const angle = config.gravityAssistRotationSpeed * config.dt;
+      const t = angle * rotationData.direction + Math.atan2(
+        this.playerData.y - rotationData.y,
+        this.playerData.x - rotationData.x,
+      );
+      const oldX = this.playerData.x;
+      const newX = rotationData.x
+        + (rotationData.r * Math.cos(t))
+      ;
+      const oldY = this.playerData.y;
+      const newY = rotationData.y
+        + (rotationData.r * Math.sin(t))
+      ;
+
+      if (Math.abs(rotationData.angle) >= Math.PI && !this.playerData.bonusVx && !this.playerData.bonusVy) {
+        this.playerData.bonusVx = (newX - oldX) / config.dt / 2;
+        this.playerData.bonusVy = (newY - oldY) / config.dt / 2;
+        continue;
+      }
+
+      this.playerData.x = newX;
+      this.playerData.y = newY;
+      rotationData.angle += angle;
     }
   }
 }

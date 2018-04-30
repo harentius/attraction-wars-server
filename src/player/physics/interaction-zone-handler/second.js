@@ -1,23 +1,28 @@
-const { RotationData } = require('../../PlayerData');
+const { GravityAssistData } = require('../../PlayerData');
 const calculateDirection = require('../calculateDirection');
 
 const secondZoneHandler = (playerData, otherPlayerData) => {
+  if (playerData.gravityAssistData.has(otherPlayerData.id)) {
+    return;
+  }
+
   const r = Math.sqrt(
     (otherPlayerData.x - playerData.x) ** 2
     + (otherPlayerData.y - playerData.y) ** 2,
   );
+  const direction = calculateDirection(playerData, otherPlayerData);
+  const gravityAssistData = new GravityAssistData(
+    otherPlayerData.x,
+    otherPlayerData.y,
+    r,
+    direction,
+    playerData.x,
+    playerData.y,
+  );
+  playerData.gravityAssistData.set(otherPlayerData.id, gravityAssistData);
 
-  let oldDirection = null;
-
-  if (playerData.rotationData.has(otherPlayerData.id)) {
-    oldDirection = playerData.rotationData.get(otherPlayerData.id).direction;
-  }
-
-  const direction = oldDirection || calculateDirection(playerData, otherPlayerData);
-  const rotationData = new RotationData(otherPlayerData.x, otherPlayerData.y, r, direction);
-
-  playerData.rotationData.set(otherPlayerData.id, rotationData);
   playerData.boundedToPlayersData.set(otherPlayerData.id, otherPlayerData);
+  playerData.rotationData.delete(otherPlayerData.id);
   playerData.attractionData.delete(otherPlayerData.id);
 };
 

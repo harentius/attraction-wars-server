@@ -6,6 +6,7 @@ const firstZoneHandler = (playerData, otherPlayerData) => {
   playerData.attractionData.set(otherPlayerData.id, attractionData);
   playerData.boundedToPlayersData.set(otherPlayerData.id, otherPlayerData);
   playerData.rotationData.delete(otherPlayerData.id);
+  playerData.gravityAssistData.delete(otherPlayerData.id);
 };
 
 module.exports = firstZoneHandler;

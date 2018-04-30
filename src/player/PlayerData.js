@@ -9,11 +9,20 @@ class AttractionData {
 }
 
 class RotationData {
-  constructor(x, y, r, direction = 1) {
+  constructor(x, y, r, direction) {
     this.x = x;
     this.y = y;
     this.r = r;
     this.direction = direction;
+  }
+}
+
+class GravityAssistData extends RotationData {
+  constructor(x, y, r, direction, xIn, yIn) {
+    super(x, y, r, direction);
+    this.xIn = xIn;
+    this.yIn = yIn;
+    this.angle = 0;
   }
 }
 
@@ -25,13 +34,16 @@ class PlayerData {
     this.r = r;
     this.vX = 0;
     this.vY = 0;
+    this.bonusVx = 0;
+    this.bonusVy = 0;
     this.aX = 0;
     this.aY = 0;
-    this.rotationData = new Map();
     this.attractionData = new Map();
+    this.rotationData = new Map();
+    this.gravityAssistData = new Map();
     this.boundedToPlayersData = new Map();
     this.color = color;
   }
 }
 
-module.exports = { RotationData, PlayerData, AttractionData };
+module.exports = { RotationData, PlayerData, AttractionData, GravityAssistData };
