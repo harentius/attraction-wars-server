@@ -6,6 +6,7 @@ const io = require('socket.io')(server);
 const { game, storage } = require('../app');
 const config = require('../config');
 const KeyPressState = require('./KeysPressState');
+const logger = require('./logger');
 
 const socketIdToPlayerIdMap = new Map();
 
@@ -16,7 +17,7 @@ io.on('connection', (socket) => {
   const client = new Client(socket, new KeysPressState());
 
   storage.addClient(playerId, client);
-  console.log(`Client '${socket.handshake.address}' connected. Socket id: ${socket.id}, Assigned id: ${playerId}`);
+  logger.info(`Client '${socket.handshake.address}' connected. Socket id: ${socket.id}, Assigned id: ${playerId}`);
   socket.emit('playerData', storage.getPlayerDataForClient(playerId));
 
   socket.on('keysPressState', (keyPressStateData) => {
@@ -28,7 +29,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     const id = socketIdToPlayerIdMap.get(socket.id);
-    console.log(`Client '${socket.handshake.address}' disconnected. Socket id: ${socket.id}, Assigned id: ${id}`);
+    logger.info(`Client '${socket.handshake.address}' disconnected. Socket id: ${socket.id}, Assigned id: ${id}`);
     storage.removeClient(id);
   });
 });
@@ -37,5 +38,5 @@ setInterval(() => {
   io.emit('worldData', storage.getWorldDataForClient());
 }, config.broadCastPeriod);
 
-server.listen(config.port, () => console.log('Attraction Wars server started'));
+server.listen(config.port, () => logger.info('Attraction Wars server started'));
 
