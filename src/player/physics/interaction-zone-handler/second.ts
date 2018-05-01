@@ -1,5 +1,5 @@
-const { GravityAssistData } = require('../../PlayerData');
-const calculateDirection = require('../calculateDirection');
+import { GravityAssistData } from '../../PlayerData';
+import calculateDirection from '../calculateDirection';
 
 const secondZoneHandler = (playerData, otherPlayerData) => {
   if (playerData.gravityAssistData.has(otherPlayerData.id)) {
@@ -8,7 +8,7 @@ const secondZoneHandler = (playerData, otherPlayerData) => {
 
   const r = Math.sqrt(
     (otherPlayerData.x - playerData.x) ** 2
-    + (otherPlayerData.y - playerData.y) ** 2,
+    + (otherPlayerData.y - playerData.y) ** 2
   );
   const direction = calculateDirection(playerData, otherPlayerData);
   const gravityAssistData = new GravityAssistData(
@@ -17,7 +17,7 @@ const secondZoneHandler = (playerData, otherPlayerData) => {
     r,
     direction,
     playerData.x,
-    playerData.y,
+    playerData.y
   );
   playerData.gravityAssistData.set(otherPlayerData.id, gravityAssistData);
 
@@ -26,4 +26,4 @@ const secondZoneHandler = (playerData, otherPlayerData) => {
   playerData.attractionData.delete(otherPlayerData.id);
 };
 
-module.exports = secondZoneHandler;
+export default secondZoneHandler;

@@ -1,4 +1,9 @@
 class KeysPressState {
+  public up: boolean;
+  public down: boolean;
+  public left: boolean;
+  public right: boolean;
+
   constructor({ up = false, down = false, left = false, right = false } = {}) {
     this.up = up;
     this.down = down;
@@ -6,8 +11,8 @@ class KeysPressState {
     this.right = right;
   }
 
-  isEqual(keysPressState) {
-    for (const [key, value] of Object.entries(this)) {
+  public isEqual(keysPressState) {
+    for (const [key, value] of (Object as any).entries(this)) {
       if (value !== keysPressState[key]) {
         return false;
       }
@@ -16,9 +21,9 @@ class KeysPressState {
     return true;
   }
 
-  isAnyMoveKeyPressed() {
+  public isAnyMoveKeyPressed() {
     return this.up || this.down || this.left || this.right;
   }
 }
 
-module.exports = KeysPressState;
+export default KeysPressState;

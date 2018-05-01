@@ -1,7 +1,7 @@
-const firstInteractionZoneHandler = require('./first');
-const secondInteractionZoneHandler = require('./second');
-const thirdInteractionZoneHandler = require('./third');
-const fourthZoneHandler = require('./fourth');
+import firstInteractionZoneHandler from './first';
+import secondInteractionZoneHandler from './second';
+import thirdInteractionZoneHandler from './third';
+import fourthZoneHandler from './fourth';
 
 const zoneHandlers = {
   1: firstInteractionZoneHandler,
@@ -18,4 +18,4 @@ const getInteractionZoneHandler = (zoneNumber) => {
   throw new Error('Not implemented');
 };
 
-module.exports = getInteractionZoneHandler;
+export default getInteractionZoneHandler;

@@ -1,4 +1,4 @@
-const config = require('../../config');
+import config from '../../config';
 
 const calculateAcceleration = (player, oldKeysPressState, newKeysPressState) => {
   const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();
@@ -24,4 +24,4 @@ const calculateAcceleration = (player, oldKeysPressState, newKeysPressState) => 
   return dv;
 };
 
-module.exports = calculateAcceleration;
+export default calculateAcceleration;

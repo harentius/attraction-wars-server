@@ -18,4 +18,4 @@ const calculateDirection = (playerData, otherPlayerData) => {
   return 1;
 };
 
-module.exports = calculateDirection;
+export default calculateDirection;

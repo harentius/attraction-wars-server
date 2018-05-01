@@ -5,4 +5,4 @@ const fourthZoneHandler = (playerData, otherPlayerData) => {
   playerData.boundedToPlayersData.delete(otherPlayerData.id);
 };
 
-module.exports = fourthZoneHandler;
+export default fourthZoneHandler;

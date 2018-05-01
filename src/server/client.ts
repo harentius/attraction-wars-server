@@ -1,8 +1,11 @@
 class Client {
+  public socket: any;
+  public keyPressState: any;
+
   constructor(socket, keyPressState) {
     this.socket = socket;
     this.keyPressState = keyPressState;
   }
 }
 
-module.exports = Client;
+export default Client;

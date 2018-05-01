@@ -1,32 +1,34 @@
-const getInteractionZoneHandler = require('./interaction-zone-handler/registry');
-const config = require('../../config');
+import getInteractionZoneHandler from './interaction-zone-handler/registry';
+import config from '../../config';
 
 class Physics {
+  private storage: any;
+
   constructor(storage) {
-    this._storage = storage;
+    this.storage = storage;
   }
 
-  checkZoneSwitch(playerData) {
-    const { playersData } = this._storage.worldData;
+  public checkZoneSwitch(playerData) {
+    const { playersData } = this.storage.worldData;
 
-    for (const otherPlayerData of Object.values(playersData)) {
+    for (const otherPlayerData of (Object as any).values(playersData)) {
       if (otherPlayerData.id === playerData.id) {
         continue;
       }
 
       const interactionZonePlayerIntoOtherPlayer = this._getInteractionZone(
         playerData,
-        otherPlayerData,
+        otherPlayerData
       );
 
       const interactionZoneOtherPlayerIntoPlayer = this._getInteractionZone(
         otherPlayerData,
-        playerData,
+        playerData
       );
 
       if (interactionZonePlayerIntoOtherPlayer <= interactionZoneOtherPlayerIntoPlayer) {
         const interactionZoneHandler = getInteractionZoneHandler(
-          interactionZonePlayerIntoOtherPlayer,
+          interactionZonePlayerIntoOtherPlayer
         );
         interactionZoneHandler(playerData, otherPlayerData);
       }
@@ -34,7 +36,7 @@ class Physics {
   }
 
   // First zone is closest to player circle
-  _getInteractionZone(playerData, otherPlayerData) {
+  private _getInteractionZone(playerData, otherPlayerData) {
     // Check is first zone.
     let i = 0;
 
@@ -51,7 +53,7 @@ class Physics {
     return 4;
   }
 
-  _circleContain(circle, x, y) {
+  private _circleContain(circle, x, y) {
     const right = circle.x + circle.r;
     const left = circle.x - circle.r;
     const top = circle.y - circle.r;
@@ -68,4 +70,4 @@ class Physics {
   }
 }
 
-module.exports = Physics;
+export default Physics;

@@ -1,14 +1,21 @@
-const genId = () => Math.random().toString(36).substr(2, 16);
-const { generateRandomColor } = require('../utils');
+import { generateRandomColor, genId } from '../utils';
 
 class AttractionData {
-  constructor(x, y) {
+  public x: number;
+  public y: number;
+
+  public constructor(x, y) {
     this.x = x;
     this.y = y;
   }
 }
 
 class RotationData {
+  public x: number;
+  public y: number;
+  public r: number;
+  public direction: number;
+
   constructor(x, y, r, direction) {
     this.x = x;
     this.y = y;
@@ -18,6 +25,10 @@ class RotationData {
 }
 
 class GravityAssistData extends RotationData {
+  public xIn: number;
+  public yIn: number;
+  public angle: number;
+
   constructor(x, y, r, direction, xIn, yIn) {
     super(x, y, r, direction);
     this.xIn = xIn;
@@ -27,6 +38,22 @@ class GravityAssistData extends RotationData {
 }
 
 class PlayerData {
+  public id: string;
+  public x: number;
+  public y: number;
+  public r: number;
+  public vX: number;
+  public vY: number;
+  public bonusVx: number;
+  public bonusVy: number;
+  public aX: number;
+  public aY: number;
+  public color: number;
+  public attractionData: Map<string, AttractionData>;
+  public rotationData: Map<string, RotationData>;
+  public gravityAssistData: Map<string, GravityAssistData>;
+  public boundedToPlayersData: Map<string, PlayerData>;
+
   constructor(x, y, r, id = genId(), color = generateRandomColor()) {
     this.id = id;
     this.x = x;
@@ -46,4 +73,4 @@ class PlayerData {
   }
 }
 
-module.exports = { RotationData, PlayerData, AttractionData, GravityAssistData };
+export { RotationData, PlayerData, AttractionData, GravityAssistData };

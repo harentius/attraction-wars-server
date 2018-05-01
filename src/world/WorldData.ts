@@ -1,15 +1,18 @@
 class WorldData {
+  public playersData: any;
+  public worldBounds: any;
+
   constructor(playersData = {}, worldBounds = []) {
     this.playersData = playersData;
     this.worldBounds = worldBounds;
   }
 
-  addPlayerData(playerData) {
+  public addPlayerData(playerData) {
     this.playersData[playerData.id] = playerData;
   }
 
-  removePlayerData(id) {
-    for (const playerData of Object.values(this.playersData)) {
+  public removePlayerData(id) {
+    for (const playerData of (Object as any).values(this.playersData)) {
       playerData.rotationData.delete(id);
       playerData.attractionData.delete(id);
       playerData.boundedToPlayersData.delete(id);
@@ -19,4 +22,4 @@ class WorldData {
   }
 }
 
-module.exports = WorldData;
+export default WorldData;

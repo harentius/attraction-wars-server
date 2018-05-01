@@ -1,4 +1,4 @@
-const { AttractionData } = require('../../PlayerData');
+import { AttractionData } from '../../PlayerData';
 
 const firstZoneHandler = (playerData, otherPlayerData) => {
   const attractionData = new AttractionData(otherPlayerData.x, otherPlayerData.y);
@@ -9,4 +9,4 @@ const firstZoneHandler = (playerData, otherPlayerData) => {
   playerData.gravityAssistData.delete(otherPlayerData.id);
 };
 
-module.exports = firstZoneHandler;
+export default firstZoneHandler;

@@ -1,13 +1,16 @@
-const KeysPressState = require('./KeysPressState');
-const Client = require('./client');
-const app = require('express')();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-const { game, storage } = require('../app');
-const config = require('../config');
-const KeyPressState = require('./KeysPressState');
-const logger = require('./logger');
+import * as logger from 'winston';
+import KeysPressState from './KeysPressState';
+import Client from './client';
+import * as express from 'express';
+import { Server } from 'http';
+import * as SocketIO from 'socket.io';
+import { game, storage } from '../app';
+import config from '../config';
+import KeyPressState from './KeysPressState';
 
+const app = express();
+const server = new Server(app);
+const io = SocketIO(server);
 const socketIdToPlayerIdMap = new Map();
 
 io.on('connection', (socket) => {
@@ -23,7 +26,7 @@ io.on('connection', (socket) => {
   socket.on('keysPressState', (keyPressStateData) => {
     storage.updateKeyPressState(
       socketIdToPlayerIdMap.get(socket.id),
-      new KeyPressState(keyPressStateData),
+      new KeyPressState(keyPressStateData)
     );
   });
 
@@ -39,4 +42,3 @@ setInterval(() => {
 }, config.broadCastPeriod);
 
 server.listen(config.port, () => logger.info('Attraction Wars server started'));
-

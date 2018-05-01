@@ -1,10 +1,10 @@
-const { RotationData } = require('../../PlayerData');
-const calculateDirection = require('../calculateDirection');
+import { RotationData } from '../../PlayerData';
+import calculateDirection from '../calculateDirection';
 
 const thirdZoneHandler = (playerData, otherPlayerData) => {
   const r = Math.sqrt(
     (otherPlayerData.x - playerData.x) ** 2
-    + (otherPlayerData.y - playerData.y) ** 2,
+    + (otherPlayerData.y - playerData.y) ** 2
   );
 
   let oldDirection = null;
@@ -22,4 +22,4 @@ const thirdZoneHandler = (playerData, otherPlayerData) => {
   playerData.gravityAssistData.delete(otherPlayerData.id);
 };
 
-module.exports = thirdZoneHandler;
+export default thirdZoneHandler;
