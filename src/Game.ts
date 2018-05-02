@@ -1,23 +1,21 @@
 import Storage from './server/storage';
-import Physics from './player/physics/Physics';
 import { PlayerData } from './player/PlayerData';
-import Player from './player/Player';
 import config from './config';
+import PlayerFactory from './player/PlayerFactory';
 
 class Game {
-  private storage: Storage;
-  private physics: Physics;
+  private readonly storage: Storage;
+  private readonly playerFactory: PlayerFactory;
 
-  constructor(storage, physics) {
+  constructor(storage: Storage, playerFactory: PlayerFactory) {
     this.storage = storage;
-    this.physics = physics;
+    this.playerFactory = playerFactory;
   }
 
   public addPlayer() {
     // TODO: demo data, update with something like rand place generating
     const playerData = new PlayerData(2600, 1500, Math.random() * 100 + 50);
-    const player = new Player(playerData, this.physics);
-
+    const player = this.playerFactory.createPlayer(playerData);
     this.storage.addPlayer(playerData.id, player);
 
     return player;

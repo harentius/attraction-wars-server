@@ -1,11 +1,14 @@
-import getInteractionZoneHandler from './interaction-zone-handler/registry';
 import config from '../../config';
+import MovementHandlerRegistry from './movement-handler/MovementHandlerRegistry';
+import Storage from '../../server/storage';
 
-class Physics {
-  private storage: any;
+class InteractionZoneSwitcher {
+  private storage: Storage;
+  private movementHandlerRegistry: MovementHandlerRegistry;
 
-  constructor(storage) {
+  constructor(storage: Storage, movementHandlerRegistry: MovementHandlerRegistry) {
     this.storage = storage;
+    this.movementHandlerRegistry = movementHandlerRegistry;
   }
 
   public checkZoneSwitch(playerData) {
@@ -27,10 +30,14 @@ class Physics {
       );
 
       if (interactionZonePlayerIntoOtherPlayer <= interactionZoneOtherPlayerIntoPlayer) {
-        const interactionZoneHandler = getInteractionZoneHandler(
-          interactionZonePlayerIntoOtherPlayer
-        );
-        interactionZoneHandler(playerData, otherPlayerData);
+        const interactionZoneMovementHandler = this.movementHandlerRegistry
+          .getInteractionZoneMovementHandler(interactionZonePlayerIntoOtherPlayer)
+        ;
+
+        // TODO
+        if (interactionZoneMovementHandler) {
+          interactionZoneMovementHandler.updateMovementHandlerData(playerData, otherPlayerData);
+        }
       }
     }
   }
@@ -70,4 +77,4 @@ class Physics {
   }
 }
 
-export default Physics;
+export default InteractionZoneSwitcher;

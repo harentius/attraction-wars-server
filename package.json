@@ -5,8 +5,8 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "server": "tsc && node ./dist/server/server.js",
-    "server-watch": "concurrently --kill-others \"tsc --watch\" \"./node_modules/.bin/nodemon ./dist/server/server.js\"",
+    "server": "./node_modules/.bin/tsc && node ./dist/server/server.js",
+    "server-watch": "concurrently --kill-others \"./node_modules/.bin/tsc --watch\" \"./node_modules/.bin/nodemon ./dist/server/server.js\"",
     "lint": "node_modules/.bin/tslint ./src/**/*.ts"
   },
   "dependencies": {

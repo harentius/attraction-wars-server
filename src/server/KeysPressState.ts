@@ -12,7 +12,7 @@ class KeysPressState {
   }
 
   public isEqual(keysPressState) {
-    for (const [key, value] of (Object as any).entries(this)) {
+    for (const [key, value] of Object.entries(this)) {
       if (value !== keysPressState[key]) {
         return false;
       }

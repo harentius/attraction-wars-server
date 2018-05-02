@@ -1,14 +1,23 @@
 import config from '../config';
 import { getValueNotViolatingBounds } from '../utils';
+import {PlayerData} from './PlayerData';
+import InteractionZoneSwitcher from './physics/InteractionZoneSwitcher';
+import MovementHandlerRegistry from './physics/movement-handler/MovementHandlerRegistry';
 
 class Player {
-  public playerData: any;
-  private physics: any;
+  public playerData: PlayerData;
+  private interactionZoneSwitcher: InteractionZoneSwitcher;
+  private movementHandlerRegistry: MovementHandlerRegistry;
   private isAttenuation: boolean;
 
-  constructor(playerData, physics) {
+  constructor(
+    playerData: PlayerData,
+    interactionZoneSwitcher: InteractionZoneSwitcher,
+    movementHandlerRegistry: MovementHandlerRegistry
+  ) {
     this.playerData = playerData;
-    this.physics = physics;
+    this.interactionZoneSwitcher = interactionZoneSwitcher;
+    this.movementHandlerRegistry = movementHandlerRegistry;
     this.isAttenuation = false;
   }
 
@@ -27,11 +36,13 @@ class Player {
   }
 
   public updateData() {
-    this.physics.checkZoneSwitch(this.playerData);
-    this._moveAttractedByPlayers();
-    this._rotateAroundPlayers();
-    this._moveByGravityAssist();
-    this._moveInfluencedByPlayers();
+    this.interactionZoneSwitcher.checkZoneSwitch(this.playerData);
+
+    for (const movementHandler of this.movementHandlerRegistry.movementHandlers.values()) {
+      movementHandler.updatePlayerData(this.playerData);
+    }
+
+    // this._moveInfluencedByPlayers();
     this._updateVelocity();
 
     this.playerData.x += (this.playerData.vX + this.playerData.bonusVx) * config.dt;
@@ -127,74 +138,10 @@ class Player {
     ;
   }
 
-  private _rotateAroundPlayers() {
-    for (const rotationData of this.playerData.rotationData.values()) {
-      const t = config.rotationSpeed * config.dt * rotationData.direction + Math.atan2(
-        this.playerData.y - rotationData.y,
-        this.playerData.x - rotationData.x
-      );
-      this.playerData.x = rotationData.x
-        + (rotationData.r * Math.cos(t))
-      ;
-      this.playerData.y = rotationData.y
-        + (rotationData.r * Math.sin(t))
-      ;
-    }
-  }
-
   private _moveInfluencedByPlayers() {
     for (const playerData of this.playerData.boundedToPlayersData.values()) {
       this.playerData.x += playerData.vX * config.dt;
       this.playerData.y += playerData.vY * config.dt;
-    }
-  }
-
-  private _moveAttractedByPlayers() {
-    for (const attractionData of this.playerData.attractionData.values()) {
-      const dx = attractionData.x - this.playerData.x;
-      const dy = attractionData.y - this.playerData.y;
-      /** This is not real world distance
-       * But this is value which pretend to work in similar way as real world distance
-       * This is "pseudo interaction potential"
-       */
-      const r = dx ** 2 + dy ** 2 + 1;
-      const vX = config.attractionSpeed * dx / r;
-      const vY = config.attractionSpeed * dy / r;
-
-      if (Math.abs(dx) < this.playerData.r / 4 && Math.abs(dy) < this.playerData.r / 4) {
-        return;
-      }
-
-      this.playerData.x += vX * config.dt;
-      this.playerData.y += vY * config.dt;
-    }
-  }
-
-  private _moveByGravityAssist() {
-    for (const rotationData of this.playerData.gravityAssistData.values()) {
-      const angle = config.gravityAssistRotationSpeed * config.dt;
-      const t = angle * rotationData.direction + Math.atan2(
-        this.playerData.y - rotationData.y,
-        this.playerData.x - rotationData.x
-      );
-      const oldX = this.playerData.x;
-      const newX = rotationData.x
-        + (rotationData.r * Math.cos(t))
-      ;
-      const oldY = this.playerData.y;
-      const newY = rotationData.y
-        + (rotationData.r * Math.sin(t))
-      ;
-
-      if (Math.abs(rotationData.angle) >= Math.PI && !this.playerData.bonusVx && !this.playerData.bonusVy) {
-        this.playerData.bonusVx = (newX - oldX) / config.dt / 2;
-        this.playerData.bonusVy = (newY - oldY) / config.dt / 2;
-        continue;
-      }
-
-      this.playerData.x = newX;
-      this.playerData.y = newY;
-      rotationData.angle += angle;
     }
   }
 }

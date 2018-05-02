@@ -1,3 +1,5 @@
+import { PlayerData } from '../player/PlayerData';
+
 class WorldData {
   public playersData: any;
   public worldBounds: any;
