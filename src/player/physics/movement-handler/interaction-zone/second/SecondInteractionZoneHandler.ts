@@ -31,22 +31,36 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
     }
 
     const considerStoppedWhen = config.considerStoppedWhen;
+    let stoppedProjections = 0;
+
+    if (Math.abs(playerData.bonusVx) < considerStoppedWhen) {
+      playerData.bonusVx = config.minSpeed;
+      stoppedProjections++;
+    }
+
+    if (Math.abs(playerData.bonusVy) < considerStoppedWhen) {
+      playerData.bonusVy = config.minSpeed;
+      stoppedProjections++;
+    }
+
+    // Already stopped
+    if (stoppedProjections === 2) {
+      return;
+    }
 
     // Bonus speed attenuating
-    if (Math.abs(playerData.bonusVx) > considerStoppedWhen || Math.abs(playerData.bonusVy) > considerStoppedWhen) {
-      const newBonusVx = (playerData.bonusVx > 0)
-        ? Math.max(0, playerData.bonusVx - config.gravityAssistReleaseDv * config.dt)
-        : Math.min(0, playerData.bonusVx + config.gravityAssistReleaseDv * config.dt)
-      ;
+    const newBonusVx = (playerData.bonusVx > 0)
+      ? Math.max(0, playerData.bonusVx - config.gravityAssistReleaseDv * config.dt)
+      : Math.min(0, playerData.bonusVx + config.gravityAssistReleaseDv * config.dt)
+    ;
 
-      const k = Math.abs(playerData.bonusVy / playerData.bonusVx);
-      const newBonusVy = (playerData.bonusVy > 0)
-        ? Math.max(0, playerData.bonusVy - config.gravityAssistReleaseDv * k * config.dt)
-        : Math.min(0, playerData.bonusVy + config.gravityAssistReleaseDv * k * config.dt)
-      ;
-      playerData.bonusVx = newBonusVx;
-      playerData.bonusVy = newBonusVy;
-    }
+    const k = Math.abs(playerData.bonusVy / playerData.bonusVx);
+    const newBonusVy = (playerData.bonusVy > 0)
+      ? Math.max(0, playerData.bonusVy - config.gravityAssistReleaseDv * k * config.dt)
+      : Math.min(0, playerData.bonusVy + config.gravityAssistReleaseDv * k * config.dt)
+    ;
+    playerData.bonusVx = newBonusVx;
+    playerData.bonusVy = newBonusVy;
   }
 
   public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {
