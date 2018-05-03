@@ -11,7 +11,8 @@ const config: {
   attractionSpeed: number,
   minSpeed: number,
   maxMovementSpeed: number,
-  relativeZonesSizes: number[]
+  relativeZonesSizes: number[],
+  considerStoppedWhen: number
 } = {
   port: 4000,
   broadCastPeriod: 30,
@@ -25,7 +26,11 @@ const config: {
   attractionSpeed: 20,
   minSpeed: 0,
   maxMovementSpeed: 0.2,
-  relativeZonesSizes: [1.5, 2.5, 3.5]
+  relativeZonesSizes: [1.5, 2.5, 3.5],
+  considerStoppedWhen: 0
 };
+
+// calculated parameter
+config.considerStoppedWhen = Math.min(config.releaseDv, config.keyPressDv) / 2;
 
 export default config;

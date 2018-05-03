@@ -55,7 +55,6 @@ class Player {
       return;
     }
 
-    const considerStoppedWhen = Math.min(config.releaseDv, config.keyPressDv) / 2;
     let newVx: number;
     let newVy: number;
 
@@ -85,6 +84,8 @@ class Player {
       config.maxMovementSpeed
     );
 
+    const considerStoppedWhen = config.considerStoppedWhen;
+
     if (this.isAttenuation) {
       if (Math.abs(this.playerData.vX) < considerStoppedWhen) {
         this.playerData.vX = config.minSpeed;
@@ -95,22 +96,6 @@ class Player {
         this.playerData.vY = config.minSpeed;
         this.playerData.aY = 0;
       }
-    }
-
-    if (this.playerData.gravityAssistData.size === 0 && (Math.abs(this.playerData.bonusVx) > considerStoppedWhen || Math.abs(this.playerData.bonusVy) > considerStoppedWhen)) {
-      const newBonusVx = (this.playerData.bonusVx > 0)
-        ? Math.max(0, this.playerData.bonusVx - config.gravityAssistReleaseDv * config.dt)
-        : Math.min(0, this.playerData.bonusVx + config.gravityAssistReleaseDv * config.dt)
-      ;
-
-      const k = Math.abs(this.playerData.bonusVy / this.playerData.bonusVx);
-      const newBonusVy = (this.playerData.bonusVy > 0)
-        ? Math.max(0, this.playerData.bonusVy - config.gravityAssistReleaseDv * k * config.dt)
-        : Math.min(0, this.playerData.bonusVy + config.gravityAssistReleaseDv * k * config.dt)
-      ;
-      // const newBonusVy = this.playerData.bonusVy * newBonusVx / this.playerData.bonusVx;
-      this.playerData.bonusVx = newBonusVx;
-      this.playerData.bonusVy = newBonusVy;
     }
   }
 
