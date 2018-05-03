@@ -1,34 +1,27 @@
-import { PlayerData } from '../../../../PlayerData';
+import PlayerData from '../../../../PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
 import calculateDirection from '../../../calculateDirection';
 import GravityAssistData from './GravityAssistData';
 import config from '../../../../../config';
+import rotatePlayerData from '../rotatePlayerData';
+import calculateDistance from '../../../calculateDistance';
 
 class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
   public updatePlayerData(playerData: PlayerData): void {
     for (const rotationData of playerData.gravityAssistData.values()) {
       const angle = config.gravityAssistRotationSpeed * config.dt;
-      const t = angle * rotationData.direction + Math.atan2(
-        playerData.y - rotationData.y,
-        playerData.x - rotationData.x
-      );
       const oldX = playerData.x;
-      const newX = rotationData.x
-        + (rotationData.r * Math.cos(t))
-      ;
       const oldY = playerData.y;
-      const newY = rotationData.y
-        + (rotationData.r * Math.sin(t))
-      ;
+      const { x, y } = rotatePlayerData(playerData, rotationData, angle);
 
       if (Math.abs(rotationData.angle) >= Math.PI && !playerData.bonusVx && !playerData.bonusVy) {
-        playerData.bonusVx = (newX - oldX) / config.dt / 2;
-        playerData.bonusVy = (newY - oldY) / config.dt / 2;
+        playerData.bonusVx = (x - oldX) / config.dt / 2;
+        playerData.bonusVy = (y - oldY) / config.dt / 2;
         continue;
       }
 
-      playerData.x = newX;
-      playerData.y = newY;
+      playerData.x = x;
+      playerData.y = y;
       rotationData.angle += angle;
     }
   }
@@ -38,10 +31,7 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
       return;
     }
 
-    const r = Math.sqrt(
-      (otherPlayerData.x - playerData.x) ** 2
-      + (otherPlayerData.y - playerData.y) ** 2
-    );
+    const r = calculateDistance(playerData, otherPlayerData);
     const direction = calculateDirection(playerData, otherPlayerData);
     const gravityAssistData = new GravityAssistData(
       otherPlayerData.x,

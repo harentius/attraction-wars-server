@@ -1,4 +1,4 @@
-import { PlayerData } from '../../../../PlayerData';
+import PlayerData from '../../../../PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
 
 class FourthInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {

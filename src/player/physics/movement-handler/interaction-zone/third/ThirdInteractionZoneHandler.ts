@@ -1,31 +1,21 @@
-import { PlayerData } from '../../../../PlayerData';
+import PlayerData from '../../../../PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
 import calculateDirection from '../../../calculateDirection';
 import RotationData from './RotationData';
+import rotatePlayerData from '../rotatePlayerData';
 import config from '../../../../../config';
+import calculateDistance from '../../../calculateDistance';
 
 class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
   public updatePlayerData(playerData: PlayerData): void {
     for (const rotationData of playerData.rotationData.values()) {
-      const t = config.rotationSpeed * config.dt * rotationData.direction + Math.atan2(
-        playerData.y - rotationData.y,
-        playerData.x - rotationData.x
-      );
-      playerData.x = rotationData.x
-        + (rotationData.r * Math.cos(t))
-      ;
-      playerData.y = rotationData.y
-        + (rotationData.r * Math.sin(t))
-      ;
+      const angle = config.rotationSpeed * config.dt;
+      Object.assign(playerData, rotatePlayerData(playerData, rotationData, angle));
     }
   }
 
   public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {
-    const r = Math.sqrt(
-      (otherPlayerData.x - playerData.x) ** 2
-      + (otherPlayerData.y - playerData.y) ** 2
-    );
-
+    const r = calculateDistance(playerData, otherPlayerData);
     let oldDirection = null;
 
     if (playerData.rotationData.has(otherPlayerData.id)) {

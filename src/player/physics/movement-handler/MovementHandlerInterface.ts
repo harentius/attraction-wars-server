@@ -1,4 +1,4 @@
-import { PlayerData } from '../../PlayerData';
+import PlayerData from '../../PlayerData';
 
 interface MovementHandlerInterface {
   updatePlayerData(playerData: PlayerData): void;

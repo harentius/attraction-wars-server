@@ -1,6 +1,6 @@
 import config from '../config';
 import { getValueNotViolatingBounds } from '../utils';
-import { PlayerData } from './PlayerData';
+import PlayerData from './PlayerData';
 import InteractionZoneSwitcher from './physics/InteractionZoneSwitcher';
 import MovementHandlerRegistry from './physics/movement-handler/MovementHandlerRegistry';
 
@@ -42,7 +42,7 @@ class Player {
       movementHandler.updatePlayerData(this.playerData);
     }
 
-    // this._moveInfluencedByPlayers();
+    this._moveInfluencedByPlayers();
     this._updateVelocity();
 
     this.playerData.x += (this.playerData.vX + this.playerData.bonusVx) * config.dt;

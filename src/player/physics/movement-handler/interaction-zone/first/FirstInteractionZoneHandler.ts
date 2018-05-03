@@ -1,6 +1,6 @@
 import AttractionData from './AttractionData';
 import config from '../../../../../config';
-import { PlayerData } from '../../../../PlayerData';
+import PlayerData from '../../../../PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
 
 class FirstInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {

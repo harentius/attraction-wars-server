@@ -1,41 +1,7 @@
 import { generateRandomColor, genId } from '../utils';
-
-class AttractionData {
-  public x: number;
-  public y: number;
-
-  public constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-}
-
-class RotationData {
-  public x: number;
-  public y: number;
-  public r: number;
-  public direction: number;
-
-  constructor(x, y, r, direction) {
-    this.x = x;
-    this.y = y;
-    this.r = r;
-    this.direction = direction;
-  }
-}
-
-class GravityAssistData extends RotationData {
-  public xIn: number;
-  public yIn: number;
-  public angle: number;
-
-  constructor(x, y, r, direction, xIn, yIn) {
-    super(x, y, r, direction);
-    this.xIn = xIn;
-    this.yIn = yIn;
-    this.angle = 0;
-  }
-}
+import AttractionData from './physics/movement-handler/interaction-zone/first/AttractionData';
+import RotationData from './physics/movement-handler/interaction-zone/third/RotationData';
+import GravityAssistData from './physics/movement-handler/interaction-zone/second/GravityAssistData';
 
 class PlayerData {
   public id: string;
@@ -73,4 +39,4 @@ class PlayerData {
   }
 }
 
-export { RotationData, PlayerData, AttractionData, GravityAssistData };
+export default PlayerData;

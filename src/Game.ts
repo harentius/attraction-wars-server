@@ -1,5 +1,5 @@
 import Storage from './server/storage';
-import { PlayerData } from './player/PlayerData';
+import PlayerData from './player/PlayerData';
 import config from './config';
 import PlayerFactory from './player/PlayerFactory';
 

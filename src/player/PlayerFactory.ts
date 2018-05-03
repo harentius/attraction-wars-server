@@ -1,5 +1,5 @@
 import Player from './Player';
-import { PlayerData } from './PlayerData';
+import PlayerData from './PlayerData';
 import InteractionZoneSwitcher from './physics/InteractionZoneSwitcher';
 import MovementHandlerRegistry from './physics/movement-handler/MovementHandlerRegistry';
 
