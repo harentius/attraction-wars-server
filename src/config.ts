@@ -11,7 +11,7 @@ const config: {
   attractionSpeed: number,
   minSpeed: number,
   maxMovementSpeed: number,
-  relativeZonesSizes: number[],
+  relativeZonesSizes: number[]
 } = {
   port: 4000,
   broadCastPeriod: 30,
@@ -25,7 +25,7 @@ const config: {
   attractionSpeed: 20,
   minSpeed: 0,
   maxMovementSpeed: 0.2,
-  relativeZonesSizes: [1.5, 2.5, 3.5],
+  relativeZonesSizes: [1.5, 2.5, 3.5]
 };
 
 export default config;
