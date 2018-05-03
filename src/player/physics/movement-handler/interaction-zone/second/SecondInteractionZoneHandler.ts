@@ -25,14 +25,14 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
       rotationData.angle += angle;
     }
 
-    // still on the orbit
+    // Still on the orbit
     if (playerData.gravityAssistData.size > 0) {
       return;
     }
 
     const considerStoppedWhen = config.considerStoppedWhen;
 
-    // Bonus speed attenuating.
+    // Bonus speed attenuating
     if (Math.abs(playerData.bonusVx) > considerStoppedWhen || Math.abs(playerData.bonusVy) > considerStoppedWhen) {
       const newBonusVx = (playerData.bonusVx > 0)
         ? Math.max(0, playerData.bonusVx - config.gravityAssistReleaseDv * config.dt)
