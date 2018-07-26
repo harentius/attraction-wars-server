@@ -2,6 +2,10 @@ import config from '../../../config';
 import PlayerData from '../../PlayerData';
 
 class BoundCollisionChecker {
+  public isBoundCollision(playerData: PlayerData) {
+    return this.isXBoundCollision(playerData) || this.isYBoundCollision(playerData);
+  }
+
   public isXBoundCollision(playerData: PlayerData) {
     return (playerData.x < (config.worldBounds[0] + playerData.r))
         ||
