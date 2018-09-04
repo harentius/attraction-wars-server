@@ -14,14 +14,16 @@ const io = SocketIO(server);
 const socketIdToPlayerIdMap = new Map();
 
 io.on('connection', (socket) => {
-  const player = game.addPlayer();
-  const playerId = player.playerData.id;
-  socketIdToPlayerIdMap.set(socket.id, playerId);
-  const client = new Client(socket, new KeysPressState());
+  socket.on('login', (username) => {
+    const player = game.addPlayer(username);
+    const playerId = player.playerData.id;
+    socketIdToPlayerIdMap.set(socket.id, playerId);
+    const client = new Client(socket, new KeysPressState());
 
-  storage.addClient(playerId, client);
-  logger.info(`Client '${socket.handshake.address}' connected. Socket id: ${socket.id}, Assigned id: ${playerId}`);
-  socket.emit('playerData', storage.getPlayerDataForClient(playerId));
+    storage.addClient(playerId, client);
+    logger.info(`Client '${socket.handshake.address}' connected. Socket id: ${socket.id}, Assigned id: ${playerId}`);
+    socket.emit('playerData', storage.getPlayerDataForClient(playerId));
+  });
 
   socket.on('keysPressState', (keyPressStateData) => {
     storage.updateKeyPressState(

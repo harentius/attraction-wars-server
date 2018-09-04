@@ -12,9 +12,9 @@ class Game {
     this.playerFactory = playerFactory;
   }
 
-  public addPlayer() {
+  public addPlayer(username) {
     // TODO: demo data, update with something like rand place generating
-    const playerData = new PlayerData(2600, 1500, Math.random() * 100 + 50);
+    const playerData = new PlayerData(username, 2600, 1500, Math.random() * 100 + 50);
     const player = this.playerFactory.createPlayer(playerData);
     this.storage.addPlayer(playerData.id, player);
 

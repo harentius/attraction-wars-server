@@ -4,6 +4,7 @@ import RotationData from './physics/movement-handler/interaction-zone/third/Rota
 import GravityAssistData from './physics/movement-handler/interaction-zone/second/GravityAssistData';
 
 class PlayerData {
+  public readonly username: string;
   public id: string;
   public x: number;
   public y: number;
@@ -21,7 +22,8 @@ class PlayerData {
   public gravityAssistData: Map<string, GravityAssistData>;
   public boundedToPlayersData: Map<string, PlayerData>;
 
-  constructor(x, y, r, id = genId(), color = generateRandomColor()) {
+  constructor(username: string, x, y, r, id = genId(), color = generateRandomColor()) {
+    this.username = username;
     this.id = id;
     this.x = x;
     this.y = y;
