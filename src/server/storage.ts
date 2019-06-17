@@ -1,14 +1,15 @@
 import Player from '../player/Player';
 import KeysPressState from './KeysPressState';
+import WorldData from '../world/WorldData';
 
 class Storage {
-  public worldData: any;
+  public worldData: WorldData;
   public players: Map<string, Player>;
   private clients: Map<string, any>;
   private events: {};
   static get UPDATE_KEY_PRESS_STATE() { return 'update_key_press_state'; }
 
-  constructor(worldData) {
+  constructor(worldData: WorldData) {
     this.worldData = worldData;
     this.players = new Map();
     this.clients = new Map();

@@ -1,17 +1,25 @@
-class WorldData {
-  public playersData: any;
-  public worldBounds: any;
+import PlayerData from '../player/PlayerData';
 
-  constructor(playersData = {}, worldBounds = []) {
+class WorldData {
+  public readonly playersData: any;
+  public readonly worldBounds: any;
+  public readonly relativeZonesSizes: number[];
+
+  constructor(
+    relativeZonesSizes: number[],
+    playersData = {},
+    worldBounds = []
+  ) {
+    this.relativeZonesSizes = relativeZonesSizes;
     this.playersData = playersData;
     this.worldBounds = worldBounds;
   }
 
-  public addPlayerData(playerData) {
+  public addPlayerData(playerData: PlayerData) {
     this.playersData[playerData.id] = playerData;
   }
 
-  public removePlayerData(id) {
+  public removePlayerData(id: string) {
     for (const playerData of (Object as any).values(this.playersData)) {
       playerData.rotationData.delete(id);
       playerData.attractionData.delete(id);
