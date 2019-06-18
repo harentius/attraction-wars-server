@@ -76,7 +76,7 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
       r,
       direction,
       playerData.x,
-      playerData.y
+      playerData.y,
     );
     playerData.gravityAssistData.set(otherPlayerData.id, gravityAssistData);
 

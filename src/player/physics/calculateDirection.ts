@@ -1,4 +1,9 @@
-const calculateDirection = (playerData, otherPlayerData) => {
+import PlayerData from '../PlayerData';
+
+const calculateDirection = (
+  playerData: PlayerData,
+  otherPlayerData: PlayerData,
+): number => {
   if (playerData.vX > 0 && playerData.vY >= 0) {
     return playerData.x > otherPlayerData.x ? 1 : -1;
   }

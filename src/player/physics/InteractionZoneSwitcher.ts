@@ -21,12 +21,12 @@ class InteractionZoneSwitcher {
 
       const interactionZonePlayerIntoOtherPlayer = this._getInteractionZone(
         playerData,
-        otherPlayerData
+        otherPlayerData,
       );
 
       const interactionZoneOtherPlayerIntoPlayer = this._getInteractionZone(
         otherPlayerData,
-        playerData
+        playerData,
       );
 
       if (interactionZonePlayerIntoOtherPlayer <= interactionZoneOtherPlayerIntoPlayer) {

@@ -49,11 +49,17 @@ class Storage {
   }
 
   public updateKeyPressState(id: string, keyPressState: KeysPressState) {
+    const client = this.getClient(id);
+
+    if (!client) {
+      return;
+    }
+
     this.trigger(
       Storage.UPDATE_KEY_PRESS_STATE,
-      [this.getPlayer(id), this.getClient(id).keyPressState, keyPressState]
+      [this.getPlayer(id), client.keyPressState, keyPressState],
     );
-    Object.assign(this.getClient(id).keyPressState, keyPressState);
+    Object.assign(client.keyPressState, keyPressState);
   }
 
   public on(event, callback) {

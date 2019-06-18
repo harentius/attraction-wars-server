@@ -5,6 +5,7 @@ import RotationData from './RotationData';
 import rotatePlayerData from '../rotatePlayerData';
 import config from '../../../../../config';
 import calculateDistance from '../../../calculateDistance';
+import GravityAssistData from '../second/GravityAssistData';
 
 class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
   public updatePlayerData(playerData: PlayerData): void {
@@ -22,7 +23,7 @@ class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInter
       oldDirection = playerData.rotationData.get(otherPlayerData.id).direction;
     }
 
-    const direction = oldDirection || calculateDirection(playerData, otherPlayerData);
+    const direction = oldDirection || this.calculateDirection(playerData, otherPlayerData);
     const rotationData = new RotationData(otherPlayerData.x, otherPlayerData.y, r, direction);
 
     playerData.rotationData.set(otherPlayerData.id, rotationData);
@@ -37,6 +38,16 @@ class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInter
 
   public getName(): string {
     return 'third_interaction_zone_handler';
+  }
+
+  private calculateDirection(playerData: PlayerData, otherPlayerData: PlayerData): number {
+    if (playerData.gravityAssistData.has(otherPlayerData.id)) {
+      const gravityAssistData: GravityAssistData = playerData.gravityAssistData.get(otherPlayerData.id);
+
+      return gravityAssistData.direction;
+    }
+
+    return calculateDirection(playerData, otherPlayerData);
   }
 }
 
