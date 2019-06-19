@@ -1,5 +1,5 @@
-import Storage from './server/storage';
-import PlayerData from './player/PlayerData';
+import Storage from './storage/storage';
+import PlayerData from './storage/PlayerData';
 import config from './config';
 import PlayerFactory from './player/PlayerFactory';
 
@@ -12,9 +12,9 @@ class Game {
     this.playerFactory = playerFactory;
   }
 
-  public addPlayer(username) {
+  public addPlayer(username, x = 2600, y = 1500, r = Math.random() * 100 + 100) {
     // TODO: demo data, update with something like rand place generating
-    const playerData = new PlayerData(username, 2600, 1500, Math.random() * 100 + 20);
+    const playerData = new PlayerData(username, x, y, r);
     const player = this.playerFactory.createPlayer(playerData);
     this.storage.addPlayer(playerData.id, player);
 

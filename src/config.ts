@@ -12,7 +12,7 @@ const config: {
   minSpeed: number,
   maxMovementSpeed: number,
   relativeZonesSizes: number[],
-  considerStoppedWhen: number
+  considerStoppedWhen: number,
 } = {
   port: 4000,
   broadCastPeriod: 30,

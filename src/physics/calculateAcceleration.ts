@@ -1,4 +1,4 @@
-import config from '../../config';
+import config from '../config';
 
 const calculateAcceleration = (player, oldKeysPressState, newKeysPressState) => {
   const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();

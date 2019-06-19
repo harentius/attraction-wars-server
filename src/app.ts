@@ -1,18 +1,13 @@
 import config from './config';
-import PlayerData from './player/PlayerData';
-import { generateRandomColor } from './utils';
-import WorldData from './world/WorldData';
+import WorldData from './storage/WorldData';
 import Game from './Game';
-import Storage from './server/storage';
-import InteractionZoneSwitcher from './player/physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
-import calculateAcceleration from './player/physics/calculateAcceleration';
-import MovementHandlerRegistryFactory from './player/physics/movement-handler/MovementHandlerRegistryFactory';
+import Storage from './storage/storage';
+import InteractionZoneSwitcher from './physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
+import calculateAcceleration from './physics/calculateAcceleration';
+import MovementHandlerRegistryFactory from './physics/movement-handler/MovementHandlerRegistryFactory';
 import PlayerFactory from './player/PlayerFactory';
 
-const playersData = {
-  demo_player1: new PlayerData('demo_player1', 1650, 1650, 200, 'demo_player1', generateRandomColor()),
-};
-const worldData = new WorldData(config.relativeZonesSizes, playersData, config.worldBounds);
+const worldData = new WorldData(config.relativeZonesSizes, config.worldBounds);
 const storage = new Storage(worldData);
 
 const movementHandlerRegistryFactory = new MovementHandlerRegistryFactory();
@@ -22,6 +17,9 @@ const playerFactory = new PlayerFactory(interactionZoneSwitcher, movementHandler
 
 const game = new Game(storage, playerFactory);
 game.startGameLoop();
+
+// demo
+game.addPlayer('demo_player1', 1650, 1650, 50);
 
 storage.on(Storage.UPDATE_KEY_PRESS_STATE, (player, oldKeysPressState, newKeysPressState) => {
   const acceleration = calculateAcceleration(player, oldKeysPressState, newKeysPressState);

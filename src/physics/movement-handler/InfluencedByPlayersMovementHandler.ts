@@ -1,6 +1,6 @@
 import MovementHandlerInterface from './MovementHandlerInterface';
-import PlayerData from '../../PlayerData';
-import config from '../../../config';
+import PlayerData from '../../storage/PlayerData';
+import config from '../../config';
 import BoundCollisionChecker from './BoundCollisionChecker';
 
 class InfluencedByPlayersMovementHandler implements MovementHandlerInterface {

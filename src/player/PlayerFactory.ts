@@ -1,7 +1,7 @@
 import Player from './Player';
-import PlayerData from './PlayerData';
-import InteractionZoneSwitcher from './physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
-import MovementHandlerRegistry from './physics/movement-handler/MovementHandlerRegistry';
+import PlayerData from '../storage/PlayerData';
+import InteractionZoneSwitcher from '../physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
+import MovementHandlerRegistry from '../physics/movement-handler/MovementHandlerRegistry';
 
 class PlayerFactory {
   private readonly interactionZoneSwitcher: InteractionZoneSwitcher;

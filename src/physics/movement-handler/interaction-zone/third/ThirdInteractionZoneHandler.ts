@@ -1,9 +1,9 @@
-import PlayerData from '../../../../PlayerData';
+import PlayerData from '../../../../storage/PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
 import calculateDirection from '../../../calculateDirection';
 import RotationData from './RotationData';
 import rotatePlayerData from '../rotatePlayerData';
-import config from '../../../../../config';
+import config from '../../../../config';
 import calculateDistance from '../../../calculateDistance';
 import GravityAssistData from '../second/GravityAssistData';
 

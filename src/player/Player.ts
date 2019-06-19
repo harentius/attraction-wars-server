@@ -1,7 +1,7 @@
 import config from '../config';
-import PlayerData from './PlayerData';
-import InteractionZoneSwitcher from './physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
-import MovementHandlerRegistry from './physics/movement-handler/MovementHandlerRegistry';
+import PlayerData from '../storage/PlayerData';
+import InteractionZoneSwitcher from '../physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
+import MovementHandlerRegistry from '../physics/movement-handler/MovementHandlerRegistry';
 
 class Player {
   public playerData: PlayerData;
@@ -11,7 +11,7 @@ class Player {
   constructor(
     playerData: PlayerData,
     interactionZoneSwitcher: InteractionZoneSwitcher,
-    movementHandlerRegistry: MovementHandlerRegistry
+    movementHandlerRegistry: MovementHandlerRegistry,
   ) {
     this.playerData = playerData;
     this.interactionZoneSwitcher = interactionZoneSwitcher;

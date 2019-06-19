@@ -1,6 +1,6 @@
 import Player from '../player/Player';
-import KeysPressState from './KeysPressState';
-import WorldData from '../world/WorldData';
+import KeysPressState from '../server/KeysPressState';
+import WorldData from './WorldData';
 
 class Storage {
   public worldData: WorldData;

@@ -1,4 +1,4 @@
-import PlayerData from '../PlayerData';
+import PlayerData from '../storage/PlayerData';
 
 const calculateDistance = (playerData1: PlayerData, playerData2: PlayerData) => {
   return Math.sqrt(

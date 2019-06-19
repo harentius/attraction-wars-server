@@ -1,4 +1,4 @@
-import PlayerData from '../PlayerData';
+import PlayerData from '../storage/PlayerData';
 
 const calculateDirection = (
   playerData: PlayerData,

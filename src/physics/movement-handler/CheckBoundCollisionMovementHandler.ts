@@ -1,5 +1,5 @@
 import MovementHandlerInterface from './MovementHandlerInterface';
-import PlayerData from '../../PlayerData';
+import PlayerData from '../../storage/PlayerData';
 import BoundCollisionChecker from './BoundCollisionChecker';
 
 class CheckBoundCollisionMovementHandler implements MovementHandlerInterface {

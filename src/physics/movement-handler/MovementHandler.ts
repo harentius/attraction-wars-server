@@ -1,7 +1,7 @@
 import MovementHandlerInterface from './MovementHandlerInterface';
-import config from '../../../config';
-import {getValueNotViolatingBounds} from '../../../utils';
-import PlayerData from '../../PlayerData';
+import config from '../../config';
+import {getValueNotViolatingBounds} from '../../utils';
+import PlayerData from '../../storage/PlayerData';
 
 class MovementHandler implements MovementHandlerInterface {
   public updatePlayerData(playerData: PlayerData): void {

@@ -1,4 +1,4 @@
-import PlayerData from '../../../PlayerData';
+import PlayerData from '../../../storage/PlayerData';
 import RotationData from './third/RotationData';
 
 const rotatePlayerData = (playerData: PlayerData, rotationData: RotationData, angle: number) => {

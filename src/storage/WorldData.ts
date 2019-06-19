@@ -1,4 +1,4 @@
-import PlayerData from '../player/PlayerData';
+import PlayerData from './PlayerData';
 
 class WorldData {
   public readonly playersData: any;
@@ -7,12 +7,11 @@ class WorldData {
 
   constructor(
     relativeZonesSizes: number[],
-    playersData = {},
-    worldBounds = []
+    worldBounds = [],
   ) {
     this.relativeZonesSizes = relativeZonesSizes;
-    this.playersData = playersData;
     this.worldBounds = worldBounds;
+    this.playersData = {};
   }
 
   public addPlayerData(playerData: PlayerData) {

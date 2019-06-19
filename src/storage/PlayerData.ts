@@ -1,7 +1,7 @@
 import { generateRandomColor, genId } from '../utils';
-import AttractionData from './physics/movement-handler/interaction-zone/first/AttractionData';
-import RotationData from './physics/movement-handler/interaction-zone/third/RotationData';
-import GravityAssistData from './physics/movement-handler/interaction-zone/second/GravityAssistData';
+import AttractionData from '../physics/movement-handler/interaction-zone/first/AttractionData';
+import RotationData from '../physics/movement-handler/interaction-zone/third/RotationData';
+import GravityAssistData from '../physics/movement-handler/interaction-zone/second/GravityAssistData';
 
 class PlayerData {
   public readonly username: string;
