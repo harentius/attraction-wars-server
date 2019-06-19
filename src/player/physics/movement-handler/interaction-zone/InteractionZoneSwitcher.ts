@@ -1,6 +1,6 @@
-import config from '../../config';
-import MovementHandlerRegistry from './movement-handler/MovementHandlerRegistry';
-import Storage from '../../server/storage';
+import config from '../../../../config';
+import MovementHandlerRegistry from '../MovementHandlerRegistry';
+import Storage from '../../../../server/storage';
 
 class InteractionZoneSwitcher {
   private storage: Storage;
@@ -52,7 +52,7 @@ class InteractionZoneSwitcher {
       const { x, y, r } = otherPlayerData;
       const circle = { x, y, r: RofZone * r };
 
-      if (this._circleContain(circle, playerData.x, playerData.y)) {
+      if (this._circlesIntersect(playerData, circle)) {
         return i;
       }
     }
@@ -60,20 +60,10 @@ class InteractionZoneSwitcher {
     return 4;
   }
 
-  private _circleContain(circle, x, y) {
-    const right = circle.x + circle.r;
-    const left = circle.x - circle.r;
-    const top = circle.y - circle.r;
-    const bottom = circle.y + circle.r;
-
-    if (x >= left && x <= right && y >= top && y <= bottom) {
-      const dx = (circle.x - x) * (circle.x - x);
-      const dy = (circle.y - y) * (circle.y - y);
-
-      return (dx + dy) <= (circle.r * circle.r);
-    }
-
-    return false;
+  private _circlesIntersect(circle1, circle2) {
+    return Math.pow((circle1.x - circle2.x), 2) + Math.pow((circle1.y - circle2.y), 2)
+      < Math.pow(circle1.r + circle2.r, 2)
+    ;
   }
 }
 

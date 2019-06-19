@@ -26,8 +26,8 @@ const config: {
   attractionSpeed: 20,
   minSpeed: 0,
   maxMovementSpeed: 0.2,
-  relativeZonesSizes: [1.5, 2.5, 3.5],
-  considerStoppedWhen: 0
+  relativeZonesSizes: [2.5, 3.5, 4.5],
+  considerStoppedWhen: 0,
 };
 
 // calculated parameter

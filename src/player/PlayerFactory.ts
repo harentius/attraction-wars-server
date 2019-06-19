@@ -1,6 +1,6 @@
 import Player from './Player';
 import PlayerData from './PlayerData';
-import InteractionZoneSwitcher from './physics/InteractionZoneSwitcher';
+import InteractionZoneSwitcher from './physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
 import MovementHandlerRegistry from './physics/movement-handler/MovementHandlerRegistry';
 
 class PlayerFactory {
