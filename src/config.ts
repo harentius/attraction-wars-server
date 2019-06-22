@@ -13,6 +13,7 @@ const config: {
   maxMovementSpeed: number,
   relativeZonesSizes: number[],
   considerStoppedWhen: number,
+  bindViscosity: number,
 } = {
   port: 4000,
   broadCastPeriod: 30,
@@ -28,6 +29,7 @@ const config: {
   maxMovementSpeed: 0.2,
   relativeZonesSizes: [2.5, 3.5, 4.5],
   considerStoppedWhen: 0,
+  bindViscosity: 0.05,
 };
 
 // calculated parameter

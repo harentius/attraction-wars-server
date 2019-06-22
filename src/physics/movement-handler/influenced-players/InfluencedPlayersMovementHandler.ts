@@ -16,8 +16,8 @@ class InfluencedPlayersMovementHandler implements MovementHandlerInterface {
     }
 
     for (const boundToPlayerData of playerData.boundedToPlayersData.values()) {
-      playerData.x += (boundToPlayerData.vX + boundToPlayerData.bonusVx) * config.dt;
-      playerData.y += (boundToPlayerData.vY + boundToPlayerData.bonusVy) * config.dt;
+      playerData.x += (boundToPlayerData.vX + boundToPlayerData.bonusVx) * config.dt * (1.0 - config.bindViscosity);
+      playerData.y += (boundToPlayerData.vY + boundToPlayerData.bonusVy) * config.dt * (1.0 - config.bindViscosity);
     }
   }
 
