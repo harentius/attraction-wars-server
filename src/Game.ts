@@ -1,4 +1,4 @@
-import Storage from './storage/storage';
+import Storage from './storage/Storage';
 import PlayerData from './storage/PlayerData';
 import config from './config';
 import PlayerFactory from './player/PlayerFactory';

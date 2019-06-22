@@ -1,6 +1,6 @@
 import config from '../../../config';
 import MovementHandlerRegistry from '../MovementHandlerRegistry';
-import Storage from '../../../storage/storage';
+import Storage from '../../../storage/Storage';
 
 class InteractionZoneSwitcher {
   private storage: Storage;

@@ -1,6 +1,6 @@
 import * as logger from 'winston';
 import KeysPressState from './KeysPressState';
-import Client from './client';
+import Client from './Client';
 import * as express from 'express';
 import { Server } from 'http';
 import * as SocketIO from 'socket.io';
