@@ -26,12 +26,12 @@ class MovementHandler implements MovementHandlerInterface {
     playerData.vX = getValueNotViolatingBounds(
       newVx,
       -config.maxMovementSpeed,
-      config.maxMovementSpeed
+      config.maxMovementSpeed,
     );
     playerData.vY = getValueNotViolatingBounds(
       newVy,
       -config.maxMovementSpeed,
-      config.maxMovementSpeed
+      config.maxMovementSpeed,
     );
 
     const considerStoppedWhen = config.considerStoppedWhen;
