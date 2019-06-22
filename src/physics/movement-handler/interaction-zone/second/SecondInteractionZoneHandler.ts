@@ -8,13 +8,13 @@ import calculateDistance from '../../../calculateDistance';
 
 class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
   public updatePlayerData(playerData: PlayerData): void {
-    for (const rotationData of playerData.gravityAssistData.values()) {
+    for (const gravityAssistData of playerData.gravityAssistData.values()) {
       const angle = config.gravityAssistRotationSpeed * config.dt;
       const oldX = playerData.x;
       const oldY = playerData.y;
-      const { x, y } = rotatePlayerData(playerData, rotationData, angle);
+      const { x, y } = rotatePlayerData(playerData, gravityAssistData, angle);
 
-      if (Math.abs(rotationData.angle) >= Math.PI && !playerData.bonusVx && !playerData.bonusVy) {
+      if (Math.abs(gravityAssistData.angle) >= Math.PI && !playerData.bonusVx && !playerData.bonusVy) {
         playerData.bonusVx = (x - oldX) / config.dt / 2;
         playerData.bonusVy = (y - oldY) / config.dt / 2;
         continue;
@@ -22,7 +22,7 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
 
       playerData.x = x;
       playerData.y = y;
-      rotationData.angle += angle;
+      gravityAssistData.angle += angle;
     }
 
     // Still on the orbit
