@@ -4,8 +4,8 @@ import ThirdInteractionZoneHandler from './interaction-zone/third/ThirdInteracti
 import FourthInteractionZoneHandler from './interaction-zone/fourth/FourthInteractionZoneHandler';
 import SecondInteractionZoneHandler from './interaction-zone/second/SecondInteractionZoneHandler';
 import MovementHandler from './MovementHandler';
-import InfluencedByPlayersMovementHandler from './InfluencedByPlayersMovementHandler';
-import CheckBoundCollisionMovementHandler from './CheckBoundCollisionMovementHandler';
+import InfluencedPlayersMovementHandler from './influenced-players/InfluencedPlayersMovementHandler';
+import CheckBoundCollisionMovementHandler from './boundary/CheckBoundCollisionMovementHandler';
 
 class MovementHandlerRegistryFactory {
   public createMovementHandlerRegistry(): MovementHandlerRegistry {
@@ -16,7 +16,7 @@ class MovementHandlerRegistryFactory {
       .registerInteractionZoneMovementHandler(new ThirdInteractionZoneHandler())
       .registerInteractionZoneMovementHandler(new FourthInteractionZoneHandler())
       .registerMovementHandler(new MovementHandler())
-      .registerMovementHandler(new InfluencedByPlayersMovementHandler())
+      .registerMovementHandler(new InfluencedPlayersMovementHandler())
       .registerMovementHandler(new CheckBoundCollisionMovementHandler())
     ;
 

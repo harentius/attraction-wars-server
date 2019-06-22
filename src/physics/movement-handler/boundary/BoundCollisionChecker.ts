@@ -1,5 +1,5 @@
-import config from '../../config';
-import PlayerData from '../../storage/PlayerData';
+import config from '../../../config';
+import PlayerData from '../../../storage/PlayerData';
 
 class BoundCollisionChecker {
   public isBoundCollision(playerData: PlayerData) {

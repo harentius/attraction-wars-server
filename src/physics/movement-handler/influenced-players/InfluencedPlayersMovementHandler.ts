@@ -1,9 +1,9 @@
-import MovementHandlerInterface from './MovementHandlerInterface';
-import PlayerData from '../../storage/PlayerData';
-import config from '../../config';
-import BoundCollisionChecker from './BoundCollisionChecker';
+import MovementHandlerInterface from '../MovementHandlerInterface';
+import PlayerData from '../../../storage/PlayerData';
+import config from '../../../config';
+import BoundCollisionChecker from '../boundary/BoundCollisionChecker';
 
-class InfluencedByPlayersMovementHandler implements MovementHandlerInterface {
+class InfluencedPlayersMovementHandler implements MovementHandlerInterface {
   private boundCollisionChecker: BoundCollisionChecker;
 
   public constructor() {
@@ -26,4 +26,4 @@ class InfluencedByPlayersMovementHandler implements MovementHandlerInterface {
   }
 }
 
-export default InfluencedByPlayersMovementHandler;
+export default InfluencedPlayersMovementHandler;
