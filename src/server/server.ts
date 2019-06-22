@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
   socket.on('keysPressState', (keyPressStateData) => {
     storage.updateKeyPressState(
       socketIdToPlayerIdMap.get(socket.id),
-      new KeyPressState(keyPressStateData)
+      new KeyPressState(keyPressStateData),
     );
   });
 

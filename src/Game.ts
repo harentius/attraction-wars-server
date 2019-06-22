@@ -2,6 +2,7 @@ import Storage from './storage/Storage';
 import PlayerData from './storage/PlayerData';
 import config from './config';
 import PlayerFactory from './player/PlayerFactory';
+import calculateAcceleration from './physics/calculateAcceleration';
 
 class Game {
   private readonly storage: Storage;
@@ -27,6 +28,16 @@ class Game {
         player.updateData();
       }
     }, config.dt);
+
+    this.registerEventHandlers();
+  }
+
+  private registerEventHandlers() {
+    this.storage.on(Storage.UPDATE_KEY_PRESS_STATE, (player, oldKeysPressState, newKeysPressState) => {
+      const acceleration = calculateAcceleration(player, oldKeysPressState, newKeysPressState);
+      const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();
+      player.setAcceleration(acceleration, !isAnyMoveKeyPressed, isAnyMoveKeyPressed);
+    });
   }
 }
 

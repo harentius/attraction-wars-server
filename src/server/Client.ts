@@ -1,6 +1,8 @@
+import KeysPressState from './KeysPressState';
+
 class Client {
   public socket: any;
-  public keyPressState: any;
+  public keyPressState: KeysPressState;
 
   constructor(socket, keyPressState) {
     this.socket = socket;

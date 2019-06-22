@@ -1,6 +1,7 @@
 import config from '../config';
+import KeysPressState from '../server/KeysPressState';
 
-const calculateAcceleration = (player, oldKeysPressState, newKeysPressState) => {
+const calculateAcceleration = (player, oldKeysPressState: KeysPressState, newKeysPressState: KeysPressState) => {
   const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();
   let dv = { aX: 0, aY: 0 };
 

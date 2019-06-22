@@ -18,10 +18,11 @@ class Player {
     this.movementHandlerRegistry = movementHandlerRegistry;
   }
 
-  public setAcceleration({ aX, aY }, isAttenuation = false) {
+  public setAcceleration({ aX, aY }, isAttenuation: boolean = false, isAccelerating: boolean = false) {
     this.playerData.aX = aX;
     this.playerData.aY = aY;
     this.playerData.isAttenuation = isAttenuation;
+    this.playerData.isAccelerating = isAccelerating;
   }
 
   public isStoppedX() {
