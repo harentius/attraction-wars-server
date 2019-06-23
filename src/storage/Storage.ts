@@ -24,9 +24,9 @@ class Storage {
     return this.clients.get(id);
   }
 
-  public getPlayerDataForClient(id: string) {
-    // TODO: filter data which users receives
-    return this.worldData.playersData[id];
+  public removeClient(id: string) {
+    this.players.delete(id);
+    this.worldData.removePlayerData(id);
   }
 
   public addPlayer(id: string, player) {
@@ -34,9 +34,9 @@ class Storage {
     this.worldData.addPlayerData(player.playerData);
   }
 
-  public removeClient(id: string) {
-    this.players.delete(id);
-    this.worldData.removePlayerData(id);
+  public getPlayerDataForClient(id: string) {
+    // TODO: filter data which users receives
+    return this.worldData.playersData[id];
   }
 
   public getPlayer(id: string) {
