@@ -9,7 +9,7 @@ import PlayerFactory from './player/PlayerFactory';
 const worldData = new WorldData(config.relativeZonesSizes, config.worldBounds);
 const storage = new Storage(worldData);
 
-const movementHandlerRegistryFactory = new MovementHandlerRegistryFactory();
+const movementHandlerRegistryFactory = new MovementHandlerRegistryFactory(storage);
 const movementHandlerRegistry = movementHandlerRegistryFactory.createMovementHandlerRegistry();
 const interactionZoneSwitcher = new InteractionZoneSwitcher(storage, movementHandlerRegistry);
 const playerFactory = new PlayerFactory(interactionZoneSwitcher, movementHandlerRegistry);
@@ -17,7 +17,9 @@ const playerFactory = new PlayerFactory(interactionZoneSwitcher, movementHandler
 const game = new Game(storage, playerFactory);
 game.startGameLoop();
 
-// demo
-game.addPlayer('demo_player1', 1650, 1650, 50);
+// TODO: demo data
+game.addPlayer('demo_player1', 1650, 1650, 100);
+game.addAsteroidData('demo_asteroid1', 2800, 1700, 30);
+game.addAsteroidData('demo_asteroid2', 2350, 1750, 80);
 
 export { game, storage };

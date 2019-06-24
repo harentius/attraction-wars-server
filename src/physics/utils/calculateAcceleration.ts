@@ -1,5 +1,5 @@
-import config from '../config';
-import KeysPressState from '../server/KeysPressState';
+import config from '../../config';
+import KeysPressState from '../../server/KeysPressState';
 
 const calculateAcceleration = (player, oldKeysPressState: KeysPressState, newKeysPressState: KeysPressState) => {
   const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();

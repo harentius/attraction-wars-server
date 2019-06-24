@@ -37,10 +37,6 @@ class FirstInteractionZoneHandler implements InteractionZoneMovementHandlerInter
   public getInteractionZoneNumber(): number {
     return 1;
   }
-
-  public getName(): string {
-    return 'first_interaction_zone_handler';
-  }
 }
 
 export default FirstInteractionZoneHandler;

@@ -36,7 +36,7 @@ class Player {
   public updateData() {
     this.interactionZoneSwitcher.checkZoneSwitch(this.playerData);
 
-    for (const movementHandler of this.movementHandlerRegistry.movementHandlers.values()) {
+    for (const movementHandler of Object.values(this.movementHandlerRegistry.movementHandlers)) {
       movementHandler.updatePlayerData(this.playerData);
     }
   }

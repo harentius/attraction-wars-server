@@ -9,7 +9,7 @@ class PlayerFactory {
 
   public constructor(
     interactionZoneSwitcher: InteractionZoneSwitcher,
-    movementHandlerRegistry: MovementHandlerRegistry
+    movementHandlerRegistry: MovementHandlerRegistry,
   ) {
     this.interactionZoneSwitcher = interactionZoneSwitcher;
     this.movementHandlerRegistry = movementHandlerRegistry;

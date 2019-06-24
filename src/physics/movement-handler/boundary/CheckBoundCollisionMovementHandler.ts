@@ -32,10 +32,6 @@ class CheckBoundCollisionMovementHandler implements MovementHandlerInterface {
       gravityAssistData.direction *= -1;
     }
   }
-
-  public getName(): string {
-    return 'check_bound_collision_movement_handler';
-  }
 }
 
 export default CheckBoundCollisionMovementHandler;

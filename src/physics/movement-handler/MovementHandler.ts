@@ -51,10 +51,6 @@ class MovementHandler implements MovementHandlerInterface {
     playerData.x += (playerData.vX + playerData.bonusVx) * config.dt;
     playerData.y += (playerData.vY + playerData.bonusVy) * config.dt;
   }
-
-  public getName(): string {
-    return 'movement_handler';
-  }
 }
 
 export default MovementHandler;

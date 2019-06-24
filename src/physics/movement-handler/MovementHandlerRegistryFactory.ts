@@ -6,8 +6,16 @@ import SecondInteractionZoneHandler from './interaction-zone/second/SecondIntera
 import MovementHandler from './MovementHandler';
 import InfluencedPlayersMovementHandler from './influenced-players/InfluencedPlayersMovementHandler';
 import CheckBoundCollisionMovementHandler from './boundary/CheckBoundCollisionMovementHandler';
+import CheckAbsorptionMovementHandler from './asteroid/CheckAbsorptionMovementHandler';
+import Storage from '../../storage/Storage';
 
 class MovementHandlerRegistryFactory {
+  private readonly storage: Storage;
+
+  public constructor(storage: Storage) {
+    this.storage = storage;
+  }
+
   public createMovementHandlerRegistry(): MovementHandlerRegistry {
     const movementHandlerRegistry = new MovementHandlerRegistry();
     movementHandlerRegistry
@@ -18,6 +26,7 @@ class MovementHandlerRegistryFactory {
       .registerMovementHandler(new MovementHandler())
       .registerMovementHandler(new InfluencedPlayersMovementHandler())
       .registerMovementHandler(new CheckBoundCollisionMovementHandler())
+      .registerMovementHandler(new CheckAbsorptionMovementHandler(this.storage))
     ;
 
     return movementHandlerRegistry;

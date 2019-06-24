@@ -16,10 +16,6 @@ class FourthInteractionZoneHandler implements InteractionZoneMovementHandlerInte
   public getInteractionZoneNumber(): number {
     return 4;
   }
-
-  public getName(): string {
-    return 'fourth_interaction_zone_handler';
-  }
 }
 
 export default FourthInteractionZoneHandler;

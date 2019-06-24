@@ -1,6 +1,7 @@
 import config from '../../../config';
 import MovementHandlerRegistry from '../MovementHandlerRegistry';
 import Storage from '../../../storage/Storage';
+import isCirclesIntersect from '../../utils/isCirclesIntersect';
 
 class InteractionZoneSwitcher {
   private storage: Storage;
@@ -52,18 +53,12 @@ class InteractionZoneSwitcher {
       const { x, y, r } = otherPlayerData;
       const circle = { x, y, r: RofZone * r };
 
-      if (this._circlesIntersect(playerData, circle)) {
+      if (isCirclesIntersect(playerData, circle)) {
         return i;
       }
     }
 
     return 4;
-  }
-
-  private _circlesIntersect(circle1, circle2) {
-    return Math.pow((circle1.x - circle2.x), 2) + Math.pow((circle1.y - circle2.y), 2)
-      < Math.pow(circle1.r + circle2.r, 2)
-    ;
   }
 }
 

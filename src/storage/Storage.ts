@@ -1,12 +1,13 @@
 import Player from '../player/Player';
 import KeysPressState from '../server/KeysPressState';
 import WorldData from './WorldData';
+import Client from '../server/Client';
 
 class Storage {
-  public worldData: WorldData;
+  public readonly worldData: WorldData;
   public players: Map<string, Player>;
-  private clients: Map<string, any>;
-  private events: {};
+  private clients: Map<string, Client>;
+  private readonly events;
   static get UPDATE_KEY_PRESS_STATE() { return 'update_key_press_state'; }
 
   constructor(worldData: WorldData) {
@@ -16,12 +17,8 @@ class Storage {
     this.events = {};
   }
 
-  public addClient(id: string, client) {
+  public addClient(id: string, client: Client) {
     this.clients.set(id, client);
-  }
-
-  public getClient(id: string) {
-    return this.clients.get(id);
   }
 
   public removeClient(id: string) {
@@ -29,18 +26,18 @@ class Storage {
     this.worldData.removePlayerData(id);
   }
 
-  public addPlayer(id: string, player) {
+  public addPlayer(id: string, player: Player): void {
     this.players.set(id, player);
     this.worldData.addPlayerData(player.playerData);
+  }
+
+  public removeAsteroidData(id: string): void {
+    this.worldData.removeAsteroidData(id);
   }
 
   public getPlayerDataForClient(id: string) {
     // TODO: filter data which users receives
     return this.worldData.playersData[id];
-  }
-
-  public getPlayer(id: string) {
-    return this.players.get(id);
   }
 
   public getWorldDataForClient() {
@@ -80,6 +77,14 @@ class Storage {
     for (const callback of this.events[event]) {
       callback.apply(this, data);
     }
+  }
+
+  private getClient(id: string) {
+    return this.clients.get(id);
+  }
+
+  private getPlayer(id: string): Player {
+    return this.players.get(id);
   }
 }
 

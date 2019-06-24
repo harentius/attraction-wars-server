@@ -1,10 +1,10 @@
 import PlayerData from '../../../../storage/PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
-import calculateDirection from '../../../calculateDirection';
+import calculateDirection from '../../../utils/calculateDirection';
 import GravityAssistData from './GravityAssistData';
 import config from '../../../../config';
 import rotatePlayerData from '../rotatePlayerData';
-import calculateDistance from '../../../calculateDistance';
+import calculateDistance from '../../../utils/calculateDistance';
 
 class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
   public updatePlayerData(playerData: PlayerData): void {
@@ -91,10 +91,6 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
 
   public getInteractionZoneNumber(): number {
     return 2;
-  }
-
-  public getName(): string {
-    return 'second_interaction_zone_handler';
   }
 }
 

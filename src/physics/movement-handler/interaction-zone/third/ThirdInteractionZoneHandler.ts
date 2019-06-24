@@ -1,10 +1,10 @@
 import PlayerData from '../../../../storage/PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
-import calculateDirection from '../../../calculateDirection';
+import calculateDirection from '../../../utils/calculateDirection';
 import RotationData from './RotationData';
 import rotatePlayerData from '../rotatePlayerData';
 import config from '../../../../config';
-import calculateDistance from '../../../calculateDistance';
+import calculateDistance from '../../../utils/calculateDistance';
 import GravityAssistData from '../second/GravityAssistData';
 
 class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
@@ -34,10 +34,6 @@ class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInter
 
   public getInteractionZoneNumber(): number {
     return 3;
-  }
-
-  public getName(): string {
-    return 'third_interaction_zone_handler';
   }
 
   private calculateDirection(playerData: PlayerData, otherPlayerData: PlayerData): number {

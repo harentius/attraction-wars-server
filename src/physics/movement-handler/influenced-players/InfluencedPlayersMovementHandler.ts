@@ -20,10 +20,6 @@ class InfluencedPlayersMovementHandler implements MovementHandlerInterface {
       playerData.y += (boundToPlayerData.vY + boundToPlayerData.bonusVy) * config.dt * (1.0 - config.bindViscosity);
     }
   }
-
-  public getName(): string {
-    return 'influenced_by_players_movement_handler';
-  }
 }
 
 export default InfluencedPlayersMovementHandler;
