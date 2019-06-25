@@ -6,15 +6,18 @@ class WorldData {
   public readonly asteroidsData: { [key: string]: AsteroidData };
   public readonly worldBounds: number[];
   public readonly relativeZonesSizes: number[];
+  public readonly asteroidAttractionRadiusMultiplier: number;
 
   constructor(
     relativeZonesSizes: number[],
-    worldBounds = [],
+    worldBounds: number[],
+    asteroidAttractionRadiusMultiplier: number,
   ) {
     this.relativeZonesSizes = relativeZonesSizes;
     this.worldBounds = worldBounds;
     this.playersData = {};
     this.asteroidsData = {};
+    this.asteroidAttractionRadiusMultiplier = asteroidAttractionRadiusMultiplier;
   }
 
   public addPlayerData(playerData: PlayerData) {

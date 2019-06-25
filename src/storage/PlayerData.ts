@@ -2,8 +2,9 @@ import { generateRandomColor, genId } from '../utils';
 import AttractionData from '../physics/movement-handler/interaction-zone/first/AttractionData';
 import RotationData from '../physics/movement-handler/interaction-zone/third/RotationData';
 import GravityAssistData from '../physics/movement-handler/interaction-zone/second/GravityAssistData';
+import CircleInterface from '../physics/CircleInterface';
 
-class PlayerData {
+class PlayerData implements CircleInterface {
   public readonly username: string;
   public id: string;
   public x: number;

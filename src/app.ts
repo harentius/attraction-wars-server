@@ -6,7 +6,11 @@ import InteractionZoneSwitcher from './physics/movement-handler/interaction-zone
 import MovementHandlerRegistryFactory from './physics/movement-handler/MovementHandlerRegistryFactory';
 import PlayerFactory from './player/PlayerFactory';
 
-const worldData = new WorldData(config.relativeZonesSizes, config.worldBounds);
+const worldData = new WorldData(
+  config.relativeZonesSizes,
+  config.worldBounds,
+  config.asteroidAttractionRadiusMultiplier,
+);
 const storage = new Storage(worldData);
 
 const movementHandlerRegistryFactory = new MovementHandlerRegistryFactory(storage);

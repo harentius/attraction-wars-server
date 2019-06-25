@@ -1,4 +1,6 @@
-class AsteroidData {
+import CircleInterface from '../physics/CircleInterface';
+
+class AsteroidData implements CircleInterface  {
   public readonly id: string;
   public readonly x: number;
   public readonly y: number;

@@ -8,6 +8,7 @@ import InfluencedPlayersMovementHandler from './influenced-players/InfluencedPla
 import CheckBoundCollisionMovementHandler from './boundary/CheckBoundCollisionMovementHandler';
 import CheckAbsorptionMovementHandler from './asteroid/CheckAbsorptionMovementHandler';
 import Storage from '../../storage/Storage';
+import AsteroidAttractionMovementHandler from './asteroid/AsteroidAttractionMovementHandler';
 
 class MovementHandlerRegistryFactory {
   private readonly storage: Storage;
@@ -27,6 +28,7 @@ class MovementHandlerRegistryFactory {
       .registerMovementHandler(new InfluencedPlayersMovementHandler())
       .registerMovementHandler(new CheckBoundCollisionMovementHandler())
       .registerMovementHandler(new CheckAbsorptionMovementHandler(this.storage))
+      .registerMovementHandler(new AsteroidAttractionMovementHandler(this.storage))
     ;
 
     return movementHandlerRegistry;

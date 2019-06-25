@@ -1,4 +1,6 @@
-class AttractionData {
+import PointInterface from '../../../PointInterface';
+
+class AttractionData implements PointInterface {
   public x: number;
   public y: number;
 
