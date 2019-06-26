@@ -14,6 +14,8 @@ class PlayerData implements CircleInterface {
   public vY: number;
   public bonusVx: number;
   public bonusVy: number;
+  public reactiveVx: number;
+  public reactiveVy: number;
   public aX: number;
   public aY: number;
   public color: number;
@@ -34,6 +36,8 @@ class PlayerData implements CircleInterface {
     this.vY = 0;
     this.bonusVx = 0;
     this.bonusVy = 0;
+    this.reactiveVx = 0;
+    this.reactiveVy = 0;
     this.aX = 0;
     this.aY = 0;
     this.isAttenuation = false;

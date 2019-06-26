@@ -16,6 +16,9 @@ const config: {
   relativeZonesSizes: number[],
   considerStoppedWhen: number,
   bindViscosity: number,
+  reactiveVAttenuation: number;
+  reactiveVMultiplier: number;
+  reactiveVRLossMultiplier: number;
 } = {
   port: 4000,
   broadCastPeriod: 30,
@@ -34,6 +37,9 @@ const config: {
   relativeZonesSizes: [2.5, 3.5, 4.5],
   considerStoppedWhen: 0,
   bindViscosity: 0.05,
+  reactiveVAttenuation: 0.99,
+  reactiveVMultiplier: 3,
+  reactiveVRLossMultiplier: 0.9,
 };
 
 // calculated parameter

@@ -48,8 +48,16 @@ class MovementHandler implements MovementHandlerInterface {
       }
     }
 
-    playerData.x += (playerData.vX + playerData.bonusVx) * config.dt;
-    playerData.y += (playerData.vY + playerData.bonusVy) * config.dt;
+    playerData.x += (playerData.vX + playerData.bonusVx + playerData.reactiveVx) * config.dt;
+    playerData.y += (playerData.vY + playerData.bonusVy + playerData.reactiveVy) * config.dt;
+
+    if (Math.abs(playerData.reactiveVx) > considerStoppedWhen) {
+      playerData.reactiveVx *= config.reactiveVAttenuation;
+    }
+
+    if (Math.abs(playerData.reactiveVy) > considerStoppedWhen) {
+      playerData.reactiveVy *= config.reactiveVAttenuation;
+    }
   }
 }
 

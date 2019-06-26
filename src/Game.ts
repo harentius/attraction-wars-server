@@ -44,6 +44,10 @@ class Game {
       const acceleration = calculateAcceleration(player, oldKeysPressState, newKeysPressState);
       const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();
       player.setAcceleration(acceleration, !isAnyMoveKeyPressed, isAnyMoveKeyPressed);
+
+      if (newKeysPressState.space) {
+        player.accelerateReactively();
+      }
     });
   }
 }

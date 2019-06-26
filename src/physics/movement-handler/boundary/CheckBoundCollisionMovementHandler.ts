@@ -17,11 +17,13 @@ class CheckBoundCollisionMovementHandler implements MovementHandlerInterface {
     if (this.boundCollisionChecker.isXBoundCollision(playerData)) {
       playerData.vX *= -1;
       playerData.bonusVx *= -1;
+      playerData.reactiveVx *= -1;
     }
 
     if (this.boundCollisionChecker.isYBoundCollision(playerData)) {
       playerData.vY *= -1;
       playerData.bonusVy *= -1;
+      playerData.reactiveVy *= -1;
     }
 
     for (const rotationData of playerData.rotationData.values()) {
