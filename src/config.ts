@@ -19,6 +19,7 @@ const config: {
   reactiveVAttenuation: number;
   reactiveVMultiplier: number;
   reactiveVRLossMultiplier: number;
+  minimumR: number;
 } = {
   port: 4000,
   broadCastPeriod: 30,
@@ -40,6 +41,7 @@ const config: {
   reactiveVAttenuation: 0.99,
   reactiveVMultiplier: 3,
   reactiveVRLossMultiplier: 0.9,
+  minimumR: 10,
 };
 
 // calculated parameter

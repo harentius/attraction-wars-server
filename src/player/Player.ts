@@ -30,8 +30,12 @@ class Player {
       return;
     }
 
-    this.playerData.reactiveVx = config.reactiveVMultiplier * this.playerData.vX;
-    this.playerData.reactiveVy = config.reactiveVMultiplier * this.playerData.vY;
+    if (this.playerData.r < config.minimumR) {
+      return;
+    }
+
+    this.playerData.reactiveVx += config.reactiveVMultiplier * this.playerData.vX;
+    this.playerData.reactiveVy += config.reactiveVMultiplier * this.playerData.vY;
     this.playerData.r *= config.reactiveVRLossMultiplier;
   }
 
