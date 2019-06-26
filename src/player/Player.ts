@@ -26,6 +26,10 @@ class Player {
   }
 
   public accelerateReactively() {
+    if (this.isStoppedX() && this.isStoppedY()) {
+      return;
+    }
+
     this.playerData.reactiveVx = config.reactiveVMultiplier * this.playerData.vX;
     this.playerData.reactiveVy = config.reactiveVMultiplier * this.playerData.vY;
     this.playerData.r *= config.reactiveVRLossMultiplier;
