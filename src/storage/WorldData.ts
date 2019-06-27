@@ -1,5 +1,6 @@
 import PlayerData from './PlayerData';
 import AsteroidData from './AsteroidData';
+import ServerStatistics from './ServerStatistics';
 
 class WorldData {
   public readonly playersData: any;
@@ -7,17 +8,20 @@ class WorldData {
   public readonly worldBounds: number[];
   public readonly relativeZonesSizes: number[];
   public readonly asteroidAttractionRadiusMultiplier: number;
+  public readonly serverStatistics: ServerStatistics;
 
   constructor(
     relativeZonesSizes: number[],
     worldBounds: number[],
     asteroidAttractionRadiusMultiplier: number,
+    serverStatistics: ServerStatistics,
   ) {
     this.relativeZonesSizes = relativeZonesSizes;
     this.worldBounds = worldBounds;
     this.playersData = {};
     this.asteroidsData = {};
     this.asteroidAttractionRadiusMultiplier = asteroidAttractionRadiusMultiplier;
+    this.serverStatistics = serverStatistics;
   }
 
   public addPlayerData(playerData: PlayerData) {

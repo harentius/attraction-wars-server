@@ -40,7 +40,7 @@ class Storage {
     return this.worldData.playersData[id];
   }
 
-  public getWorldDataForClient() {
+  public getWorldDataForClient(): WorldData {
     // TODO: filter data which users receives
     return this.worldData;
   }

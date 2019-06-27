@@ -5,11 +5,13 @@ import Storage from './storage/Storage';
 import InteractionZoneSwitcher from './physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
 import MovementHandlerRegistryFactory from './physics/movement-handler/MovementHandlerRegistryFactory';
 import PlayerFactory from './player/PlayerFactory';
+import ServerStatistics from './storage/ServerStatistics';
 
 const worldData = new WorldData(
   config.relativeZonesSizes,
   config.worldBounds,
   config.asteroidAttractionRadiusMultiplier,
+  new ServerStatistics(),
 );
 const storage = new Storage(worldData);
 

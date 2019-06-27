@@ -23,6 +23,7 @@ const config: {
 } = {
   port: 4000,
   broadCastPeriod: 30,
+  // game loop interval in ms
   dt: 10,
   worldBounds: [0, 0, 20000, 20000],
   keyPressDv: 0.00025,

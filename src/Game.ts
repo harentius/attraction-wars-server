@@ -31,9 +31,15 @@ class Game {
 
   public startGameLoop() {
     setInterval(() => {
+      const timeStart = process.hrtime();
+
       for (const [, player] of this.storage.players) {
         player.updateData();
       }
+
+      const timeDiff = process.hrtime(timeStart)[1];
+      const period = config.dt * 1e6;
+      this.storage.worldData.serverStatistics.setLoadPercent(timeDiff / period * 100);
     }, config.dt);
 
     this.registerEventHandlers();
