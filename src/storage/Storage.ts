@@ -9,6 +9,7 @@ class Storage {
   private clients: Map<string, Client>;
   private readonly events;
   static get UPDATE_KEY_PRESS_STATE() { return 'update_key_press_state'; }
+  static get REMOVE_CLIENT() { return 'remove_client'; }
 
   constructor(worldData: WorldData) {
     this.worldData = worldData;
@@ -22,8 +23,10 @@ class Storage {
   }
 
   public removeClient(id: string) {
+    this.trigger(Storage.REMOVE_CLIENT, [this.clients.get(id)]);
     this.players.delete(id);
     this.worldData.removePlayerData(id);
+    this.clients.delete(id);
   }
 
   public addPlayer(id: string, player: Player): void {

@@ -15,15 +15,27 @@ class DeathMovementHandler implements MovementHandlerInterface {
   public handle(player: Player): void {
     const playerData = player.playerData;
 
-    const { playersData } = this.storage.worldData;
+    const { playersData, asteroidsData } = this.storage.worldData;
 
     for (const otherPlayerData of Object.values(playersData)) {
       if (otherPlayerData.id === playerData.id) {
         continue;
       }
 
-      if (this.isKilled(playerData, otherPlayerData)) {
+      if ( this.isKilled(playerData, otherPlayerData)) {
+        this.storage.removeClient(playerData.id);
 
+        return;
+      }
+    }
+
+    for (const asteroidData of Object.values(asteroidsData)) {
+      if (this.isKilled(playerData, asteroidData)) {
+        if (this.isKilled(playerData, asteroidData)) {
+          this.storage.removeClient(playerData.id);
+
+          return;
+        }
       }
     }
   }

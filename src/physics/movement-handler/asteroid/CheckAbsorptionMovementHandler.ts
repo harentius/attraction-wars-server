@@ -14,6 +14,10 @@ class CheckAbsorptionMovementHandler implements MovementHandlerInterface {
     const playerData = player.playerData;
 
     for (const asteroidData of Object.values(this.storage.worldData.asteroidsData)) {
+      if (playerData.r < asteroidData.r) {
+        continue;
+      }
+
       if (!isCirclesIntersect(asteroidData, playerData)) {
         continue;
       }

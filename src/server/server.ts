@@ -7,6 +7,7 @@ import * as SocketIO from 'socket.io';
 import { game, storage } from '../app';
 import config from '../config';
 import KeyPressState from './KeysPressState';
+import Storage from '../storage/Storage';
 
 const app = express();
 const server = new Server(app);
@@ -37,6 +38,10 @@ io.on('connection', (socket) => {
     logger.info(`Client '${socket.handshake.address}' disconnected. Socket id: ${socket.id}, Assigned id: ${id}`);
     storage.removeClient(id);
   });
+});
+
+storage.on(Storage.REMOVE_CLIENT, (client: Client) => {
+  client.socket.disconnect();
 });
 
 setInterval(() => {

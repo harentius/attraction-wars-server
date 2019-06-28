@@ -14,7 +14,7 @@ class Game {
     this.playerFactory = playerFactory;
   }
 
-  public addPlayer(username: string, x: number = 2600, y: number = 1500, r: number = Math.random() * 100 + 10) {
+  public addPlayer(username: string, x: number = 2600, y: number = 1500, r: number = 50) {
     // TODO: demo data, update with something like rand place generating
     const playerData = new PlayerData(username, x, y, r);
     const player = this.playerFactory.createPlayer(playerData);
