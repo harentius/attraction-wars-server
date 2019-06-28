@@ -9,6 +9,7 @@ import CheckBoundCollisionMovementHandler from './boundary/CheckBoundCollisionMo
 import CheckAbsorptionMovementHandler from './asteroid/CheckAbsorptionMovementHandler';
 import Storage from '../../storage/Storage';
 import AsteroidAttractionMovementHandler from './asteroid/AsteroidAttractionMovementHandler';
+import DeathMovementHandler from './DeathMovementHandler';
 
 class MovementHandlerRegistryFactory {
   private readonly storage: Storage;
@@ -29,6 +30,7 @@ class MovementHandlerRegistryFactory {
       .registerMovementHandler(new CheckBoundCollisionMovementHandler())
       .registerMovementHandler(new CheckAbsorptionMovementHandler(this.storage))
       .registerMovementHandler(new AsteroidAttractionMovementHandler(this.storage))
+      .registerMovementHandler(new DeathMovementHandler(this.storage))
     ;
 
     return movementHandlerRegistry;

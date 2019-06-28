@@ -1,7 +1,7 @@
 import MovementHandlerInterface from '../MovementHandlerInterface';
-import PlayerData from '../../../storage/PlayerData';
 import Storage from '../../../storage/Storage';
 import isCirclesIntersect from '../../utils/isCirclesIntersect';
+import Player from '../../../player/Player';
 
 class CheckAbsorptionMovementHandler implements MovementHandlerInterface {
   private storage: Storage;
@@ -10,7 +10,9 @@ class CheckAbsorptionMovementHandler implements MovementHandlerInterface {
     this.storage = storage;
   }
 
-  public updatePlayerData(playerData: PlayerData): void {
+  public handle(player: Player): void {
+    const playerData = player.playerData;
+
     for (const asteroidData of Object.values(this.storage.worldData.asteroidsData)) {
       if (!isCirclesIntersect(asteroidData, playerData)) {
         continue;

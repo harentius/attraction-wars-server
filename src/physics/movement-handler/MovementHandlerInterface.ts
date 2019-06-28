@@ -1,7 +1,7 @@
-import PlayerData from '../../storage/PlayerData';
+import Player from '../../player/Player';
 
 interface MovementHandlerInterface {
-  updatePlayerData(playerData: PlayerData): void;
+  handle(player: Player): void;
 }
 
 export default MovementHandlerInterface;

@@ -3,7 +3,7 @@ import AsteroidData from './AsteroidData';
 import ServerStatistics from './ServerStatistics';
 
 class WorldData {
-  public readonly playersData: any;
+  public readonly playersData: { [key: string]: PlayerData };
   public readonly asteroidsData: { [key: string]: AsteroidData };
   public readonly worldBounds: number[];
   public readonly relativeZonesSizes: number[];

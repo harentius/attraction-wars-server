@@ -5,9 +5,12 @@ import GravityAssistData from './GravityAssistData';
 import config from '../../../../config';
 import rotatePlayerData from '../rotatePlayerData';
 import calculateDistance from '../../../utils/calculateDistance';
+import Player from '../../../../player/Player';
 
 class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
-  public updatePlayerData(playerData: PlayerData): void {
+  public handle(player: Player): void {
+    const playerData = player.playerData;
+
     for (const gravityAssistData of playerData.gravityAssistData.values()) {
       const angle = config.gravityAssistRotationSpeed * config.dt;
       const oldX = playerData.x;

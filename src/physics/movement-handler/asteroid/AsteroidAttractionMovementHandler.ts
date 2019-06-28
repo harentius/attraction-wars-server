@@ -1,9 +1,9 @@
 import MovementHandlerInterface from '../MovementHandlerInterface';
 import Storage from '../../../storage/Storage';
-import PlayerData from '../../../storage/PlayerData';
 import config from '../../../config';
 import performGravityAttraction from '../../utils/performGravityAttraction';
 import isCirclesIntersect from '../../utils/isCirclesIntersect';
+import Player from '../../../player/Player';
 
 class AsteroidAttractionMovementHandler implements MovementHandlerInterface {
   private storage: Storage;
@@ -12,7 +12,9 @@ class AsteroidAttractionMovementHandler implements MovementHandlerInterface {
     this.storage = storage;
   }
 
-  public updatePlayerData(playerData: PlayerData): void {
+  public handle(player: Player): void {
+    const playerData = player.playerData;
+
     for (const asteroidData of Object.values(this.storage.worldData.asteroidsData)) {
       const intersectCircle = {
         x: asteroidData.x,

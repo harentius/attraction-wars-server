@@ -6,9 +6,12 @@ import rotatePlayerData from '../rotatePlayerData';
 import config from '../../../../config';
 import calculateDistance from '../../../utils/calculateDistance';
 import GravityAssistData from '../second/GravityAssistData';
+import Player from '../../../../player/Player';
 
 class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
-  public updatePlayerData(playerData: PlayerData): void {
+  public handle(player: Player): void {
+    const playerData = player.playerData;
+
     for (const rotationData of playerData.rotationData.values()) {
       const angle = config.rotationSpeed * config.dt;
       Object.assign(playerData, rotatePlayerData(playerData, rotationData, angle));

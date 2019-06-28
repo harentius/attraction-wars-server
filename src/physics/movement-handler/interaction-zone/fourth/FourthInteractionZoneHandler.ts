@@ -1,9 +1,10 @@
 import PlayerData from '../../../../storage/PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
+import Player from '../../../../player/Player';
 
 class FourthInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
   // noinspection TsLint
-  public updatePlayerData(playerData: PlayerData): void {
+  public handle(player: Player): void {
   }
 
   public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {

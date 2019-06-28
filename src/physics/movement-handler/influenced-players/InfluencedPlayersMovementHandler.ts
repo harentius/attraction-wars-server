@@ -1,7 +1,7 @@
 import MovementHandlerInterface from '../MovementHandlerInterface';
-import PlayerData from '../../../storage/PlayerData';
 import config from '../../../config';
 import BoundCollisionChecker from '../boundary/BoundCollisionChecker';
+import Player from '../../../player/Player';
 
 class InfluencedPlayersMovementHandler implements MovementHandlerInterface {
   private boundCollisionChecker: BoundCollisionChecker;
@@ -10,7 +10,9 @@ class InfluencedPlayersMovementHandler implements MovementHandlerInterface {
     this.boundCollisionChecker = new BoundCollisionChecker();
   }
 
-  public updatePlayerData(playerData: PlayerData): void {
+  public handle(player: Player): void {
+    const playerData = player.playerData;
+
     if (this.boundCollisionChecker.isBoundCollision(playerData)) {
       return;
     }

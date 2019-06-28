@@ -1,10 +1,12 @@
 import MovementHandlerInterface from './MovementHandlerInterface';
 import config from '../../config';
 import {getValueNotViolatingBounds} from '../../utils';
-import PlayerData from '../../storage/PlayerData';
+import Player from '../../player/Player';
 
 class MovementHandler implements MovementHandlerInterface {
-  public updatePlayerData(playerData: PlayerData): void {
+  public handle(player: Player): void {
+    const playerData = player.playerData;
+
     let newVx: number;
     let newVy: number;
 

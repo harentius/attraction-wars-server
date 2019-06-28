@@ -2,9 +2,12 @@ import AttractionData from './AttractionData';
 import PlayerData from '../../../../storage/PlayerData';
 import InteractionZoneMovementHandlerInterface from '../InteractionZoneMovementHandlerInterface';
 import performGravityAttraction from '../../../utils/performGravityAttraction';
+import Player from '../../../../player/Player';
 
 class FirstInteractionZoneHandler implements InteractionZoneMovementHandlerInterface {
-  public updatePlayerData(playerData: PlayerData): void {
+  public handle(player: Player): void {
+    const playerData = player.playerData;
+
     for (const attractionData of playerData.attractionData.values()) {
       performGravityAttraction(playerData, attractionData);
     }
