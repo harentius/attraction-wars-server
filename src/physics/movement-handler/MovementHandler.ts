@@ -60,6 +60,8 @@ class MovementHandler implements MovementHandlerInterface {
     if (Math.abs(playerData.reactiveVy) > considerStoppedWhen) {
       playerData.reactiveVy *= config.reactiveVAttenuation;
     }
+
+    playerData.score += 0.0025;
   }
 }
 
