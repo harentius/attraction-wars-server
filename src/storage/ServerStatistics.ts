@@ -34,12 +34,12 @@ class ServerStatistics {
     );
   }
 
-  public toJSON(): string {
-    return JSON.stringify({
+  public toJSON(): object {
+    return {
       loadPercent: this.loadPercent,
       maxLoadPercent: this.maxLoadPercent,
       averageLoadPercent: this.averageLoadPercent,
-    });
+    };
   }
 
   private roundValue(value: number): number {
