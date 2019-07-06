@@ -30,6 +30,14 @@ class InteractionZoneSwitcher {
         playerData,
       );
 
+      if (
+        (interactionZonePlayerIntoOtherPlayer === interactionZoneOtherPlayerIntoPlayer)
+          &&
+        (playerData.r > otherPlayerData.r)
+      ) {
+        return;
+      }
+
       if (interactionZonePlayerIntoOtherPlayer <= interactionZoneOtherPlayerIntoPlayer) {
         const interactionZoneMovementHandler = this.movementHandlerRegistry
           .getInteractionZoneMovementHandler(interactionZonePlayerIntoOtherPlayer)

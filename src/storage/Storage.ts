@@ -23,7 +23,13 @@ class Storage {
   }
 
   public removeClient(id: string) {
-    this.trigger(Storage.REMOVE_CLIENT, [this.clients.get(id)]);
+    const client = this.clients.get(id);
+
+    if (!client) {
+      return;
+    }
+
+    this.trigger(Storage.REMOVE_CLIENT, [client]);
     this.players.delete(id);
     this.worldData.removePlayerData(id);
     this.clients.delete(id);
