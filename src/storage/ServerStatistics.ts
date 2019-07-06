@@ -21,7 +21,7 @@ class ServerStatistics {
     this.loadPercent = this.roundValue(loadPercent);
 
     if (this.loadPercent > this.maxLoadPercent) {
-      this.maxLoadPercent = this.loadPercent;
+      this.maxLoadPercent = Math.min(100, this.loadPercent);
     }
 
     if (this.loadPercentHistoryIndex === AVERAGE_PERCENT_CALCULATION_PERIOD) {
