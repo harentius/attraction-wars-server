@@ -4,6 +4,7 @@ class ServerStatistics {
   public loadPercent: number;
   public maxLoadPercent: number;
   public averageLoadPercent: number;
+  public onlineCount: number;
   private readonly loadPercentHistory: number[];
   private loadPercentHistoryIndex: number;
 
@@ -11,6 +12,7 @@ class ServerStatistics {
     this.loadPercent = 0.0;
     this.maxLoadPercent = 0.0;
     this.averageLoadPercent = 0.0;
+    this.onlineCount = 0;
     this.loadPercentHistory = [].fill(0, 0, AVERAGE_PERCENT_CALCULATION_PERIOD);
     this.loadPercentHistoryIndex = 0;
   }
@@ -39,6 +41,7 @@ class ServerStatistics {
       loadPercent: this.loadPercent,
       maxLoadPercent: this.maxLoadPercent,
       averageLoadPercent: this.averageLoadPercent,
+      onlineCount: this.onlineCount,
     };
   }
 

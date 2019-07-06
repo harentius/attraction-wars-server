@@ -27,11 +27,13 @@ class Storage {
     this.players.delete(id);
     this.worldData.removePlayerData(id);
     this.clients.delete(id);
+    this.worldData.serverStatistics.onlineCount = this.players.size;
   }
 
   public addPlayer(id: string, player: Player): void {
     this.players.set(id, player);
     this.worldData.addPlayerData(player.playerData);
+    this.worldData.serverStatistics.onlineCount = this.players.size;
   }
 
   public removeAsteroidData(id: string): void {
