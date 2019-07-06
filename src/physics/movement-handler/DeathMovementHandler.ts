@@ -22,7 +22,7 @@ class DeathMovementHandler implements MovementHandlerInterface {
         continue;
       }
 
-      if ( this.isKilled(playerData, otherPlayerData)) {
+      if (this.isKilled(playerData, otherPlayerData)) {
         this.storage.removeClient(playerData.id);
 
         return;

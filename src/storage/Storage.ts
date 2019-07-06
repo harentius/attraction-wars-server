@@ -23,6 +23,10 @@ class Storage {
   }
 
   public removeClient(id: string) {
+    this.players.delete(id);
+    this.worldData.removePlayerData(id);
+    this.worldData.serverStatistics.onlineCount = this.players.size;
+
     const client = this.clients.get(id);
 
     if (!client) {
@@ -30,10 +34,7 @@ class Storage {
     }
 
     this.trigger(Storage.REMOVE_CLIENT, [client]);
-    this.players.delete(id);
-    this.worldData.removePlayerData(id);
     this.clients.delete(id);
-    this.worldData.serverStatistics.onlineCount = this.players.size;
   }
 
   public addPlayer(id: string, player: Player): void {
