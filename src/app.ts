@@ -6,6 +6,7 @@ import InteractionZoneSwitcher from './physics/movement-handler/interaction-zone
 import MovementHandlerRegistryFactory from './physics/movement-handler/MovementHandlerRegistryFactory';
 import PlayerFactory from './player/PlayerFactory';
 import ServerStatistics from './storage/ServerStatistics';
+import * as logger from 'winston';
 
 const worldData = new WorldData(
   config.relativeZonesSizes,
@@ -25,7 +26,14 @@ game.startGameLoop();
 
 // TODO: demo data
 game.addPlayer('demo_player1', 1650, 1650, 100);
-game.addAsteroidData('demo_asteroid1', 2800, 1700, 30);
-game.addAsteroidData('demo_asteroid2', 2350, 1750, 80);
+game.addPlayer('demo_player2', 1950, 1650, 50);
+
+try {
+  for (let i = 0; i < config.initAsteroidsAmount; i++) {
+    game.addAsteroidDataOnRandomPosition();
+  }
+} catch (e) {
+  logger.warn(e.message);
+}
 
 export { game, storage };

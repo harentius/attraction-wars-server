@@ -2,6 +2,12 @@ import Player from '../player/Player';
 import KeysPressState from '../server/KeysPressState';
 import WorldData from './WorldData';
 import Client from '../server/Client';
+import PointInterface from '../physics/PointInterface';
+import CircleInterface from '../physics/CircleInterface';
+import isCirclesIntersect from '../physics/utils/isCirclesIntersect';
+import config from '../config';
+
+const ATTEMPTS_THRESHOLD = 1000;
 
 class Storage {
   public readonly worldData: WorldData;
@@ -71,6 +77,23 @@ class Storage {
     Object.assign(client.keyPressState, keyPressState);
   }
 
+  public generateRandomPosition(r: number): PointInterface {
+    let attemptCount = 0;
+
+    while (attemptCount < ATTEMPTS_THRESHOLD) {
+      const x = Math.random() * this.worldData.worldBounds[2];
+      const y = Math.random() * this.worldData.worldBounds[3];
+
+      if (this.isCircleAvailable({x, y, r})) {
+        return {x, y};
+      }
+
+      attemptCount++;
+    }
+
+    throw new Error('Objects limit exceed. World is overpopulated.');
+  }
+
   public on(event, callback) {
     if (typeof this.events[event] === 'undefined') {
       this.events[event] = [];
@@ -97,6 +120,27 @@ class Storage {
 
   private getPlayer(id: string): Player {
     return this.players.get(id);
+  }
+
+  private isCircleAvailable(circle: CircleInterface): boolean {
+    for (const playerData of Object.values(this.worldData.playersData)) {
+      if (isCirclesIntersect(circle, playerData)) {
+        return false;
+      }
+    }
+
+    for (const asteroidData of Object.values(this.worldData.asteroidsData)) {
+      const asteroidInfluenceCircle = {
+        ...asteroidData,
+        r: asteroidData.r * config.asteroidAttractionRadiusMultiplier,
+      };
+
+      if (isCirclesIntersect(circle, asteroidInfluenceCircle)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
 

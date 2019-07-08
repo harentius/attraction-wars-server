@@ -20,6 +20,9 @@ const config: {
   reactiveVMultiplier: number;
   reactiveVRLossMultiplier: number;
   minimumR: number;
+  initAsteroidsAmount: number;
+  minAsteroidSize: number,
+  maxAsteroidSize: number;
 } = {
   port: 4000,
   broadCastPeriod: 30,
@@ -43,6 +46,9 @@ const config: {
   reactiveVMultiplier: 3,
   reactiveVRLossMultiplier: 0.9,
   minimumR: 10,
+  initAsteroidsAmount: 500,
+  minAsteroidSize: 5,
+  maxAsteroidSize: 100,
 };
 
 // calculated parameter

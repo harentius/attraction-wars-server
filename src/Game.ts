@@ -4,6 +4,7 @@ import config from './config';
 import PlayerFactory from './player/PlayerFactory';
 import calculateAcceleration from './physics/utils/calculateAcceleration';
 import AsteroidData from './storage/AsteroidData';
+import {genId, randInt} from './utils';
 
 class Game {
   private readonly storage: Storage;
@@ -21,6 +22,13 @@ class Game {
     this.storage.addPlayer(playerData.id, player);
 
     return player;
+  }
+
+  public addAsteroidDataOnRandomPosition() {
+    const r = randInt(config.minAsteroidSize, config.maxAsteroidSize);
+    const interactionR = r * config.asteroidAttractionRadiusMultiplier;
+    const position = this.storage.generateRandomPosition(interactionR);
+    this.addAsteroidData(genId(), position.x, position.y, r);
   }
 
   public addAsteroidData(id: string, x: number, y: number, r: number = Math.random() * 10) {

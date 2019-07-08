@@ -4,4 +4,6 @@ const generateRandomColor = (): number => Math.trunc(Math.random() * 16777215);
 
 const genId = (): string => Math.random().toString(36).substr(2, 16);
 
-export { getValueNotViolatingBounds, generateRandomColor, genId };
+const randInt = (min: number, max: number) => Math.round(Math.random() * (max - min)) + min;
+
+export { getValueNotViolatingBounds, generateRandomColor, genId, randInt };
