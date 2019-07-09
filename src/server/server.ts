@@ -16,7 +16,7 @@ const socketIdToPlayerIdMap = new Map();
 
 io.on('connection', (socket) => {
   socket.on('login', (username) => {
-    const player = game.addPlayer(username);
+    const player = game.addPlayerOnRandomPosition(username);
     const playerId = player.playerData.id;
     socketIdToPlayerIdMap.set(socket.id, playerId);
     const client = new Client(socket, new KeysPressState());

@@ -24,10 +24,6 @@ const playerFactory = new PlayerFactory(interactionZoneSwitcher, movementHandler
 const game = new Game(storage, playerFactory);
 game.startGameLoop();
 
-// TODO: demo data
-game.addPlayer('demo_player1', 1650, 1650, 100);
-game.addPlayer('demo_player2', 1950, 1650, 50);
-
 try {
   for (let i = 0; i < config.initAsteroidsAmount; i++) {
     game.addAsteroidDataOnRandomPosition();

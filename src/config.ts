@@ -23,6 +23,7 @@ const config: {
   initAsteroidsAmount: number;
   minAsteroidSize: number,
   maxAsteroidSize: number;
+  initPlayerSize: number;
 } = {
   port: 4000,
   broadCastPeriod: 30,
@@ -49,6 +50,7 @@ const config: {
   initAsteroidsAmount: 500,
   minAsteroidSize: 5,
   maxAsteroidSize: 100,
+  initPlayerSize: 50,
 };
 
 // calculated parameter

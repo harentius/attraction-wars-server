@@ -15,13 +15,12 @@ class Game {
     this.playerFactory = playerFactory;
   }
 
-  public addPlayer(username: string, x: number = 2600, y: number = 1500, r: number = 50) {
-    // TODO: demo data, update with something like rand place generating
-    const playerData = new PlayerData(username, x, y, r);
-    const player = this.playerFactory.createPlayer(playerData);
-    this.storage.addPlayer(playerData.id, player);
+  public addPlayerOnRandomPosition(username: string) {
+    const r = config.initPlayerSize;
+    const interactionR = r * config.relativeZonesSizes[2];
+    const position = this.storage.generateRandomPosition(interactionR);
 
-    return player;
+    return this.addPlayer(username, position.x, position.y, r);
   }
 
   public addAsteroidDataOnRandomPosition() {
@@ -29,12 +28,6 @@ class Game {
     const interactionR = r * config.asteroidAttractionRadiusMultiplier;
     const position = this.storage.generateRandomPosition(interactionR);
     this.addAsteroidData(genId(), position.x, position.y, r);
-  }
-
-  public addAsteroidData(id: string, x: number, y: number, r: number = Math.random() * 10) {
-    // TODO: demo data, update with something like rand place generating
-    const asteroidData = new AsteroidData(id, x, y, r);
-    this.storage.worldData.addAsteroidData(asteroidData);
   }
 
   public startGameLoop() {
@@ -69,6 +62,19 @@ class Game {
         this.addAsteroidDataOnRandomPosition();
       })
     ;
+  }
+
+  private addAsteroidData(id: string, x: number, y: number, r: number) {
+    const asteroidData = new AsteroidData(id, x, y, r);
+    this.storage.worldData.addAsteroidData(asteroidData);
+  }
+
+  private addPlayer(username: string, x: number, y: number, r: number) {
+    const playerData = new PlayerData(username, x, y, r);
+    const player = this.playerFactory.createPlayer(playerData);
+    this.storage.addPlayer(playerData.id, player);
+
+    return player;
   }
 }
 
