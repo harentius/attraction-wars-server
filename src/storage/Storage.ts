@@ -16,6 +16,7 @@ class Storage {
   private readonly events;
   static get UPDATE_KEY_PRESS_STATE() { return 'update_key_press_state'; }
   static get REMOVE_CLIENT() { return 'remove_client'; }
+  static get REMOVE_ASTEROID() { return 'remove_asteroid'; }
 
   constructor(worldData: WorldData) {
     this.worldData = worldData;
@@ -51,6 +52,7 @@ class Storage {
 
   public removeAsteroidData(id: string): void {
     this.worldData.removeAsteroidData(id);
+    this.trigger(Storage.REMOVE_ASTEROID);
   }
 
   public getPlayerDataForClient(id: string) {
@@ -104,7 +106,7 @@ class Storage {
     return this;
   }
 
-  public trigger(event, data) {
+  public trigger(event, data = []) {
     if (typeof this.events[event] === 'undefined') {
       return;
     }

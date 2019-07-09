@@ -54,15 +54,21 @@ class Game {
   }
 
   private registerEventHandlers() {
-    this.storage.on(Storage.UPDATE_KEY_PRESS_STATE, (player, oldKeysPressState, newKeysPressState) => {
-      const acceleration = calculateAcceleration(player, oldKeysPressState, newKeysPressState);
-      const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();
-      player.setAcceleration(acceleration, !isAnyMoveKeyPressed, isAnyMoveKeyPressed);
+    this.storage
+      .on(Storage.UPDATE_KEY_PRESS_STATE, (player, oldKeysPressState, newKeysPressState) => {
+        const acceleration = calculateAcceleration(player, oldKeysPressState, newKeysPressState);
+        const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();
+        player.setAcceleration(acceleration, !isAnyMoveKeyPressed, isAnyMoveKeyPressed);
 
-      if (newKeysPressState.space) {
-        player.accelerateReactively();
-      }
-    });
+        if (newKeysPressState.space) {
+          player.accelerateReactively();
+        }
+      })
+
+      .on(Storage.REMOVE_ASTEROID, () => {
+        this.addAsteroidDataOnRandomPosition();
+      })
+    ;
   }
 }
 
