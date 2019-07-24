@@ -47,6 +47,7 @@ class PlayerData implements CircleInterface {
     this.rotationData = new Map();
     this.gravityAssistData = new Map();
     this.boundedToPlayersData = new Map();
+    // Internal color list item number
     this.color = color;
     this.score = 0;
   }
