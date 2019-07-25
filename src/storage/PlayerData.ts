@@ -18,6 +18,7 @@ class PlayerData implements CircleInterface {
   public reactiveVy: number;
   public aX: number;
   public aY: number;
+  // Internal color list item number
   public color: number;
   public isAttenuation: boolean;
   public isAccelerating: boolean;
@@ -27,7 +28,7 @@ class PlayerData implements CircleInterface {
   public boundedToPlayersData: Map<string, PlayerData>;
   public score: number;
 
-  constructor(username: string, x, y, r, id = genId(), color = generateRandomColor()) {
+  constructor(username: string, x, y, r, id = genId(), color: number = generateRandomColor()) {
     this.username = username;
     this.id = id;
     this.x = x;
@@ -47,7 +48,6 @@ class PlayerData implements CircleInterface {
     this.rotationData = new Map();
     this.gravityAssistData = new Map();
     this.boundedToPlayersData = new Map();
-    // Internal color list item number
     this.color = color;
     this.score = 0;
   }

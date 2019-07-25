@@ -1,6 +1,6 @@
 const getValueNotViolatingBounds = (v: number, min: number, max: number): number => Math.max(Math.min(v, max), min);
 
-const generateRandomColor = (): number => Math.trunc(Math.random() * 9);
+const generateRandomColor = (max: number = 9): number => Math.trunc(Math.random() * max);
 
 const genId = (): string => Math.random().toString(36).substr(2, 16);
 
