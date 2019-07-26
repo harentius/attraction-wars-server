@@ -78,6 +78,7 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
     const r = calculateDistance(playerData, otherPlayerData);
     const direction = calculateDirection(playerData, otherPlayerData);
     const gravityAssistData = new GravityAssistData(
+      otherPlayerData.id,
       otherPlayerData.x,
       otherPlayerData.y,
       r,

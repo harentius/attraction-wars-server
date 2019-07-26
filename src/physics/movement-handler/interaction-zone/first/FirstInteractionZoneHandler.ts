@@ -14,7 +14,7 @@ class FirstInteractionZoneHandler implements InteractionZoneMovementHandlerInter
   }
 
   public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {
-    const attractionData = new AttractionData(otherPlayerData.x, otherPlayerData.y);
+    const attractionData = new AttractionData(otherPlayerData.id, otherPlayerData.x, otherPlayerData.y);
 
     playerData.attractionData.set(otherPlayerData.id, attractionData);
     playerData.boundedToPlayersData.set(otherPlayerData.id, otherPlayerData);

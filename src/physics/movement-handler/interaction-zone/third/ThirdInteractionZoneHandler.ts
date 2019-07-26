@@ -27,7 +27,7 @@ class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInter
     }
 
     const direction = oldDirection || this.calculateDirection(playerData, otherPlayerData);
-    const rotationData = new RotationData(otherPlayerData.x, otherPlayerData.y, r, direction);
+    const rotationData = new RotationData(otherPlayerData.id, otherPlayerData.x, otherPlayerData.y, r, direction);
 
     playerData.rotationData.set(otherPlayerData.id, rotationData);
     playerData.boundedToPlayersData.set(otherPlayerData.id, otherPlayerData);

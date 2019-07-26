@@ -2,6 +2,7 @@ import config from '../../../config';
 import MovementHandlerRegistry from '../MovementHandlerRegistry';
 import Storage from '../../../storage/Storage';
 import isCirclesIntersect from '../../utils/isCirclesIntersect';
+import OtherPlayerIdAwareInterface from './OtherPlayerIdAwareInterface';
 
 class InteractionZoneSwitcher {
   private storage: Storage;
@@ -14,6 +15,18 @@ class InteractionZoneSwitcher {
 
   public checkZoneSwitch(playerData) {
     const { playersData } = this.storage.worldData;
+
+    // Clear in case other player was killed or disconnected
+    for (const key of ['attractionData', 'rotationData', 'gravityAssistData', 'boundedToPlayersData']) {
+      // @ts-ignore
+      for (const otherPlayerIdAware: OtherPlayerIdAwareInterface of playerData[key].values()) {
+        const otherPlayerId = otherPlayerIdAware.otherPlayerId;
+
+        if (!playersData[otherPlayerId]) {
+          playerData[key].delete(otherPlayerId);
+        }
+      }
+    }
 
     for (const otherPlayerData of (Object as any).values(playersData)) {
       if (otherPlayerData.id === playerData.id) {
