@@ -37,7 +37,7 @@ class AsteroidAttractionMovementHandler implements MovementHandlerInterface {
     }
   }
 
-  private createResizedCircle(circe: CircleInterface, multiplier: number) {
+  private createResizedCircle(circe: CircleInterface, multiplier: number): CircleInterface {
     return {
       x: circe.x,
       y: circe.y,
