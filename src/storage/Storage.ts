@@ -8,6 +8,7 @@ import isCirclesIntersect from '../physics/utils/isCirclesIntersect';
 import config from '../config';
 
 const ATTEMPTS_THRESHOLD = 1000;
+const BORDER_MARGIN = 5;
 
 class Storage {
   public readonly worldData: WorldData;
@@ -83,8 +84,8 @@ class Storage {
     let attemptCount = 0;
 
     while (attemptCount < ATTEMPTS_THRESHOLD) {
-      const x = Math.random() * this.worldData.worldBounds[2];
-      const y = Math.random() * this.worldData.worldBounds[3];
+      const x = Math.random() * (this.worldData.worldBounds[2] - r - BORDER_MARGIN) + r + BORDER_MARGIN;
+      const y = Math.random() * (this.worldData.worldBounds[3] - r - BORDER_MARGIN) + r + BORDER_MARGIN;
 
       if (this.isCircleAvailable({x, y, r})) {
         return {x, y};
