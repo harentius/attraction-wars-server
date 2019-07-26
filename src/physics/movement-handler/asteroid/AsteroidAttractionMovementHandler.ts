@@ -4,6 +4,7 @@ import config from '../../../config';
 import performGravityAttraction from '../../utils/performGravityAttraction';
 import isCirclesIntersect from '../../utils/isCirclesIntersect';
 import Player from '../../../player/Player';
+import CircleInterface from '../../CircleInterface';
 
 class AsteroidAttractionMovementHandler implements MovementHandlerInterface {
   private storage: Storage;
@@ -16,22 +17,32 @@ class AsteroidAttractionMovementHandler implements MovementHandlerInterface {
     const playerData = player.playerData;
 
     for (const asteroidData of Object.values(this.storage.worldData.asteroidsData)) {
-      const intersectCircle = {
-        x: asteroidData.x,
-        y: asteroidData.y,
-        r: asteroidData.r * config.asteroidAttractionRadiusMultiplier,
-      };
-
-      if (!isCirclesIntersect(playerData, intersectCircle)) {
-        continue;
-      }
-
       if (asteroidData.r > playerData.r) {
+        const intersectCircle = this.createResizedCircle(asteroidData, config.asteroidAttractionRadiusMultiplier);
+
+        if (!isCirclesIntersect(playerData, intersectCircle)) {
+          continue;
+        }
+
         performGravityAttraction(playerData, asteroidData);
       } else {
+        const intersectCircle = this.createResizedCircle(playerData, config.relativeZonesSizes[0]);
+
+        if (!isCirclesIntersect(asteroidData, intersectCircle)) {
+          continue;
+        }
+
         performGravityAttraction(asteroidData, playerData);
       }
     }
+  }
+
+  private createResizedCircle(circe: CircleInterface, multiplier: number) {
+    return {
+      x: circe.x,
+      y: circe.y,
+      r: circe.r * multiplier,
+    };
   }
 }
 
