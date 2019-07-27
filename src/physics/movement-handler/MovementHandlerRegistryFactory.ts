@@ -27,7 +27,7 @@ class MovementHandlerRegistryFactory {
       .registerInteractionZoneMovementHandler(new FourthInteractionZoneHandler())
       .registerMovementHandler(new MovementHandler())
       .registerMovementHandler(new InfluencedPlayersMovementHandler())
-      .registerMovementHandler(new CheckBoundCollisionMovementHandler())
+      .registerMovementHandler(new CheckBoundCollisionMovementHandler(this.storage))
       .registerMovementHandler(new CheckAbsorptionMovementHandler(this.storage))
       .registerMovementHandler(new AsteroidAttractionMovementHandler(this.storage))
       .registerMovementHandler(new DeathMovementHandler(this.storage))

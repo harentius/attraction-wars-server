@@ -2,13 +2,17 @@ import MovementHandlerInterface from '../MovementHandlerInterface';
 import BoundCollisionChecker from './BoundCollisionChecker';
 import Player from '../../../player/Player';
 import config from '../../../config';
+import Storage from '../../../storage/Storage';
+import PlayerData from '../../../storage/PlayerData';
 
 const BORDER_MARGIN = 1;
 
 class CheckBoundCollisionMovementHandler implements MovementHandlerInterface {
   private boundCollisionChecker: BoundCollisionChecker;
+  private storage: Storage;
 
-  public constructor() {
+  public constructor(storage: Storage) {
+    this.storage = storage;
     this.boundCollisionChecker = new BoundCollisionChecker();
   }
 
@@ -24,6 +28,7 @@ class CheckBoundCollisionMovementHandler implements MovementHandlerInterface {
       playerData.bonusVx *= -1;
       playerData.reactiveVx *= -1;
       playerData.aX *= -1;
+      this.updateKeyPressState(playerData);
     }
 
     if (this.boundCollisionChecker.isYBoundCollision(playerData)) {
@@ -31,6 +36,7 @@ class CheckBoundCollisionMovementHandler implements MovementHandlerInterface {
       playerData.bonusVy *= -1;
       playerData.reactiveVy *= -1;
       playerData.aY *= -1;
+      this.updateKeyPressState(playerData);
     }
 
     for (const rotationData of playerData.rotationData.values()) {
@@ -56,6 +62,11 @@ class CheckBoundCollisionMovementHandler implements MovementHandlerInterface {
     if (this.boundCollisionChecker.isYRightBoundCollision(playerData)) {
       playerData.y =  config.worldBounds[3] - playerData.r - BORDER_MARGIN;
     }
+  }
+
+  private updateKeyPressState(playerData: PlayerData): void {
+    const client = this.storage.getClient(playerData.id);
+    this.storage.updateKeyPressState(playerData.id, client.keyPressState);
   }
 }
 

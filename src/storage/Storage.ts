@@ -117,11 +117,11 @@ class Storage {
     }
   }
 
-  private getClient(id: string) {
+  public getClient(id: string) {
     return this.clients.get(id);
   }
 
-  private getPlayer(id: string): Player {
+  public getPlayer(id: string): Player {
     return this.players.get(id);
   }
 
