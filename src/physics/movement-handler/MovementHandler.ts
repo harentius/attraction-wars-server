@@ -61,7 +61,7 @@ class MovementHandler implements MovementHandlerInterface {
       playerData.reactiveVy *= config.reactiveVAttenuation;
     }
 
-    playerData.score += 0.0025;
+    player.increaseScoreByMovement();
   }
 }
 

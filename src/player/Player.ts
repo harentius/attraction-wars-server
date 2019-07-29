@@ -2,6 +2,7 @@ import config from '../config';
 import PlayerData from '../storage/PlayerData';
 import InteractionZoneSwitcher from '../physics/movement-handler/interaction-zone/InteractionZoneSwitcher';
 import MovementHandlerRegistry from '../physics/movement-handler/MovementHandlerRegistry';
+import AsteroidData from '../storage/AsteroidData';
 
 class Player {
   public playerData: PlayerData;
@@ -53,6 +54,14 @@ class Player {
     for (const movementHandler of Object.values(this.movementHandlerRegistry.movementHandlers)) {
       movementHandler.handle(this);
     }
+  }
+
+  public increaseScoreByAsteroidAbsorption(asteroidData: AsteroidData) {
+    this.playerData.score += asteroidData.r / 2;
+  }
+
+  public increaseScoreByMovement() {
+    this.playerData.score += 0.0025;
   }
 }
 
