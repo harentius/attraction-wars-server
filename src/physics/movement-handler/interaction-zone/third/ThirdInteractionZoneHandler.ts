@@ -16,6 +16,10 @@ class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInter
       const angle = config.rotationSpeed * config.dt;
       Object.assign(playerData, rotatePlayerData(playerData, rotationData, angle));
     }
+
+    if (playerData.rotationData.size > 0) {
+      player.increaseBufferScoreByThirdZone();
+    }
   }
 
   public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {

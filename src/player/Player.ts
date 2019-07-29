@@ -8,6 +8,8 @@ class Player {
   public playerData: PlayerData;
   private interactionZoneSwitcher: InteractionZoneSwitcher;
   private movementHandlerRegistry: MovementHandlerRegistry;
+  private thirdZoneBufferScore: number;
+  private secondZoneBufferScore: number;
 
   constructor(
     playerData: PlayerData,
@@ -17,6 +19,8 @@ class Player {
     this.playerData = playerData;
     this.interactionZoneSwitcher = interactionZoneSwitcher;
     this.movementHandlerRegistry = movementHandlerRegistry;
+    this.thirdZoneBufferScore = 0;
+    this.secondZoneBufferScore = 0;
   }
 
   public setAcceleration({ aX, aY }, isAttenuation: boolean = false, isAccelerating: boolean = false) {
@@ -38,6 +42,7 @@ class Player {
     this.playerData.reactiveVx += config.reactiveVMultiplier * this.playerData.vX;
     this.playerData.reactiveVy += config.reactiveVMultiplier * this.playerData.vY;
     this.playerData.r *= config.reactiveVRLossMultiplier;
+    this.increaseScoreByAcceleration();
   }
 
   public isStoppedX() {
@@ -56,12 +61,36 @@ class Player {
     }
   }
 
-  public increaseScoreByAsteroidAbsorption(asteroidData: AsteroidData) {
+  public increaseBufferScoreByThirdZone(): void {
+    const bufferOverflow = 50;
+    this.thirdZoneBufferScore += 0.2;
+
+    if (this.thirdZoneBufferScore > bufferOverflow) {
+      this.playerData.score += bufferOverflow;
+      this.thirdZoneBufferScore = 0;
+    }
+  }
+
+  public increaseBufferScoreBySecondZone(): void {
+    const bufferOverflow = 150;
+    this.secondZoneBufferScore += 1;
+
+    if (this.secondZoneBufferScore > bufferOverflow) {
+      this.playerData.score += bufferOverflow;
+      this.secondZoneBufferScore = 0;
+    }
+  }
+
+  public increaseScoreByAsteroidAbsorption(asteroidData: AsteroidData): void {
     this.playerData.score += asteroidData.r / 2;
   }
 
-  public increaseScoreByMovement() {
+  public increaseScoreByMovement(): void {
     this.playerData.score += 0.0025;
+  }
+
+  public increaseScoreByAcceleration(): void {
+    this.playerData.score += 10;
   }
 }
 

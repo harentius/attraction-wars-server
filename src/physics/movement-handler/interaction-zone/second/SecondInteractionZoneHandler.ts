@@ -30,6 +30,8 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
 
     // Still on the orbit
     if (playerData.gravityAssistData.size > 0) {
+      player.increaseBufferScoreBySecondZone();
+
       return;
     }
 
