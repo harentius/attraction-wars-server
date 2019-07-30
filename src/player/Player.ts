@@ -85,6 +85,10 @@ class Player {
     this.playerData.score += asteroidData.r / 2;
   }
 
+  public increaseScoreByOtherPlayerAbsorption(playerData: PlayerData): void {
+    this.playerData.score += 4 * playerData.r;
+  }
+
   public increaseScoreByMovement(): void {
     this.playerData.score += 0.0025;
   }
