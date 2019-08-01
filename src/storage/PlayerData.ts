@@ -27,6 +27,7 @@ class PlayerData implements CircleInterface {
   public gravityAssistData: Map<string, GravityAssistData>;
   public boundedToPlayersData: Map<string, PlayerData>;
   public score: number;
+  public isCanPerformGravityAssist: boolean;
 
   constructor(username: string, x, y, r, id = genId(), color: number = generateRandomColor()) {
     this.username = username;
@@ -50,6 +51,7 @@ class PlayerData implements CircleInterface {
     this.boundedToPlayersData = new Map();
     this.color = color;
     this.score = 0;
+    this.isCanPerformGravityAssist = true;
   }
 }
 

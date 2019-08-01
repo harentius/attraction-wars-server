@@ -12,6 +12,7 @@ class FourthInteractionZoneHandler implements InteractionZoneMovementHandlerInte
     playerData.rotationData.delete(otherPlayerData.id);
     playerData.gravityAssistData.delete(otherPlayerData.id);
     playerData.boundedToPlayersData.delete(otherPlayerData.id);
+    playerData.isCanPerformGravityAssist = true;
   }
 
   public getInteractionZoneNumber(): number {

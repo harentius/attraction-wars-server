@@ -69,13 +69,15 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
   }
 
   public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {
-    if (playerData.gravityAssistData.has(otherPlayerData.id)) {
+    if (!playerData.isCanPerformGravityAssist || playerData.gravityAssistData.has(otherPlayerData.id)) {
       return;
     }
 
     if (!playerData.isAccelerating) {
       return;
     }
+
+    playerData.isCanPerformGravityAssist = false;
 
     const r = calculateDistance(playerData, otherPlayerData);
     const direction = calculateDirection(playerData, otherPlayerData);
