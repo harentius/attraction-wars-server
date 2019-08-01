@@ -2,6 +2,7 @@
 const worldWidth = +process.env.WORLD_WIDTH || 20000;
 const worldHeight = +process.env.WORLD_HEIGHT || 20000;
 const asteroidsDensity = (+process.env.ASTEROIDS_DENSITY || 1.25) * 1e-06;
+const port = +process.env.PORT;
 
 const config: {
   port: number,
@@ -30,7 +31,7 @@ const config: {
   maxAsteroidSize: number;
   initPlayerSize: number;
 } = {
-  port: +process.env.PORT,
+  port,
 
   // Game-level configuration. Most Likely often changeable (per game round?)
   worldBounds: [0, 0, worldWidth, worldHeight],
