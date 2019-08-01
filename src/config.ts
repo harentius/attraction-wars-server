@@ -2,7 +2,7 @@
 const worldWidth = +process.env.WORLD_WIDTH || 20000;
 const worldHeight = +process.env.WORLD_HEIGHT || 20000;
 const asteroidsDensity = (+process.env.ASTEROIDS_DENSITY || 1.25) * 1e-06;
-const port = +process.env.PORT;
+const port = +process.env.PORT || 4000;
 
 const config: {
   port: number,

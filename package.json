@@ -7,7 +7,7 @@
   "scripts": {
     "build": "./node_modules/.bin/tsc",
     "server": "npm run build && node ./dist/server/server.js",
-    "server:watch": "PORT=4000 concurrently --kill-others \"./node_modules/.bin/tsc --watch\" \"./node_modules/.bin/nodemon ./dist/server/server.js\"",
+    "server:watch": "concurrently --kill-others \"./node_modules/.bin/tsc --watch\" \"./node_modules/.bin/nodemon ./dist/server/server.js\"",
     "lint": "node_modules/.bin/tslint ./src/**/*.ts"
   },
   "dependencies": {
