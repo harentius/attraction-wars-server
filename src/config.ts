@@ -1,3 +1,8 @@
+// Configurable parameters
+const worldWidth = +process.env.WORLD_WIDTH || 20000;
+const worldHeight = +process.env.WORLD_HEIGHT || 20000;
+const asteroidsDensity = (+process.env.ASTEROIDS_DENSITY || 1.25) * 1e-06;
+
 const config: {
   port: number,
   broadCastPeriod: number,
@@ -25,11 +30,15 @@ const config: {
   maxAsteroidSize: number;
   initPlayerSize: number;
 } = {
-  port: 4000,
+  port: +process.env.PORT,
+
+  // Game-level configuration. Most Likely often changeable (per game round?)
+  worldBounds: [0, 0, worldWidth, worldHeight],
+  initAsteroidsAmount: worldWidth * worldHeight * asteroidsDensity,
+
+  // Kind of unchangeable parameters
   broadCastPeriod: 30,
-  // game loop interval in ms
-  dt: 10,
-  worldBounds: [0, 0, 20000, 20000],
+  dt: 10, // game loop interval in ms
   keyPressDv: 0.00025,
   releaseDv: 0.0005,
   gravityAssistReleaseDv: 0.0001,
@@ -47,13 +56,12 @@ const config: {
   reactiveVMultiplier: 3,
   reactiveVRLossMultiplier: 0.9,
   minimumR: 10,
-  initAsteroidsAmount: 500,
   minAsteroidSize: 5,
   maxAsteroidSize: 100,
   initPlayerSize: 50,
 };
 
-// calculated parameter
+// calculated parameters
 config.considerStoppedWhen = Math.min(config.releaseDv, config.keyPressDv) / 2;
 
 export default config;
