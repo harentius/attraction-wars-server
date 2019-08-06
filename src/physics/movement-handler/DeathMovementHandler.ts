@@ -25,6 +25,7 @@ class DeathMovementHandler implements MovementHandlerInterface {
       if (this.isKilled(playerData, otherPlayerData)) {
         const otherPlayer = this.storage.getPlayer(otherPlayerData.id);
         otherPlayer.increaseScoreByOtherPlayerAbsorption(playerData);
+        otherPlayerData.r += 8 * Math.log10(otherPlayerData.r + playerData.r);
         this.storage.removeClient(playerData.id);
 
         return;
@@ -33,11 +34,9 @@ class DeathMovementHandler implements MovementHandlerInterface {
 
     for (const asteroidData of Object.values(asteroidsData)) {
       if (this.isKilled(playerData, asteroidData)) {
-        if (this.isKilled(playerData, asteroidData)) {
-          this.storage.removeClient(playerData.id);
+        this.storage.removeClient(playerData.id);
 
-          return;
-        }
+        return;
       }
     }
   }

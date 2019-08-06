@@ -39,13 +39,13 @@ const config: {
 
   // Kind of unchangeable parameters
   broadCastPeriod: 30,
-  dt: 10, // game loop interval in ms
+  dt: 15, // game loop interval in ms
   keyPressDv: 0.00025,
   releaseDv: 0.0005,
   gravityAssistReleaseDv: 0.0001,
   rotationSpeed: 0.00025,
   gravityAssistRotationSpeed: 0.003,
-  attractionSpeed: 20,
+  attractionSpeed: 30,
   asteroidAttractionSpeed: 50,
   asteroidAttractionRadiusMultiplier: 4,
   minSpeed: 0,
@@ -55,9 +55,9 @@ const config: {
   bindViscosity: 0.05,
   reactiveVAttenuation: 0.99,
   reactiveVMultiplier: 3,
-  reactiveVRLossMultiplier: 0.9,
-  minimumR: 10,
-  minAsteroidSize: 5,
+  reactiveVRLossMultiplier: 0.95,
+  minimumR: 30,
+  minAsteroidSize: 10,
   maxAsteroidSize: 100,
   initPlayerSize: 50,
 };
