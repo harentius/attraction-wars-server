@@ -22,7 +22,7 @@ class CheckAbsorptionMovementHandler implements MovementHandlerInterface {
         continue;
       }
 
-      playerData.r = Math.sqrt(Math.pow(playerData.r, 2) + Math.pow(asteroidData.r, 2));
+      playerData.r = playerData.r + Math.log10(asteroidData.r + playerData.r);
       player.increaseScoreByAsteroidAbsorption(asteroidData);
       this.storage.removeAsteroidData(asteroidData.id);
     }
