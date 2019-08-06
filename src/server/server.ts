@@ -45,7 +45,7 @@ storage.on(Storage.REMOVE_CLIENT, (client: Client) => {
 });
 
 setInterval(() => {
-  io.emit('worldData', storage.getWorldDataForClient());
+  io.volatile.emit('worldData', storage.getWorldDataForClient());
 }, config.broadCastPeriod);
 
 server.listen(config.port, () => logger.info('Attraction Wars server started'));
