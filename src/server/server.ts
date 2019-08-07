@@ -1,17 +1,15 @@
 import * as logger from 'winston';
+import * as parser from 'socket.io-msgpack-parser';
 import KeysPressState from './KeysPressState';
 import Client from './Client';
-import * as express from 'express';
 import { Server } from 'http';
-import * as SocketIO from 'socket.io';
 import { game, storage } from '../app';
 import config from '../config';
 import KeyPressState from './KeysPressState';
 import Storage from '../storage/Storage';
 
-const app = express();
-const server = new Server(app);
-const io = SocketIO(server);
+const server = new Server();
+const io = require('socket.io')(server, { parser });
 const socketIdToPlayerIdMap = new Map();
 
 io.on('connection', (socket) => {
@@ -45,7 +43,7 @@ storage.on(Storage.REMOVE_CLIENT, (client: Client) => {
 });
 
 setInterval(() => {
-  io.volatile.emit('worldData', Buffer.from(JSON.stringify(storage.getWorldDataForClient())));
+  io.binary(true).volatile.emit('worldData', storage.getWorldDataForClient());
 }, config.broadCastPeriod);
 
 server.listen(config.port, () => logger.info('Attraction Wars server started'));
