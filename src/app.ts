@@ -7,6 +7,7 @@ import MovementHandlerRegistryFactory from './physics/movement-handler/MovementH
 import PlayerFactory from './player/PlayerFactory';
 import ServerStatistics from './storage/ServerStatistics';
 import * as logger from 'winston';
+import WorldDataFilter from './storage/Filter/WorldDataFilter';
 
 const worldData = new WorldData(
   config.relativeZonesSizes,
@@ -14,7 +15,7 @@ const worldData = new WorldData(
   config.asteroidAttractionRadiusMultiplier,
   new ServerStatistics(),
 );
-const storage = new Storage(worldData);
+const storage = new Storage(worldData, new WorldDataFilter());
 
 const movementHandlerRegistryFactory = new MovementHandlerRegistryFactory(storage);
 const movementHandlerRegistry = movementHandlerRegistryFactory.createMovementHandlerRegistry();

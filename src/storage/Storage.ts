@@ -6,6 +6,8 @@ import PointInterface from '../physics/PointInterface';
 import CircleInterface from '../physics/CircleInterface';
 import isCirclesIntersect from '../physics/utils/isCirclesIntersect';
 import config from '../config';
+import WorldDataFilter from './Filter/WorldDataFilter';
+import AsteroidData from './AsteroidData';
 
 const ATTEMPTS_THRESHOLD = 1000;
 const BORDER_MARGIN = 5;
@@ -14,16 +16,23 @@ class Storage {
   public readonly worldData: WorldData;
   public players: Map<string, Player>;
   private clients: Map<string, Client>;
+  private readonly worldDataFilter: WorldDataFilter;
   private readonly events;
   static get UPDATE_KEY_PRESS_STATE() { return 'update_key_press_state'; }
+
+  static get ADD_PLAYER() { return 'add_player'; }
   static get REMOVE_CLIENT() { return 'remove_client'; }
+
+  static get ADD_ASTEROID() { return 'add_asteroid'; }
   static get REMOVE_ASTEROID() { return 'remove_asteroid'; }
 
-  constructor(worldData: WorldData) {
+
+  constructor(worldData: WorldData, worldDataFilter: WorldDataFilter) {
     this.worldData = worldData;
     this.players = new Map();
     this.clients = new Map();
     this.events = {};
+    this.worldDataFilter = worldDataFilter;
   }
 
   public addClient(id: string, client: Client) {
@@ -49,6 +58,12 @@ class Storage {
     this.players.set(id, player);
     this.worldData.addPlayerData(player.playerData);
     this.worldData.serverStatistics.onlineCount = this.players.size;
+    this.trigger(Storage.ADD_PLAYER, [player]);
+  }
+
+  public addAsteroidData(asteroidData: AsteroidData) {
+    this.worldData.addAsteroidData(asteroidData);
+    this.trigger(Storage.ADD_ASTEROID, [asteroidData]);
   }
 
   public removeAsteroidData(id: string): void {
@@ -57,13 +72,16 @@ class Storage {
   }
 
   public getPlayerDataForClient(id: string) {
-    // TODO: filter data which users receives
     return this.worldData.playersData[id];
   }
 
-  public getWorldDataForClient(): WorldData {
-    // TODO: filter data which users receives
+  public getFullWorldDataForClient(): WorldData {
+    // TODO: filter
     return this.worldData;
+  }
+
+  public getWorldDataForClient(): object {
+    return this.worldDataFilter.filter(this.worldData);
   }
 
   public updateKeyPressState(id: string, keyPressState: KeysPressState) {
@@ -97,12 +115,18 @@ class Storage {
     throw new Error('Objects limit exceed. World is overpopulated.');
   }
 
-  public on(event, callback) {
-    if (typeof this.events[event] === 'undefined') {
-      this.events[event] = [];
+  public on(events, callback) {
+    if (typeof events === 'string') {
+      events = [events];
     }
 
-    this.events[event].push(callback);
+    for (const event of events) {
+      if (typeof this.events[event] === 'undefined') {
+        this.events[event] = [];
+      }
+
+      this.events[event].push(callback);
+    }
 
     return this;
   }

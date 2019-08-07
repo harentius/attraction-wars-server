@@ -66,7 +66,7 @@ class Game {
 
   private addAsteroidData(id: string, x: number, y: number, r: number) {
     const asteroidData = new AsteroidData(id, x, y, r);
-    this.storage.worldData.addAsteroidData(asteroidData);
+    this.storage.addAsteroidData(asteroidData);
   }
 
   private addPlayer(username: string, x: number, y: number, r: number) {

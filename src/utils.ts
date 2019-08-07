@@ -2,8 +2,11 @@ const getValueNotViolatingBounds = (v: number, min: number, max: number): number
 
 const generateRandomColor = (max: number = 9): number => Math.round(Math.random() * max);
 
-const genId = (): string => Math.random().toString(36).substr(2, 16);
+let id = 0;
+const genId = (): string => '' + (id)++;
 
 const randInt = (min: number, max: number) => Math.round(Math.random() * (max - min)) + min;
 
-export { getValueNotViolatingBounds, generateRandomColor, genId, randInt };
+const truncateFloat = (x: number) => ~~x;
+
+export { getValueNotViolatingBounds, generateRandomColor, genId, randInt, truncateFloat };

@@ -22,6 +22,7 @@ io.on('connection', (socket) => {
     storage.addClient(playerId, client);
     logger.info(`Client '${socket.handshake.address}' connected. Socket id: ${socket.id}, Assigned id: ${playerId}`);
     socket.emit('playerData', storage.getPlayerDataForClient(playerId));
+    socket.emit('worldData', storage.getFullWorldDataForClient());
   });
 
   socket.on('keysPressState', (keyPressStateData) => {
@@ -40,6 +41,10 @@ io.on('connection', (socket) => {
 
 storage.on(Storage.REMOVE_CLIENT, (client: Client) => {
   client.socket.disconnect();
+});
+
+storage.on([Storage.ADD_ASTEROID, Storage.REMOVE_ASTEROID, Storage.ADD_PLAYER, Storage.REMOVE_CLIENT], () => {
+  io.binary(true).volatile.emit('worldData', storage.getFullWorldDataForClient());
 });
 
 setInterval(() => {
