@@ -8,6 +8,7 @@ import config from '../config';
 import KeyPressState from './KeysPressState';
 import Storage from '../storage/Storage';
 import AsteroidData from '../storage/AsteroidData';
+import {truncateFloat} from '../utils';
 
 const server = new Server();
 // tslint:disable-next-line
@@ -26,7 +27,7 @@ io.on('connection', (socket) => {
     storage.addClient(playerId, client);
     logger.info(`Client '${socket.handshake.address}' connected. Socket id: ${socket.id}, Assigned id: ${playerId}`);
     socket.emit('playerData', storage.getPlayerDataForClient(playerId));
-    socket.volatile.emit('worldData', storage.getFullWorldDataForClient());
+    socket.emit('fullWorldData', storage.getFullWorldDataForClient());
   });
 
   socket.on('keysPressState', (keyPressStateData) => {
@@ -58,8 +59,8 @@ storage.on(Storage.ASTEROID_ATTRACTION_START, (asteroidData: AsteroidData) => {
     asteroidSyncIntervals[asteroidData.id] = setInterval(() => {
       io.binary(true).volatile.emit('asteroidData', {
         id: asteroidData.id,
-        x: asteroidData.x,
-        y: asteroidData.y,
+        x: truncateFloat(asteroidData.x),
+        y: truncateFloat(asteroidData.y),
       });
     }, config.broadCastPeriod);
   }

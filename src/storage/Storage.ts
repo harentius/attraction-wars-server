@@ -8,6 +8,7 @@ import isCirclesIntersect from '../physics/utils/isCirclesIntersect';
 import config from '../config';
 import WorldDataFilter from './Filter/WorldDataFilter';
 import AsteroidData from './AsteroidData';
+import FullWorldDataFilter from './Filter/FullWorldDataFilter';
 
 const ATTEMPTS_THRESHOLD = 1000;
 const BORDER_MARGIN = 5;
@@ -17,6 +18,7 @@ class Storage {
   public players: Map<string, Player>;
   private clients: Map<string, Client>;
   private readonly worldDataFilter: WorldDataFilter;
+  private fullWorldDataFilter: FullWorldDataFilter;
   private readonly events;
 
   static get UPDATE_KEY_PRESS_STATE() { return 'update_key_press_state'; }
@@ -30,8 +32,9 @@ class Storage {
   static get ATTRACT_ASTEROID() { return 'attract_asteroid'; }
   static get REMOVE_ASTEROID() { return 'remove_asteroid'; }
 
-  constructor(worldData: WorldData, worldDataFilter: WorldDataFilter) {
+  constructor(worldData: WorldData, worldDataFilter: WorldDataFilter, fullWorldDataFilter: FullWorldDataFilter) {
     this.worldData = worldData;
+    this.fullWorldDataFilter = fullWorldDataFilter;
     this.players = new Map();
     this.clients = new Map();
     this.events = {};
@@ -79,9 +82,8 @@ class Storage {
     return this.worldData.playersData[id];
   }
 
-  public getFullWorldDataForClient(): WorldData {
-    // TODO: filter
-    return this.worldData;
+  public getFullWorldDataForClient(): object {
+    return this.fullWorldDataFilter.filter(this.worldData);
   }
 
   public getWorldDataForClient(): object {
