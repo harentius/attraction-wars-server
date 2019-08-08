@@ -10,6 +10,7 @@ import Storage from '../storage/Storage';
 import AsteroidData from '../storage/AsteroidData';
 
 const server = new Server();
+// tslint:disable-next-line
 const io = require('socket.io')(server, { parser });
 const socketIdToPlayerIdMap = new Map();
 
@@ -50,7 +51,6 @@ storage.on([Storage.ADD_ASTEROID, Storage.REMOVE_ASTEROID, Storage.ADD_PLAYER, S
   io.binary(true).volatile.emit('worldData', storage.getFullWorldDataForClient());
 });
 
-
 const asteroidSyncIntervals = {};
 
 storage.on(Storage.ASTEROID_ATTRACTION_START, (asteroidData: AsteroidData) => {
@@ -61,7 +61,7 @@ storage.on(Storage.ASTEROID_ATTRACTION_START, (asteroidData: AsteroidData) => {
         x: asteroidData.x,
         y: asteroidData.y,
       });
-    }, config.broadCastPeriod)
+    }, config.broadCastPeriod);
   }
 });
 
