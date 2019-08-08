@@ -6,6 +6,7 @@ class AsteroidData implements CircleInterface  {
   public readonly x: number;
   public readonly y: number;
   public r: number;
+  public isAttracting: boolean;
   // Internal color list item number
   public color: number;
 
@@ -15,6 +16,7 @@ class AsteroidData implements CircleInterface  {
     this.y = y;
     this.r = r;
     this.color = color;
+    this.isAttracting = false;
   }
 }
 

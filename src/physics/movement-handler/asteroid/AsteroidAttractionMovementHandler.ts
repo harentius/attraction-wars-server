@@ -17,7 +17,10 @@ class AsteroidAttractionMovementHandler implements MovementHandlerInterface {
     const playerData = player.playerData;
 
     for (const asteroidData of Object.values(this.storage.worldData.asteroidsData)) {
+      const isWasAttracting = asteroidData.isAttracting;
+
       if (asteroidData.r > playerData.r) {
+        asteroidData.isAttracting = false;
         const intersectCircle = this.createResizedCircle(asteroidData, config.asteroidAttractionRadiusMultiplier);
 
         if (!isCirclesIntersect(playerData, intersectCircle)) {
@@ -29,10 +32,20 @@ class AsteroidAttractionMovementHandler implements MovementHandlerInterface {
         const intersectCircle = this.createResizedCircle(playerData, config.relativeZonesSizes[0]);
 
         if (!isCirclesIntersect(asteroidData, intersectCircle)) {
+          asteroidData.isAttracting = false;
           continue;
         }
 
+        asteroidData.isAttracting = true;
         performGravityAttraction(asteroidData, playerData);
+      }
+
+      if (isWasAttracting !== asteroidData.isAttracting) {
+        if (asteroidData.isAttracting) {
+          this.storage.trigger(Storage.ASTEROID_ATTRACTION_START, [asteroidData]);
+        } else {
+          this.storage.trigger(Storage.ASTEROID_ATTRACTION_STOP, [asteroidData]);
+        }
       }
     }
   }

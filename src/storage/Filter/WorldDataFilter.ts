@@ -1,15 +1,17 @@
 import WorldData from '../WorldData';
-import CircleInterface from '../../physics/CircleInterface';
-import PlayerData from '../PlayerData';
 import { truncateFloat } from '../../utils';
-import AsteroidData from '../AsteroidData';
 
 class WorldDataFilter {
   public filter(worldData: WorldData): object {
     const data = {
       playersData: {},
-      asteroidsData: {},
-      serverStatistics: worldData.serverStatistics,
+      // asteroidsData: {},
+      serverStatistics: {
+        loadPercent: worldData.serverStatistics.loadPercent,
+        maxLoadPercent: worldData.serverStatistics.maxLoadPercent,
+        averageLoadPercent: worldData.serverStatistics.averageLoadPercent,
+        onlineCount: worldData.serverStatistics.onlineCount,
+      },
     };
 
     for (const [key, playerData] of Object.entries(worldData.playersData)) {
@@ -21,12 +23,13 @@ class WorldDataFilter {
       };
     }
 
-    for (const [key, asteroidData] of Object.entries(worldData.asteroidsData)) {
-      data.asteroidsData[key] = {
-        x: truncateFloat(asteroidData.x),
-        y: truncateFloat(asteroidData.y),
-      };
-    }
+    // TODO; Currently asteroids static (except attraction moments), so so reason to sync. Will be changed in future.
+    // for (const [key, asteroidData] of Object.entries(worldData.asteroidsData)) {
+    //   data.asteroidsData[key] = {
+    //     x: truncateFloat(asteroidData.x),
+    //     y: truncateFloat(asteroidData.y),
+    //   };
+    // }
 
     return data;
   }

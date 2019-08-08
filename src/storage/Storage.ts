@@ -18,14 +18,17 @@ class Storage {
   private clients: Map<string, Client>;
   private readonly worldDataFilter: WorldDataFilter;
   private readonly events;
+
   static get UPDATE_KEY_PRESS_STATE() { return 'update_key_press_state'; }
 
   static get ADD_PLAYER() { return 'add_player'; }
   static get REMOVE_CLIENT() { return 'remove_client'; }
 
   static get ADD_ASTEROID() { return 'add_asteroid'; }
+  static get ASTEROID_ATTRACTION_START() { return 'asteroid_attraction_start'; }
+  static get ASTEROID_ATTRACTION_STOP() { return 'asteroid_attraction_stop'; }
+  static get ATTRACT_ASTEROID() { return 'attract_asteroid'; }
   static get REMOVE_ASTEROID() { return 'remove_asteroid'; }
-
 
   constructor(worldData: WorldData, worldDataFilter: WorldDataFilter) {
     this.worldData = worldData;
@@ -67,6 +70,7 @@ class Storage {
   }
 
   public removeAsteroidData(id: string): void {
+    this.trigger(Storage.ASTEROID_ATTRACTION_STOP, [this.worldData.asteroidsData[id]]);
     this.worldData.removeAsteroidData(id);
     this.trigger(Storage.REMOVE_ASTEROID);
   }
