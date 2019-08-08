@@ -9,7 +9,7 @@ class AsteroidData implements CircleInterface  {
   // Internal color list item number
   public color: number;
 
-  constructor(id: string, x: number, y: number, r: number, color: number = generateRandomColor()) {
+  constructor(id: string, x: number, y: number, r: number, color: number = generateRandomColor(19)) {
     this.id = id;
     this.x = x;
     this.y = y;
