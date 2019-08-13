@@ -11,16 +11,16 @@
     "lint": "tslint ./src/**/*.ts"
   },
   "dependencies": {
-    "@types/socket.io": "^1.4.33",
-    "@types/winston": "^2.3.9",
+    "@types/socket.io": "^1.4.40",
+    "@types/winston": "^2.4.4",
     "socket.io": "^2.2.0",
     "socket.io-msgpack-parser": "^2.2.0",
-    "winston": "^2.4.2"
+    "winston": "^2.4.4"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "nodemon": "^1.17.2",
+    "concurrently": "^3.6.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "nodemon": "^1.19.1",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   },
