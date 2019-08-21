@@ -8,12 +8,6 @@ class FullWorldDataFilter {
       worldBounds: worldData.worldBounds,
       playersData: {},
       asteroidsData: {},
-      serverStatistics: {
-        loadPercent: worldData.serverStatistics.loadPercent,
-        maxLoadPercent: worldData.serverStatistics.maxLoadPercent,
-        averageLoadPercent: worldData.serverStatistics.averageLoadPercent,
-        onlineCount: worldData.serverStatistics.onlineCount,
-      },
       asteroidAttractionRadiusMultiplier: worldData.asteroidAttractionRadiusMultiplier,
     };
 

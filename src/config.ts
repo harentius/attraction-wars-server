@@ -30,6 +30,7 @@ const config: {
   minAsteroidSize: number,
   maxAsteroidSize: number;
   initPlayerSize: number;
+  serverStatisticsBroadCastPeriod: number
 } = {
   port,
 
@@ -60,6 +61,7 @@ const config: {
   minAsteroidSize: 10,
   maxAsteroidSize: 100,
   initPlayerSize: 50,
+  serverStatisticsBroadCastPeriod: 1000,
 };
 
 // calculated parameters

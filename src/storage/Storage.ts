@@ -90,6 +90,14 @@ class Storage {
     return this.worldDataFilter.filter(this.worldData);
   }
 
+  public getServerStatistics(): object {
+    return {
+      maxLoadPercent: this.worldData.serverStatistics.maxLoadPercent,
+      averageLoadPercent: this.worldData.serverStatistics.averageLoadPercent,
+      onlineCount: this.worldData.serverStatistics.onlineCount,
+    }
+  }
+
   public updateKeyPressState(id: string, keyPressState: KeysPressState) {
     const client = this.getClient(id);
 

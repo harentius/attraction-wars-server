@@ -6,12 +6,6 @@ class WorldDataFilter {
     const data = {
       playersData: {},
       // asteroidsData: {},
-      serverStatistics: {
-        loadPercent: worldData.serverStatistics.loadPercent,
-        maxLoadPercent: worldData.serverStatistics.maxLoadPercent,
-        averageLoadPercent: worldData.serverStatistics.averageLoadPercent,
-        onlineCount: worldData.serverStatistics.onlineCount,
-      },
     };
 
     for (const [key, playerData] of Object.entries(worldData.playersData)) {

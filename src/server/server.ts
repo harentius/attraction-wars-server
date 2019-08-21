@@ -77,4 +77,8 @@ setInterval(() => {
   io.binary(true).volatile.emit('worldData', storage.getWorldDataForClient());
 }, config.broadCastPeriod);
 
+setInterval(() => {
+  io.binary(true).volatile.emit('serverStatisticsData', storage.getServerStatistics());
+}, config.serverStatisticsBroadCastPeriod);
+
 server.listen(config.port, () => logger.info('Attraction Wars server started'));
