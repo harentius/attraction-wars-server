@@ -95,7 +95,7 @@ class Storage {
       maxLoadPercent: this.worldData.serverStatistics.maxLoadPercent,
       averageLoadPercent: this.worldData.serverStatistics.averageLoadPercent,
       onlineCount: this.worldData.serverStatistics.onlineCount,
-    }
+    };
   }
 
   public updateKeyPressState(id: string, keyPressState: KeysPressState) {
