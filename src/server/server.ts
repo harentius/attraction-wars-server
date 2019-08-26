@@ -44,8 +44,13 @@ io.on('connection', (socket) => {
   });
 });
 
+storage.on(Storage.ADD_PLAYER, () => {
+  io.binary(true).emit('serverStatisticsData', storage.getServerStatistics());
+});
+
 storage.on(Storage.REMOVE_CLIENT, (client: Client) => {
   client.socket.disconnect();
+  io.binary(true).emit('serverStatisticsData', storage.getServerStatistics());
 });
 
 storage.on([Storage.ADD_ASTEROID, Storage.REMOVE_ASTEROID, Storage.ADD_PLAYER, Storage.REMOVE_CLIENT], () => {
@@ -76,9 +81,5 @@ storage.on(Storage.ASTEROID_ATTRACTION_STOP, (asteroidData: AsteroidData) => {
 setInterval(() => {
   io.binary(true).volatile.emit('worldData', storage.getWorldDataForClient());
 }, config.broadCastPeriod);
-
-setInterval(() => {
-  io.binary(true).volatile.emit('serverStatisticsData', storage.getServerStatistics());
-}, config.serverStatisticsBroadCastPeriod);
 
 server.listen(config.port, () => logger.info('Attraction Wars server started'));

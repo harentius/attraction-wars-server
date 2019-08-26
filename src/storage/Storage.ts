@@ -92,8 +92,6 @@ class Storage {
 
   public getServerStatistics(): object {
     return {
-      maxLoadPercent: this.worldData.serverStatistics.maxLoadPercent,
-      averageLoadPercent: this.worldData.serverStatistics.averageLoadPercent,
       onlineCount: this.worldData.serverStatistics.onlineCount,
     };
   }
