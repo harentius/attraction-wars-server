@@ -9,6 +9,7 @@ import config from '../config';
 import WorldDataFilter from './Filter/WorldDataFilter';
 import AsteroidData from './AsteroidData';
 import FullWorldDataFilter from './Filter/FullWorldDataFilter';
+import { truncateFloat } from '../utils';
 
 const ATTEMPTS_THRESHOLD = 1000;
 const BORDER_MARGIN = 5;
@@ -79,7 +80,17 @@ class Storage {
   }
 
   public getPlayerDataForClient(id: string) {
-    return this.worldData.playersData[id];
+    const playerData = this.worldData.playersData[id];
+
+    return {
+      id: playerData.id,
+      x: truncateFloat(playerData.x),
+      y: truncateFloat(playerData.y),
+      r: truncateFloat(playerData.r),
+      score: truncateFloat(playerData.score),
+      color: playerData.color,
+      username: playerData.username,
+    };
   }
 
   public getFullWorldDataForClient(): object {
