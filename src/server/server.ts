@@ -54,7 +54,7 @@ storage.on(Storage.REMOVE_CLIENT, (client: Client) => {
 });
 
 storage.on([Storage.ADD_ASTEROID, Storage.REMOVE_ASTEROID, Storage.ADD_PLAYER, Storage.REMOVE_CLIENT], () => {
-  io.binary(true).volatile.emit('worldData', storage.getFullWorldDataForClient());
+  io.binary(true).emit('worldData', storage.getFullWorldDataForClient());
 });
 
 const asteroidSyncIntervals = {};
