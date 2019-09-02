@@ -54,7 +54,7 @@ class Player {
   }
 
   public updateData() {
-    this.interactionZoneSwitcher.checkZoneSwitch(this.playerData);
+    this.interactionZoneSwitcher.checkZoneSwitch(this);
 
     for (const movementHandler of Object.values(this.movementHandlerRegistry.movementHandlers)) {
       movementHandler.handle(this);
@@ -71,9 +71,9 @@ class Player {
     }
   }
 
-  public increaseBufferScoreBySecondZone(): void {
+  public increaseBufferScoreBySecondZone(score: number = 3): void {
     const bufferOverflow = 150;
-    this.secondZoneBufferScore += 1;
+    this.secondZoneBufferScore += score;
 
     if (this.secondZoneBufferScore > bufferOverflow) {
       this.playerData.score += bufferOverflow;

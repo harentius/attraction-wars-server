@@ -68,7 +68,9 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
     playerData.bonusVy = newBonusVy;
   }
 
-  public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {
+  public updateMovementHandlerData(player: Player, otherPlayerData: PlayerData): void {
+    const playerData = player.playerData;
+
     if (!playerData.isCanPerformGravityAssist || playerData.gravityAssistData.has(otherPlayerData.id)) {
       return;
     }
@@ -77,6 +79,7 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
       return;
     }
 
+    player.increaseBufferScoreBySecondZone(150);
     playerData.isCanPerformGravityAssist = false;
 
     const r = calculateDistance(playerData, otherPlayerData);

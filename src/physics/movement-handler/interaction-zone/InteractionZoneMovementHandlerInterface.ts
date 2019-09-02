@@ -1,8 +1,9 @@
 import MovementHandlerInterface from '../MovementHandlerInterface';
 import PlayerData from '../../../storage/PlayerData';
+import Player from '../../../player/Player';
 
 interface InteractionZoneMovementHandlerInterface extends MovementHandlerInterface {
-  updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void;
+  updateMovementHandlerData(player: Player, otherPlayerData: PlayerData): void;
   getInteractionZoneNumber(): number;
 }
 

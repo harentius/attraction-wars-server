@@ -7,7 +7,8 @@ class FourthInteractionZoneHandler implements InteractionZoneMovementHandlerInte
   public handle(player: Player): void {
   }
 
-  public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {
+  public updateMovementHandlerData(player: Player, otherPlayerData: PlayerData): void {
+    const playerData = player.playerData;
     playerData.attractionData.delete(otherPlayerData.id);
     playerData.rotationData.delete(otherPlayerData.id);
     playerData.gravityAssistData.delete(otherPlayerData.id);

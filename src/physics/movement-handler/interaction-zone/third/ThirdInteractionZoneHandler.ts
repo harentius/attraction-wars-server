@@ -22,7 +22,9 @@ class ThirdInteractionZoneHandler implements InteractionZoneMovementHandlerInter
     }
   }
 
-  public updateMovementHandlerData(playerData: PlayerData, otherPlayerData: PlayerData): void {
+  public updateMovementHandlerData(player: Player, otherPlayerData: PlayerData): void {
+    const playerData = player.playerData;
+
     const r = calculateDistance(playerData, otherPlayerData);
     let oldDirection = null;
 

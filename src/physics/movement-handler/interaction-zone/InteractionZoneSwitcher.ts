@@ -3,6 +3,7 @@ import MovementHandlerRegistry from '../MovementHandlerRegistry';
 import Storage from '../../../storage/Storage';
 import isCirclesIntersect from '../../utils/isCirclesIntersect';
 import OtherPlayerIdAwareInterface from './OtherPlayerIdAwareInterface';
+import Player from '../../../player/Player';
 
 class InteractionZoneSwitcher {
   private storage: Storage;
@@ -13,8 +14,9 @@ class InteractionZoneSwitcher {
     this.movementHandlerRegistry = movementHandlerRegistry;
   }
 
-  public checkZoneSwitch(playerData) {
+  public checkZoneSwitch(player: Player) {
     const { playersData } = this.storage.worldData;
+    const playerData = player.playerData;
 
     // Clear in case other player was killed or disconnected
     for (const key of ['attractionData', 'rotationData', 'gravityAssistData', 'boundedToPlayersData']) {
@@ -58,7 +60,7 @@ class InteractionZoneSwitcher {
 
         // TODO
         if (interactionZoneMovementHandler) {
-          interactionZoneMovementHandler.updateMovementHandlerData(playerData, otherPlayerData);
+          interactionZoneMovementHandler.updateMovementHandlerData(player, otherPlayerData);
         }
       }
     }
