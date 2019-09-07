@@ -18,6 +18,17 @@ const socketIdToPlayerIdMap = new Map();
 io.on('connection', (socket) => {
   socket = socket.binary(true);
 
+  if (storage.players.size >= config.maxPlayers) {
+    socket.emit('notification', {
+      type: 'error',
+      message: 'Server is overloaded. Please try again later.'
+    });
+    logger.warn('Server is overloaded. Player was rejected to connect');
+    socket.disconnect();
+
+    return;
+  }
+
   socket.on('login', (username) => {
     const player = game.addPlayerOnRandomPosition(username);
     const playerId = player.playerData.id;

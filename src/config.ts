@@ -22,15 +22,16 @@ const config: {
   relativeZonesSizes: number[],
   considerStoppedWhen: number,
   bindViscosity: number,
-  reactiveVAttenuation: number;
-  reactiveVMultiplier: number;
-  reactiveVRLossMultiplier: number;
-  minimumR: number;
-  initAsteroidsAmount: number;
+  reactiveVAttenuation: number,
+  reactiveVMultiplier: number,
+  reactiveVRLossMultiplier: number,
+  minimumR: number,
+  initAsteroidsAmount: number,
   minAsteroidSize: number,
-  maxAsteroidSize: number;
-  initPlayerSize: number;
-  serverStatisticsBroadCastPeriod: number
+  maxAsteroidSize: number,
+  initPlayerSize: number,
+  serverStatisticsBroadCastPeriod: number,
+  maxPlayers: number,
 } = {
   port,
 
@@ -62,6 +63,7 @@ const config: {
   maxAsteroidSize: 100,
   initPlayerSize: 50,
   serverStatisticsBroadCastPeriod: 1000,
+  maxPlayers: 50,
 };
 
 // calculated parameters
