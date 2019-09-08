@@ -7,13 +7,19 @@ const calculateAcceleration = (player, oldKeysPressState: KeysPressState, newKey
 
   if (isAnyMoveKeyPressed) {
     if (newKeysPressState.up) {
-      dv = { aX: 0, aY: -config.keyPressDv };
-    } else if (newKeysPressState.down) {
-      dv = { aX: 0, aY: config.keyPressDv };
-    } else if (newKeysPressState.left) {
-      dv = { aX: -config.keyPressDv, aY: 0 };
-    } else if (newKeysPressState.right) {
-      dv = { aX: config.keyPressDv, aY: 0 };
+      dv.aY = -config.keyPressDv;
+    }
+
+    if (newKeysPressState.down) {
+      dv.aY = config.keyPressDv;
+    }
+
+    if (newKeysPressState.left) {
+      dv.aX = -config.keyPressDv;
+    }
+
+    if (newKeysPressState.right) {
+      dv.aX = config.keyPressDv;
     }
   } else if (!player.isStoppedX() || !player.isStoppedY()) {
     dv = {
