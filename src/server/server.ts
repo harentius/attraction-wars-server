@@ -29,7 +29,10 @@ io.on('connection', (socket) => {
     return;
   }
 
-  socket.on('login', (username) => {
+  socket.on('login', (username: string) => {
+    // Dummy sanitize user input
+    username = `${username}`;
+
     const player = game.addPlayerOnRandomPosition(username);
     const playerId = player.playerData.id;
     socketIdToPlayerIdMap.set(socket.id, playerId);
