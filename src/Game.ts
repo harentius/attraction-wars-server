@@ -5,6 +5,8 @@ import PlayerFactory from './player/PlayerFactory';
 import calculateAcceleration from './physics/utils/calculateAcceleration';
 import AsteroidData from './storage/AsteroidData';
 import {genId, randInt} from './utils';
+import KeysPressState from './server/KeysPressState';
+import Player from './player/Player';
 
 class Game {
   private readonly storage: Storage;
