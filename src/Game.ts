@@ -45,7 +45,7 @@ class Game {
       .on(Storage.UPDATE_KEY_PRESS_STATE, (
         player: Player,
         oldKeysPressState: KeysPressState,
-        newKeysPressState: KeysPressState
+        newKeysPressState: KeysPressState,
       ) => {
         const acceleration = calculateAcceleration(player, oldKeysPressState, newKeysPressState);
         const isAttenuationX = !newKeysPressState.left && !newKeysPressState.right;
