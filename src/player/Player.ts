@@ -23,11 +23,15 @@ class Player {
     this.secondZoneBufferScore = 0;
   }
 
-  public setAcceleration({ aX, aY }, isAttenuation: boolean = false, isAccelerating: boolean = false) {
+  public setAcceleration(
+    { aX, aY },
+    isAttenuationX: boolean = false,
+    isAttenuationY: boolean = false
+  ) {
     this.playerData.aX = aX;
     this.playerData.aY = aY;
-    this.playerData.isAttenuation = isAttenuation;
-    this.playerData.isAccelerating = isAccelerating;
+    this.playerData.isAttenuationX = isAttenuationX;
+    this.playerData.isAttenuationY = isAttenuationY;
   }
 
   public accelerateReactively() {

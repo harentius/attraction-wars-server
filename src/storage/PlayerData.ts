@@ -20,8 +20,8 @@ class PlayerData implements CircleInterface {
   public aY: number;
   // Internal color list item number
   public color: number;
-  public isAttenuation: boolean;
-  public isAccelerating: boolean;
+  public isAttenuationX: boolean;
+  public isAttenuationY: boolean;
   public attractionData: Map<string, AttractionData>;
   public rotationData: Map<string, RotationData>;
   public gravityAssistData: Map<string, GravityAssistData>;
@@ -43,8 +43,8 @@ class PlayerData implements CircleInterface {
     this.reactiveVy = 0;
     this.aX = 0;
     this.aY = 0;
-    this.isAttenuation = false;
-    this.isAccelerating = false;
+    this.isAttenuationX = false;
+    this.isAttenuationY = false;
     this.attractionData = new Map();
     this.rotationData = new Map();
     this.gravityAssistData = new Map();
