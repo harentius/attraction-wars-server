@@ -26,7 +26,7 @@ class Player {
   public setAcceleration(
     { aX, aY },
     isAttenuationX: boolean = false,
-    isAttenuationY: boolean = false
+    isAttenuationY: boolean = false,
   ) {
     this.playerData.aX = aX;
     this.playerData.aY = aY;
