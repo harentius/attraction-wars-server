@@ -42,10 +42,15 @@ class Game {
 
   private registerEventHandlers() {
     this.storage
-      .on(Storage.UPDATE_KEY_PRESS_STATE, (player, oldKeysPressState, newKeysPressState) => {
+      .on(Storage.UPDATE_KEY_PRESS_STATE, (
+        player: Player,
+        oldKeysPressState: KeysPressState,
+        newKeysPressState: KeysPressState
+      ) => {
         const acceleration = calculateAcceleration(player, oldKeysPressState, newKeysPressState);
-        const isAnyMoveKeyPressed = newKeysPressState.isAnyMoveKeyPressed();
-        player.setAcceleration(acceleration, !isAnyMoveKeyPressed, isAnyMoveKeyPressed);
+        const isAttenuationX = !newKeysPressState.left && !newKeysPressState.right;
+        const isAttenuationY = !newKeysPressState.down && !newKeysPressState.up;
+        player.setAcceleration(acceleration, isAttenuationX, isAttenuationY);
 
         if (newKeysPressState.space) {
           player.accelerateReactively();
