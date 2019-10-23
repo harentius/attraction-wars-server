@@ -52,7 +52,7 @@ class Game {
         const acceleration = calculateAcceleration(player, oldKeysPressState, newKeysPressState);
         const isAttenuationX = !newKeysPressState.left && !newKeysPressState.right;
         const isAttenuationY = !newKeysPressState.down && !newKeysPressState.up;
-        player.setAcceleration(acceleration, isAttenuationX, isAttenuationY);
+        player.setAcceleration(acceleration, isAttenuationX, isAttenuationY, newKeysPressState.isAnyMoveKeyPressed());
 
         if (newKeysPressState.space) {
           player.accelerateReactively();

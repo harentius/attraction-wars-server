@@ -75,6 +75,10 @@ class SecondInteractionZoneHandler implements InteractionZoneMovementHandlerInte
       return;
     }
 
+    if (!playerData.isAccelerating) {
+      return;
+    }
+
     player.increaseBufferScoreBySecondZone(150);
     playerData.isCanPerformGravityAssist = false;
 

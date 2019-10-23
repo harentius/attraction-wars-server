@@ -28,6 +28,7 @@ class PlayerData implements CircleInterface {
   public boundedToPlayersData: Map<string, PlayerData>;
   public score: number;
   public isCanPerformGravityAssist: boolean;
+  public isAccelerating: boolean;
 
   constructor(username: string, x, y, r, id = genId(), color: number = generateRandomColor()) {
     this.username = username;
@@ -45,6 +46,7 @@ class PlayerData implements CircleInterface {
     this.aY = 0;
     this.isAttenuationX = false;
     this.isAttenuationY = false;
+    this.isAccelerating = false;
     this.attractionData = new Map();
     this.rotationData = new Map();
     this.gravityAssistData = new Map();

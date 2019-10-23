@@ -27,11 +27,13 @@ class Player {
     { aX, aY },
     isAttenuationX: boolean = false,
     isAttenuationY: boolean = false,
+    isAccelerating: boolean = false,
   ) {
     this.playerData.aX = aX;
     this.playerData.aY = aY;
     this.playerData.isAttenuationX = isAttenuationX;
     this.playerData.isAttenuationY = isAttenuationY;
+    this.playerData.isAccelerating = isAccelerating;
   }
 
   public accelerateReactively() {
