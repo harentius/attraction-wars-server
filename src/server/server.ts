@@ -15,16 +15,21 @@ const server = new Server();
 const io = require('socket.io')(server, { parser });
 const socketIdToPlayerIdMap = new Map();
 
+const sendRejectionMessage = (socket) => {
+  socket.emit('notification', {
+    type: 'error',
+    message: 'Server is overloaded. Please try again later.',
+  });
+  logger.warn('Server is overloaded. Player was rejected to connect');
+  socket.disconnect();
+
+};
+
 io.on('connection', (socket) => {
   socket = socket.binary(true);
 
   if (storage.players.size >= config.maxPlayers) {
-    socket.emit('notification', {
-      type: 'error',
-      message: 'Server is overloaded. Please try again later.',
-    });
-    logger.warn('Server is overloaded. Player was rejected to connect');
-    socket.disconnect();
+    sendRejectionMessage(socket);
 
     return;
   }
@@ -33,15 +38,20 @@ io.on('connection', (socket) => {
     // Dummy sanitize user input
     username = `${username}`;
 
-    const player = game.addPlayerOnRandomPosition(username);
-    const playerId = player.playerData.id;
-    socketIdToPlayerIdMap.set(socket.id, playerId);
-    const client = new Client(socket, new KeysPressState());
+    try {
+      const player = game.addPlayerOnRandomPosition(username);
+      const playerId = player.playerData.id;
+      socketIdToPlayerIdMap.set(socket.id, playerId);
+      const client = new Client(socket, new KeysPressState());
 
-    storage.addClient(playerId, client);
-    logger.info(`Client '${socket.handshake.address}' connected. Socket id: ${socket.id}, Assigned id: ${playerId}`);
-    socket.emit('playerData', storage.getPlayerDataForClient(playerId));
-    socket.emit('fullWorldData', storage.getFullWorldDataForClient());
+      storage.addClient(playerId, client);
+      logger.info(`Client '${socket.handshake.address}' connected. Socket id: ${socket.id}, Assigned id: ${playerId}`);
+      socket.emit('playerData', storage.getPlayerDataForClient(playerId));
+      socket.emit('fullWorldData', storage.getFullWorldDataForClient());
+    } catch (e) {
+      sendRejectionMessage(socket);
+      logger.warn(e.message);
+    }
   });
 
   socket.on('keysPressState', (keyPressStateData) => {

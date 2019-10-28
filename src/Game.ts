@@ -1,3 +1,4 @@
+import * as logger from 'winston';
 import Storage from './storage/Storage';
 import PlayerData from './storage/PlayerData';
 import config from './config';
@@ -60,7 +61,11 @@ class Game {
       })
 
       .on(Storage.REMOVE_ASTEROID, () => {
-        this.addAsteroidDataOnRandomPosition();
+        try {
+          this.addAsteroidDataOnRandomPosition();
+        } catch (e) {
+          logger.warn(e.message);
+        }
       })
     ;
   }
