@@ -27,7 +27,8 @@ class Game {
   }
 
   public addAsteroidDataOnRandomPosition() {
-    const r = randInt(config.minAsteroidSize, config.maxAsteroidSize);
+    const maxAsteroidSize = randInt(0, 100) > 0 ? config.maxAsteroidSize : config.initPlayerSize;
+    const r = randInt(config.minAsteroidSize, maxAsteroidSize);
     const interactionR = r * config.asteroidAttractionRadiusMultiplier;
     const position = this.storage.generateRandomPosition(interactionR);
     this.addAsteroidData(genId(), position.x, position.y, r);
