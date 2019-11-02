@@ -59,6 +59,11 @@ class Storage {
 
     this.trigger(Storage.REMOVE_CLIENT, [client]);
     this.clients.delete(id);
+
+    if (client.socket) {
+      client.socket.disconnect();
+      delete client.socket;
+    }
   }
 
   public addPlayer(id: string, player: Player): void {

@@ -6,7 +6,7 @@ import CircleInterface from '../physics/CircleInterface';
 
 class PlayerData implements CircleInterface {
   public readonly username: string;
-  public id: string;
+  public readonly id: string;
   public x: number;
   public y: number;
   public r: number;
