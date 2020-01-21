@@ -46,7 +46,6 @@ storage.on(Storage.ASTEROID_ATTRACTION_STOP, (asteroidData: AsteroidData) => {
 });
 // Asteroid animation cycle end
 
-
 // Clean stalled clients
 const heartbeatTimes = {};
 
