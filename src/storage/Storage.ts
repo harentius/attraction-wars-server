@@ -17,7 +17,7 @@ const BORDER_MARGIN = 5;
 class Storage {
   public readonly worldData: WorldData;
   public players: Map<string, Player>;
-  private clients: Map<string, Client>;
+  public clients: Map<string, Client>;
   private readonly worldDataFilter: WorldDataFilter;
   private fullWorldDataFilter: FullWorldDataFilter;
   private readonly events;

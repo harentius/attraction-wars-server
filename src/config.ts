@@ -32,6 +32,7 @@ const config: {
   initPlayerSize: number,
   serverStatisticsBroadCastPeriod: number,
   maxPlayers: number,
+  heartbeatWaitTime: number,
 } = {
   port,
 
@@ -64,6 +65,7 @@ const config: {
   initPlayerSize: 50,
   serverStatisticsBroadCastPeriod: 1000,
   maxPlayers: 50,
+  heartbeatWaitTime: 60000,
 };
 
 // calculated parameters
