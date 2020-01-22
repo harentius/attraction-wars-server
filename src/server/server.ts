@@ -33,10 +33,10 @@ storage.on(Storage.ASTEROID_ATTRACTION_START, (asteroidData: AsteroidData) => {
   }
 });
 
-const cleanAsteroidAttractionInterval = (intervalId) => {
-  clearInterval(asteroidSyncIntervals[intervalId]);
-  delete asteroidSyncIntervals[intervalId];
-  delete asteroidSyncIntervalsTimes[intervalId];
+const cleanAsteroidAttractionInterval = (asteroidDataId) => {
+  clearInterval(asteroidSyncIntervals[asteroidDataId]);
+  delete asteroidSyncIntervals[asteroidDataId];
+  delete asteroidSyncIntervalsTimes[asteroidDataId];
 };
 
 storage.on(Storage.ASTEROID_ATTRACTION_STOP, (asteroidData: AsteroidData) => {
@@ -56,9 +56,9 @@ const cleanStalledClients = () => {
     }
   }
 
-  for (const [intervalId, timestamp] of Object.entries(asteroidSyncIntervalsTimes)) {
+  for (const [asteroidDataId, timestamp] of Object.entries(asteroidSyncIntervalsTimes)) {
     if ((timestamp as number + config.heartbeatWaitTime) < Date.now()) {
-      cleanAsteroidAttractionInterval(intervalId);
+      cleanAsteroidAttractionInterval(asteroidDataId);
     }
   }
 };
