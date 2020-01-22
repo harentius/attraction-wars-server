@@ -25,6 +25,11 @@ storage.on(Storage.ASTEROID_ATTRACTION_START, (asteroidData: AsteroidData, playe
   if (!asteroidSyncIntervals[asteroidData.id]) {
     asteroidSyncIntervals[asteroidData.id] = setInterval(() => {
       const client = storage.getClient(player.playerData.id);
+
+      if (!client) {
+        return;
+      }
+
       client.socket.binary(true).volatile.emit('asteroidData', {
         id: asteroidData.id,
         x: truncateFloat(asteroidData.x),
