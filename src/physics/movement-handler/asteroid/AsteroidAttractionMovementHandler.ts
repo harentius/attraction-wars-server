@@ -42,7 +42,7 @@ class AsteroidAttractionMovementHandler implements MovementHandlerInterface {
 
       if (isWasAttracting !== asteroidData.isAttracting) {
         if (asteroidData.isAttracting) {
-          this.storage.trigger(Storage.ASTEROID_ATTRACTION_START, [asteroidData]);
+          this.storage.trigger(Storage.ASTEROID_ATTRACTION_START, [asteroidData, player]);
         } else {
           this.storage.trigger(Storage.ASTEROID_ATTRACTION_STOP, [asteroidData]);
         }

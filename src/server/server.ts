@@ -10,6 +10,7 @@ import Storage from '../storage/Storage';
 import AsteroidData from '../storage/AsteroidData';
 import {truncateFloat} from '../utils';
 import sendRejectionMessage from './sendRejectionMessage';
+import Player from '../player/Player';
 
 const server = new Server();
 // tslint:disable-next-line
@@ -20,10 +21,11 @@ const socketIdToPlayerIdMap = new Map();
 const asteroidSyncIntervals = {};
 const asteroidSyncIntervalsTimes = {};
 
-storage.on(Storage.ASTEROID_ATTRACTION_START, (asteroidData: AsteroidData) => {
+storage.on(Storage.ASTEROID_ATTRACTION_START, (asteroidData: AsteroidData, player: Player) => {
   if (!asteroidSyncIntervals[asteroidData.id]) {
     asteroidSyncIntervals[asteroidData.id] = setInterval(() => {
-      io.binary(true).volatile.emit('asteroidData', {
+      const client = storage.getClient(player.playerData.id);
+      client.socket.binary(true).volatile.emit('asteroidData', {
         id: asteroidData.id,
         x: truncateFloat(asteroidData.x),
         y: truncateFloat(asteroidData.y),
