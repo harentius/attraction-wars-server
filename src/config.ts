@@ -1,6 +1,6 @@
 // Configurable parameters
-const worldWidth = +process.env.WORLD_WIDTH || 20000;
-const worldHeight = +process.env.WORLD_HEIGHT || 20000;
+const worldWidth = +process.env.WORLD_WIDTH || 15000;
+const worldHeight = +process.env.WORLD_HEIGHT || 15000;
 const asteroidsDensity = (+process.env.ASTEROIDS_DENSITY || 1.25) * 1e-06;
 const port = +process.env.PORT || 4000;
 
@@ -33,6 +33,7 @@ const config: {
   serverStatisticsBroadCastPeriod: number,
   maxPlayers: number,
   heartbeatWaitTime: number,
+  tooBigMultiplier: number,
 } = {
   port,
 
@@ -66,6 +67,7 @@ const config: {
   serverStatisticsBroadCastPeriod: 1000,
   maxPlayers: 50,
   heartbeatWaitTime: 60000,
+  tooBigMultiplier: 1.0 / 20.0,
 };
 
 // calculated parameters

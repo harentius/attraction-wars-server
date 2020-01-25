@@ -88,11 +88,13 @@ class Player {
   }
 
   public increaseScoreByAsteroidAbsorption(asteroidData: AsteroidData): void {
-    this.playerData.score += asteroidData.r / 2;
+    const multiplier = this.isTooBig() ? 1 : 0.5;
+    this.playerData.score += multiplier * asteroidData.r;
   }
 
   public increaseScoreByOtherPlayerAbsorption(playerData: PlayerData): void {
-    this.playerData.score += 4 * playerData.r;
+    const multiplier = this.isTooBig() ? 8 : 4;
+    this.playerData.score += multiplier * playerData.r;
   }
 
   public increaseScoreByMovement(): void {
@@ -101,6 +103,17 @@ class Player {
 
   public increaseScoreByAcceleration(): void {
     this.playerData.score += 10;
+  }
+
+  public isTooBig(): boolean {
+    return this.playerData.r > config.worldBounds[2] * config.tooBigMultiplier;
+  }
+
+  public increaseSize(value: number): void {
+    if (!this.isTooBig()) {
+      const size = this.playerData.r + value;
+      this.playerData.r = Math.min(size, config.worldBounds[2] * config.tooBigMultiplier);
+    }
   }
 }
 
